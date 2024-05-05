@@ -58,6 +58,11 @@ def crawl_product_page(url):
 
         group_job_location = tree.xpath('//div[@class="job-detail__box--right job-detail__body-right--item job-detail__body-right--box-category"]//div[@class="box-category-tags"]/span/a/text()')
         data['location'] = group_job_location
+        company = tree.xpath('//h2[@class="company-name-label"]/a/text()')
+        if(len(company)):
+            data['company'] = company[0]
+        else:
+            data['company'] = None
         if any(data.values()):
             return data
     elif(response.status_code == 429): 
@@ -102,32 +107,30 @@ try:
             if(jobData):
                 data.append(jobData)
             index += 1
-            if(index == 1):
-                WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, "//*[@id='main']/div[1]/div[5]/div[2]/div/div/div[3]/div[1]/div/div[1]/nav/ul/li[3]")))
-            next_button_list = driver.find_elements(By.XPATH, "//*[@id='main']/div[1]/div[5]/div[2]/div/div/div[3]/div[1]/div/div[1]/nav/ul/li[3]")
-            if(len(next_button_list) != 0):
-                next_button = next_button_list[0]
+            try:
+                if(index == 1):
+                    WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, '//*[@class="box-pagination"]/ul/li[3]')))
+                next_button_list = driver.find_elements(By.XPATH, '//*[@class="box-pagination"]/ul/li[3]')
+                temp = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@class="box-pagination"]/ul/li[3]')))
+                print(temp.text)
+                if(temp and index <5):
+                    time.sleep(10)
+                    temp.click()
+                    time.sleep(5)
+                else:
+                    break
 
-            if(next_button is None):
-                print("No button len:"+ str(index))
+            except Exception as e:
+                print("Click button exception")
+                print(e)
                 break
-            elif("disabled" in next_button.get_attribute("class")):
-                print("Button disable!")
-                break
-            elif(index == 4):
-                print("Stop by user set index")
-                break
-            else:
-                print("has button")
-                print(str(next_button))
-                next_button.click()
-                time.sleep(5)
 
         with open('output.json', 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
 
     except Exception as e:
+        print("error when get sepecific url")
         print(e)
 
 except Exception as e:

@@ -1,20 +1,150 @@
 [
     [
         {
-            "title": "Nhân Viên Kinh Doanh / Tư Vấn (Thu Nhập 10 Đến 25 Triệu)",
-            "salary": "10 - 25 triệu",
+            "title": "Nhân Viên Kinh Doanh Tại Hà Nội Và Hồ Chí Minh (Lương Cứng 6,5 - 12,5 Triệu - Thu Nhập Từ: 20 Triệu Trở Lên)",
+            "salary": "Trên 20 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Dịch vụ khách hàng",
+                "Tư vấn"
+            ],
+            "location": [
+                "Thanh Xuân",
+                "Tân Bình",
+                "Hà Nội",
+                "Hồ Chí Minh"
+            ],
+            "company": "CÔNG TY TNHH MTV NỘI THẤT MỘC GIA"
+        },
+        {
+            "title": "Nhân Viên Kinh Doanh Nguồn Hàng Trung Quốc (Thu Nhập Từ 8 - 35 Triệu)",
+            "salary": "8 - 35 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Logistics",
+                "Bán lẻ / bán sỉ"
+            ],
+            "location": [
+                "Thanh Xuân",
+                "Cầu Giấy",
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY TNHH Á CHÂU LOGISTICS"
+        },
+        {
+            "title": "Junior Devops Engineer [Hà Nội] - Thu Nhập Cạnh Tranh, Nhiều Đãi Ngộ Hấp Dẫn",
+            "salary": "Thoả thuận",
             "experience": "1 năm",
             "position": "Nhân viên",
             "type_of_job": "Toàn thời gian",
-            "sex": "Không yêu cầu"
-        },
+            "sex": "Không yêu cầu",
+            "category": [
+                "IT Phần cứng / Mạng",
+                "IT phần mềm",
+                "Công nghệ thông tin",
+                "Việc làm IT",
+                "Kubernetes",
+                "VMWare",
+                "Linux",
+                "Kubernetes"
+            ],
+            "location": [
+                "Hà Nội",
+                "Cầu Giấy"
+            ],
+            "company": "AMIGO"
+        }
+    ],
+    [
         {
-            "title": "Chuyên Viên Bán Hàng Tại Cửa Hàng (Tại Q10, Gò Vấp) - Thu Nhập: 8.500.000 - 18.000.000/ Tháng",
-            "salary": "8.5 - 18 triệu",
-            "experience": "2 năm",
+            "title": "Nhân Viên Kinh Doanh Không Áp Doanh Số Đi Làm Ngay",
+            "salary": "Thoả thuận",
+            "experience": "1 năm",
             "position": "Nhân viên",
             "type_of_job": "Toàn thời gian",
-            "sex": "Không yêu cầu"
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Dịch vụ khách hàng",
+                "Hành chính / Văn phòng",
+                "Photoshop",
+                "Teamwork",
+                "Microsoft Office",
+                "Telesales",
+                "Sales online"
+            ],
+            "location": [
+                "Hà Nội",
+                "Ba Đình"
+            ],
+            "company": "Công Ty TNHH Công Nghệ Và Tư Vấn Hàn"
+        }
+    ],
+    [
+        {
+            "title": "Giám Sát Kỹ Thuật Sơn",
+            "salary": "Thoả thuận",
+            "experience": "3 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Nam",
+            "category": [
+                "Dầu khí/Hóa chất",
+                "Hoá học / Sinh học",
+                "Quản lý chất lượng (QA/QC)"
+            ],
+            "location": [
+                "Hóc Môn",
+                "Hồ Chí Minh"
+            ],
+            "company": "Công Ty TNHH TM SX Tân Trường Thịnh"
+        },
+        {
+            "title": "Trưởng Phòng Hành Chính Nhân Sự",
+            "salary": "15 - 20 triệu",
+            "experience": "5 năm",
+            "position": "Trưởng/Phó phòng",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Hành chính / Văn phòng",
+                "Nhân sự",
+                "Quản lý điều hành"
+            ],
+            "location": [
+                "TP Vinh",
+                "Nghệ An"
+            ],
+            "company": "Công ty TNHH Thương Mại và Công nghệ Kim Long"
+        }
+    ],
+    [
+        {
+            "title": "Nhân Viên Kinh Doanh /Tư Vấn Khách Hàng Cao Cấp (Lương Cứng Cao 12 - 18 Triệu + Phụ Cấp Đảm Bảo + Phúc Lợi Hấp Dẫn), Cơ Hội Thăng Tiến, Văn Hóa Khác Biệt",
+            "salary": "18 - 100 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Bảo hiểm",
+                "Ngân hàng / Tài chính",
+                "Tư vấn"
+            ],
+            "location": [
+                "Ba Đình",
+                "Hai Bà Trưng",
+                "Hà Nội"
+            ],
+            "company": "NOUS By Sun Life Miền Bắc"
         }
     ]
 ]

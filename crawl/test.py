@@ -28,6 +28,11 @@ if response.status_code == 200:
     group_job_location = tree.xpath('//div[@class="job-detail__box--right job-detail__body-right--item job-detail__body-right--box-category"]//div[@class="box-category-tags"]/span/a/text()')
     data['location'] = group_job_location
 
+    company = tree.xpath('//h2[@class="company-name-label"]/a/text()')
+    if(len(company)):
+        data['company'] = company[0]
+    else:
+        data['company'] = None
     if any(data.values()):
         print(data)
 else:
