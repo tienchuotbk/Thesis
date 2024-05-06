@@ -8,7 +8,7 @@ import requests
 from lxml import html
 import time
 import random
-
+import subprocess
 # import undetected_chromedriver as uc
 # driver = uc.Chrome()
 
@@ -22,7 +22,7 @@ options.add_experimental_option(
         "profile.managed_default_content_settings.images": 2,
     }
 )
-
+count = 0
 user_agents = [
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0',
@@ -33,6 +33,7 @@ user_agents = [
 def crawl_product_page(url):
     random_user_agent = random.choice(user_agents)
     data = {}
+    refresh = 0
     while True:
         response = requests.get(url, headers={'User-agent': random_user_agent})
         if response.status_code == 200:
@@ -41,6 +42,8 @@ def crawl_product_page(url):
             title_elemet = tree.xpath('//*[@id="header-job-info"]/h1')
             if title_elemet:
                 data['title'] = title_elemet[0].text_content().strip()
+            else:
+                break
             salary_elemet = tree.xpath('//*[@id="header-job-info"]/div[@class="job-detail__info--sections"]/div[1]/div[@class="job-detail__info--section-content"]/div[@class="job-detail__info--section-content-value"]')
             if salary_elemet:
                 data['salary'] = salary_elemet[0].text_content()
@@ -67,8 +70,9 @@ def crawl_product_page(url):
                 data['company'] = None
             if any(data.values()):
                 break
-        elif(response.status_code == 429): 
+        elif(response.status_code == 429 and refresh <= 5): 
             print("429, wait 2s ....")
+            refresh += 1
             time.sleep(2.5)
         else:
             print(response)
@@ -79,7 +83,8 @@ def crawl_product_page(url):
     else:
         return None
 
-def getListUrl(driver, count):
+def getListUrl(driver):
+    global count
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "box-job-list")))
     jobs = driver.find_elements(By.CLASS_NAME, "job-item-search-result")
     dataJobs = []
@@ -100,17 +105,30 @@ try:
     driver = webdriver.Chrome(service=service, options=options)
     baseUrl = "https://www.topcv.vn/tim-viec-lam-moi-nhat?page="
     data = []
+    index = 1
     try:
-        index = 1
         driver.get("https://www.topcv.vn/tim-viec-lam-moi-nhat?page=1")
         time.sleep(1)
-        count = 0
         next_button = None
         
         while True:
-            jobData = getListUrl(driver, count)
+            existing_data = []
+            jobData = getListUrl(driver)
             if(jobData):
-                data.append(jobData)
+                data.extend(jobData)
+                try:
+                    with open('output.json', 'r', encoding='utf-8') as f:
+                        existing_data = json.load(f)
+                        existing_data.extend(data)
+                    with open('output.json', 'w', encoding='utf-8') as file:
+                        json.dump(existing_data, file, indent=4, ensure_ascii=False)
+                        data = []
+
+                except Exception as e:
+                    print("Error when read/write file:")
+                    print(e)
+                    data.extend(jobData)
+                
             index += 1
             try:
                 if(index == 1):
@@ -119,7 +137,10 @@ try:
                 next_button_list = driver.find_elements(By.XPATH, '//*[@class="box-pagination"]/ul/li[3]')
                 temp = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@class="box-pagination"]/ul/li[3]')))
                 print(temp.text)
-                if(temp and index <5):
+                if(temp and index <4):
+                    subprocess.run(["nmcli", "radio", "wifi", "off"])
+                    time.sleep(2)
+                    subprocess.run(["nmcli", "radio", "wifi", "on"])
                     time.sleep(10)
                     temp.click()
                     time.sleep(5)
@@ -130,9 +151,6 @@ try:
                 print("Click button exception")
                 print(e)
                 break
-
-        with open('output.json', 'w', encoding='utf-8') as f:
-            json.dump(data, f, indent=4, ensure_ascii=False)
 
     except Exception as e:
         print("error when get sepecific url")
