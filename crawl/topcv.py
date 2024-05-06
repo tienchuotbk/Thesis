@@ -32,59 +32,64 @@ user_agents = [
 
 def crawl_product_page(url):
     random_user_agent = random.choice(user_agents)
-    response = requests.get(url, headers={'User-agent': random_user_agent})
-    if response.status_code == 200:
-        tree = html.fromstring(response.content)
-        data = {}
-        title_elemet = tree.xpath('//*[@id="header-job-info"]/h1')
-        if title_elemet:
-            data['title'] = title_elemet[0].text_content().strip()
-        salary_elemet = tree.xpath('//*[@id="header-job-info"]/div[@class="job-detail__info--sections"]/div[1]/div[@class="job-detail__info--section-content"]/div[@class="job-detail__info--section-content-value"]')
-        if salary_elemet:
-            data['salary'] = salary_elemet[0].text_content()
-        experience_elemet = tree.xpath('//*[@id="job-detail-info-experience"]/div[@class="job-detail__info--section-content"]/div[@class="job-detail__info--section-content-value"]')
-        if experience_elemet:
-            data['experience'] = experience_elemet[0].text_content()
-        group_general_info = tree.xpath('//*[@id="job-detail"]//div[@class="box-general-content"]')
-        if group_general_info:
-            group_general_info_element = group_general_info[0]
-            position_element = group_general_info_element.xpath('.//div[@class="box-general-group"]//div[@class="box-general-group-info-value"]')
-            if position_element:
-                data['position'] = position_element[0].text_content()
-                data['type_of_job'] = position_element[3].text_content()
-                data['sex'] = position_element[4].text_content()
-        group_job_category = tree.xpath('//div[@class="job-detail__box--right job-detail__body-right--item job-detail__body-right--box-category"]//div[@class="box-category-tags"]/a/text()')
-        data['category'] = group_job_category
+    data = {}
+    while True:
+        response = requests.get(url, headers={'User-agent': random_user_agent})
+        if response.status_code == 200:
+            tree = html.fromstring(response.content)
+            data = {}
+            title_elemet = tree.xpath('//*[@id="header-job-info"]/h1')
+            if title_elemet:
+                data['title'] = title_elemet[0].text_content().strip()
+            salary_elemet = tree.xpath('//*[@id="header-job-info"]/div[@class="job-detail__info--sections"]/div[1]/div[@class="job-detail__info--section-content"]/div[@class="job-detail__info--section-content-value"]')
+            if salary_elemet:
+                data['salary'] = salary_elemet[0].text_content()
+            experience_elemet = tree.xpath('//*[@id="job-detail-info-experience"]/div[@class="job-detail__info--section-content"]/div[@class="job-detail__info--section-content-value"]')
+            if experience_elemet:
+                data['experience'] = experience_elemet[0].text_content()
+            group_general_info = tree.xpath('//*[@id="job-detail"]//div[@class="box-general-content"]')
+            if group_general_info:
+                group_general_info_element = group_general_info[0]
+                position_element = group_general_info_element.xpath('.//div[@class="box-general-group"]//div[@class="box-general-group-info-value"]')
+                if position_element:
+                    data['position'] = position_element[0].text_content()
+                    data['type_of_job'] = position_element[3].text_content()
+                    data['sex'] = position_element[4].text_content()
+            group_job_category = tree.xpath('//div[@class="job-detail__box--right job-detail__body-right--item job-detail__body-right--box-category"]//div[@class="box-category-tags"]/a/text()')
+            data['category'] = group_job_category
 
-        group_job_location = tree.xpath('//div[@class="job-detail__box--right job-detail__body-right--item job-detail__body-right--box-category"]//div[@class="box-category-tags"]/span/a/text()')
-        data['location'] = group_job_location
-        company = tree.xpath('//h2[@class="company-name-label"]/a/text()')
-        if(len(company)):
-            data['company'] = company[0]
+            group_job_location = tree.xpath('//div[@class="job-detail__box--right job-detail__body-right--item job-detail__body-right--box-category"]//div[@class="box-category-tags"]/span/a/text()')
+            data['location'] = group_job_location
+            company = tree.xpath('//h2[@class="company-name-label"]/a/text()')
+            if(len(company)):
+                data['company'] = company[0]
+            else:
+                data['company'] = None
+            if any(data.values()):
+                break
+        elif(response.status_code == 429): 
+            print("429, wait 2s ....")
+            time.sleep(2.5)
         else:
-            data['company'] = None
-        if any(data.values()):
-            return data
-    elif(response.status_code == 429): 
-        # time.sleep(2)
-        print("429")
+            print(response)
+            break
+    if any(data.values()):
+        time.sleep(1)
+        return data
     else:
-        print(response)
-    # time.sleep(1)
-    return None
+        return None
 
 def getListUrl(driver, count):
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "box-job-list")))
     jobs = driver.find_elements(By.CLASS_NAME, "job-item-search-result")
     dataJobs = []
-    print(len(jobs))
     for job in jobs:
-        count += 1
         url = job.find_element(By.CSS_SELECTOR, "div.body> div.body-content > div > div:nth-child(1) > h3 > a").get_attribute("href")
-        print (f"#{count: 03d}")
-        # print(f"URL: {url}")
+        print (f"#{(count+1): 03d}")
         data = crawl_product_page(url)
         if data:
+            count = count + 1
+            data['id'] = count
             print(data)
             dataJobs.append(data)
         print('---------')

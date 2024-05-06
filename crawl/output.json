@@ -1,94 +1,781 @@
 [
     [
         {
-            "title": "Nhân Viên Kinh Doanh Tại Hà Nội Và Hồ Chí Minh (Lương Cứng 6,5 - 12,5 Triệu - Thu Nhập Từ: 20 Triệu Trở Lên)",
-            "salary": "Trên 20 triệu",
-            "experience": "Không yêu cầu kinh nghiệm",
+            "title": "Kỹ Sư Thiết Kế [Bắc Ninh] - Thu Nhập Hấp Dẫn, Hỗ Trợ Xe Đưa Đón, Phỏng Vấn Đi Làm Ngay",
+            "salary": "Thoả thuận",
+            "experience": "1 năm",
             "position": "Nhân viên",
             "type_of_job": "Toàn thời gian",
-            "sex": "Không yêu cầu",
+            "sex": "Nam",
             "category": [
-                "Kinh doanh / Bán hàng",
-                "Dịch vụ khách hàng",
-                "Tư vấn"
+                "Cơ khí / Chế tạo / Tự động hóa",
+                "Hoạch định/Dự án",
+                "Sản xuất"
             ],
             "location": [
-                "Thanh Xuân",
-                "Tân Bình",
-                "Hà Nội",
-                "Hồ Chí Minh"
+                "Bắc Ninh",
+                "Quế Võ"
             ],
-            "company": "CÔNG TY TNHH MTV NỘI THẤT MỘC GIA"
+            "company": "CÔNG TY CP INNOTEK"
         },
         {
-            "title": "Nhân Viên Kinh Doanh Nguồn Hàng Trung Quốc (Thu Nhập Từ 8 - 35 Triệu)",
-            "salary": "8 - 35 triệu",
-            "experience": "Không yêu cầu kinh nghiệm",
-            "position": "Nhân viên",
+            "title": "District Manager Gà Rán Popeyes",
+            "salary": "Thoả thuận",
+            "experience": "3 năm",
+            "position": "Trưởng/Phó phòng",
             "type_of_job": "Toàn thời gian",
             "sex": "Không yêu cầu",
             "category": [
-                "Kinh doanh / Bán hàng",
-                "Logistics",
+                "Khách sạn / Nhà hàng",
+                "Thực phẩm / Đồ uống",
                 "Bán lẻ / bán sỉ"
             ],
             "location": [
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY TNHH DỊCH VỤ THỰC PHẨM VÀ GIẢI KHÁT VIỆT NAM (VFBS)"
+        },
+        {
+            "title": "Nhân Viên Graphic Designer Tại Hồ Chí Minh",
+            "salary": "8 - 12 triệu",
+            "experience": "Dưới 1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Báo chí / Truyền hình",
+                "Marketing / Truyền thông / Quảng cáo"
+            ],
+            "location": [
+                "Tân Bình",
+                "Hồ Chí Minh"
+            ],
+            "company": "HỘ KINH DOANH ONICI"
+        },
+        {
+            "title": "Store Supervisor - Victoria'S Secret - Hà Nội",
+            "salary": "Thoả thuận",
+            "experience": "2 năm",
+            "position": "Quản lý / Giám sát",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Mỹ phẩm / Trang sức",
+                "Thời trang",
+                "Leadership",
+                "English",
+                "Communication"
+            ],
+            "location": [
+                "Hà Nội",
+                "Tây Hồ"
+            ],
+            "company": "CÔNG TY TNHH UNIVERSAL SELARAS VIỆT NAM"
+        },
+        {
+            "title": "Nhân Viên Tìm Kiếm Ý Tưởng/ Idea Creator (Thương Mại Điện Tử)- Không Yêu Cầu Kinh Nghiệm, Lương Upto 16M+",
+            "salary": "8 - 16 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Hành chính / Văn phòng",
+                "Marketing / Truyền thông / Quảng cáo"
+            ],
+            "location": [
                 "Thanh Xuân",
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY TNHH EGC TECH"
+        },
+        {
+            "title": "Content Tiktok, Youtube Lương 12-18 Triệu Cho Hệ Thống Kênh 3 Tỷ View",
+            "salary": "12 - 18 triệu",
+            "experience": "Dưới 1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Báo chí / Truyền hình",
+                "Marketing / Truyền thông / Quảng cáo",
+                "Spa / Làm đẹp",
+                "Word",
+                "Excel",
+                "Photoshop",
+                "Capcut"
+            ],
+            "location": [
+                "Hà Nội",
+                "Đống Đa"
+            ],
+            "company": "CÔNG TY CỔ PHẦN NHA KHOA LẠC VIỆT INTECH"
+        },
+        {
+            "title": "Thiết Kế Ấn Phẩm Truyền Thông - Designer (Lương Up To 20 Triệu)",
+            "salary": "10 - 20 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Báo chí / Truyền hình",
+                "Mỹ thuật / Nghệ thuật / Điện ảnh",
+                "Thiết kế đồ họa",
+                "Designer",
+                "Graphic design",
+                "Adobe Photoshop",
+                "Biên tập Video",
+                "Adobe Illustrator",
+                "Sáng tạo nội dung",
+                "2D graphics",
+                "Tư duy sáng tạo",
+                "Chỉnh Sửa Video",
+                "Edit Video",
+                "Capcut",
+                "Sáng tạo nội dung",
+                "Tư duy sáng tạo",
+                "Video Editor"
+            ],
+            "location": [
+                "Hồ Chí Minh",
+                "Quận 3"
+            ],
+            "company": "CÔNG TY CỔ PHẦN TẬP ĐOÀN THIÊN KHÔI – CHI NHÁNH HỒ CHÍ MINH"
+        },
+        {
+            "title": "Nhân Viên Kỹ Thuật Tòa Nhà",
+            "salary": "8 - 11 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Nam",
+            "category": [
+                "Cơ khí / Chế tạo / Tự động hóa",
+                "Điện / Điện tử / Điện lạnh",
+                "Bảo trì / Sửa chữa"
+            ],
+            "location": [
+                "Hồ Chí Minh",
+                "Bình Thạnh"
+            ],
+            "company": "CÔNG TY TNHH DỊCH VỤ XUYÊN THÁI BÌNH"
+        },
+        {
+            "title": "Chỉ Huy Trưởng Công Trình (M&E, Điều Hòa Không Khí, Thông Gió) Lương Từ 18 - 25 Triệu, Tại Hà Nội",
+            "salary": "18 - 25 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Điện / Điện tử / Điện lạnh",
+                "Hoạch định/Dự án",
+                "Xây dựng"
+            ],
+            "location": [
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY TNHH ĐIỆN LẠNH VÀ THIẾT BỊ CÔNG NGHIỆP TÂN THANH"
+        },
+        {
+            "title": "Digital Marketing",
+            "salary": "10 - 18 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Báo chí / Truyền hình",
+                "Marketing / Truyền thông / Quảng cáo",
+                "Thời trang"
+            ],
+            "location": [
+                "Hà Nội",
+                "Hai Bà Trưng"
+            ],
+            "company": "Công ty Cổ phần Thời trang DHY"
+        },
+        {
+            "title": "Sale Director",
+            "salary": "2,000 - 5,000 USD",
+            "experience": "2 năm",
+            "position": "Giám đốc",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Marketing / Truyền thông / Quảng cáo",
+                "Quản lý điều hành"
+            ],
+            "location": [
+                "Toàn Quốc"
+            ],
+            "company": "CÔNG TY TNHH HR SOLUTION ASIA"
+        },
+        {
+            "title": "Nhân Viên Idea Creator/Sáng Tạo Ý Tưởng (Biết Tiếng Anh - Không Yêu Cầu Kinh Nghiệm) Tại Hà Nội Lương Cứng Từ 10 Triệu",
+            "salary": "Trên 10 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Biên / Phiên dịch",
+                "Marketing / Truyền thông / Quảng cáo",
+                "Mỹ thuật / Nghệ thuật / Điện ảnh"
+            ],
+            "location": [
                 "Cầu Giấy",
                 "Hà Nội"
             ],
-            "company": "CÔNG TY TNHH Á CHÂU LOGISTICS"
+            "company": "TEEOMEGA"
         },
         {
-            "title": "Junior Devops Engineer [Hà Nội] - Thu Nhập Cạnh Tranh, Nhiều Đãi Ngộ Hấp Dẫn",
+            "title": "Nhân Viên Marketing Tại Phú Thọ (Thu Nhập 8 - 20 Triệu)",
+            "salary": "8 - 30 triệu",
+            "experience": "Dưới 1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Báo chí / Truyền hình",
+                "Marketing / Truyền thông / Quảng cáo"
+            ],
+            "location": [
+                "TP Việt Trì",
+                "Phú Thọ",
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY TNHH QUỐC TẾ AN THỊNH HƯNG"
+        },
+        {
+            "title": "Kỹ Sư Xây Dựng /QS;QC _ Khối Dự Án",
+            "salary": "15 - 20 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Hoạch định/Dự án",
+                "Quản lý chất lượng (QA/QC)",
+                "Xây dựng"
+            ],
+            "location": [
+                "Nam Sách",
+                "Lạng Giang",
+                "Lâm Thao",
+                "Cẩm Khê",
+                "Tiền Hải",
+                "Hải Dương",
+                "Bắc Giang",
+                "Phú Thọ",
+                "Thái Bình"
+            ],
+            "company": "CÔNG TY CỔ PHẦN THIẾT KẾ VÀ XÂY DỰNG GIZA VIỆT NAM"
+        },
+        {
+            "title": "Content Creator (Lương Up To 20 Triệu)",
+            "salary": "10 - 20 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Báo chí / Truyền hình",
+                "Bất động sản",
+                "Marketing / Truyền thông / Quảng cáo",
+                "3D Artist",
+                "Marketing",
+                "Adobe Photoshop",
+                "Sáng tạo nội dung",
+                "Tư duy sáng tạo",
+                "Bắt Trend",
+                "Truyền Thông",
+                "Canva",
+                "Truyền Thông Nội Bộ",
+                "Content Creator",
+                "Báo Chí",
+                "Capcut",
+                "Adobe Photoshop",
+                "Video Editing",
+                "Tư duy sáng tạo",
+                "Bắt Trend",
+                "Canva",
+                "Truyền Thông Nội Bộ",
+                "Báo Chí"
+            ],
+            "location": [
+                "Hồ Chí Minh",
+                "Quận 3"
+            ],
+            "company": "CÔNG TY CỔ PHẦN TẬP ĐOÀN THIÊN KHÔI – CHI NHÁNH HỒ CHÍ MINH"
+        },
+        {
+            "title": "Quản Lý Kinh Doanh Khu Vực",
+            "salary": "15 - 18 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Tư vấn",
+                "Công nghệ thông tin"
+            ],
+            "location": [
+                "Cần Thơ",
+                "An Giang",
+                "Đồng Tháp",
+                "Tiền Giang",
+                "Vĩnh Long"
+            ],
+            "company": "Công ty dịch vụ MobiFone Khu vực 9"
+        },
+        {
+            "title": "Nhân Viên Marketing - Thu Nhập Từ 8 - 20 Triệu - Từ 6 Tháng Kinh Nghiệm - Tại Hà Nội",
+            "salary": "8 - 20 triệu",
+            "experience": "Dưới 1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Marketing / Truyền thông / Quảng cáo"
+            ],
+            "location": [
+                "Hà Đông",
+                "Nam Từ Liêm",
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY TNHH SƠN DDM VIỆT NAM"
+        },
+        {
+            "title": "Operation Manager / Trưởng Phòng Vận Hành Logistics",
+            "salary": "Trên 800 USD",
+            "experience": "3 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Vận tải / Kho vận",
+                "Logistics",
+                "Xuất nhập khẩu"
+            ],
+            "location": [
+                "Hồ Chí Minh"
+            ],
+            "company": "CÔNG TY TNHH GIAO NHẬN VÀ VẬN TẢI HÀNG DƯƠNG"
+        },
+        {
+            "title": "Lễ Tân Phố Cổ (Tiếng Anh Tốt) Lương Từ 12 Đến 17 Triệu - Đi Làm Luôn",
+            "salary": "12 - 17 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Du lịch",
+                "Hành chính / Văn phòng",
+                "Khách sạn / Nhà hàng",
+                "Kỹ năng giao tiếp",
+                "Tin học văn phòng",
+                "Tiếng Anh"
+            ],
+            "location": [
+                "Hà Nội",
+                "Hoàn Kiếm"
+            ],
+            "company": "CÔNG TY TNHH THƯƠNG MẠI VÀ DỊCH VỤ DU LỊCH P.T.H"
+        },
+        {
+            "title": "Nhân Viên Quay Dựng Đi Làm Ngay Tại Cầu Giấy Hà Nội",
+            "salary": "8 - 10 triệu",
+            "experience": "Dưới 1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Marketing / Truyền thông / Quảng cáo",
+                "Thiết kế đồ họa",
+                "Hàng tiêu dùng"
+            ],
+            "location": [
+                "Cầu Giấy",
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY CỔ PHẦN PHÁT TRIỂN ĐỒ HỌA & TRUYỀN THÔNG EPIX"
+        },
+        {
+            "title": "Chuyên Viên Tư Vấn Đầu Tư Chứng Khoán (Broker) - Được Đào Tạo - Tại Hồ Chí Minh - Thu Nhập Từ 20 Triệu",
+            "salary": "Trên 20 triệu",
+            "experience": "Dưới 1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Chứng khoán / Vàng / Ngoại tệ",
+                "Ngân hàng / Tài chính",
+                "Tài chính / Đầu tư"
+            ],
+            "location": [
+                "Quận 1",
+                "Hồ Chí Minh"
+            ],
+            "company": "Công ty cổ phần Chứng khoán VPS - Chi nhánh TPHCM"
+        },
+        {
+            "title": "Giám Sát Phát Triển Nguồn",
+            "salary": "15 - 25 triệu",
+            "experience": "2 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Dệt may / Da giày",
+                "Sản xuất"
+            ],
+            "location": [
+                "Nam Sách",
+                "Hải Dương"
+            ],
+            "company": "Công ty TNHH May Formostar Việt Nam"
+        },
+        {
+            "title": "Nhân Viên Content Marketing Thu Nhập Từ 9 Triệu, Đi Làm Ngay Tại Hoàng Mai - Hà Nội",
+            "salary": "Trên 9 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Báo chí / Truyền hình",
+                "Marketing / Truyền thông / Quảng cáo",
+                "Tổ chức sự kiện / Quà tặng"
+            ],
+            "location": [
+                "Hoàng Mai",
+                "Hà Nội"
+            ],
+            "company": "Công ty TNHH Công Nghệ và Thương Mại Megaline"
+        },
+        {
+            "title": "Trưởng Phòng Hành Chính – Nhân Sự (Lương Từ 30 - 60 Triệu)",
+            "salary": "30 - 60 triệu",
+            "experience": "3 năm",
+            "position": "Trưởng/Phó phòng",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Hành chính / Văn phòng",
+                "Nhân sự",
+                "Quản lý điều hành"
+            ],
+            "location": [
+                "Gia Lâm",
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY CỔ PHẦN KINH DOANH BẤT ĐỘNG SẢN MAYHOMES"
+        },
+        {
+            "title": "Bác Sĩ Phòng Khám",
+            "salary": "10 - 50 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Trưởng nhóm",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Hoá học / Sinh học",
+                "Y tế / Dược"
+            ],
+            "location": [
+                "Thủ Đức",
+                "Thanh Xuân",
+                "Hồ Chí Minh",
+                "Hà Nội"
+            ],
+            "company": "Công ty Cổ phần Dược phẩm Vinamedic"
+        },
+        {
+            "title": "Nhân Viên SEO Youtube (Lương + Phụ Cấp + Thưởng Theo Doanh Thu Kênh Upto 100 Triệu)",
+            "salary": "6 - 9 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "IT phần mềm",
+                "Marketing / Truyền thông / Quảng cáo",
+                "Công nghệ thông tin",
+                "Việc làm IT"
+            ],
+            "location": [
+                "Nam Từ Liêm",
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY TNHH CÔNG NGHỆ VÀ TRUYỀN THÔNG IGC VIỆT NAM"
+        },
+        {
+            "title": "Trưởng Phòng Marketing Tại Đà Nẵng/ Lương Upto 25tr",
+            "salary": "Thoả thuận",
+            "experience": "5 năm",
+            "position": "Trưởng/Phó phòng",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Bất động sản",
+                "Marketing / Truyền thông / Quảng cáo",
+                "Quản lý điều hành",
+                "Marketing",
+                "PR",
+                "Lập Kế Hoạch",
+                "Digital Marketing",
+                "Truyền Thông",
+                "Photoshop",
+                "Content Marketing",
+                "Viết Bài Pr",
+                "Chạy Ads"
+            ],
+            "location": [
+                "Đà Nẵng",
+                "Hải Châu"
+            ],
+            "company": "CÔNG TY CỔ PHẦN ĐẦU TƯ PHÁT TRIỂN NAVI"
+        },
+        {
+            "title": "Nhân Viên Mua Hàng Tiếng Nhật N3 Trở Lên",
             "salary": "Thoả thuận",
             "experience": "1 năm",
             "position": "Nhân viên",
             "type_of_job": "Toàn thời gian",
             "sex": "Không yêu cầu",
             "category": [
-                "IT Phần cứng / Mạng",
-                "IT phần mềm",
-                "Công nghệ thông tin",
-                "Việc làm IT",
-                "Kubernetes",
-                "VMWare",
-                "Linux",
-                "Kubernetes"
+                "Hành chính / Văn phòng",
+                "Logistics",
+                "Xuất nhập khẩu"
+            ],
+            "location": [
+                "Duy Tiên",
+                "Hà Nam"
+            ],
+            "company": "Công ty TNHH Sinfonia Microtec (Việt Nam)"
+        },
+        {
+            "title": "Nhân Viên Kế Toán - Mạnh Về Thuế / Công Nợ / Khuyến Mãi / Hệ Thống - Lương 7 - 12 Triệu (Thỏa Thuận Theo Năng Lực)",
+            "salary": "7 - 12 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Hành chính / Văn phòng",
+                "Kế toán / Kiểm toán",
+                "Luật/Pháp lý",
+                "Excel",
+                "Kế Toán Kiểm Toán"
             ],
             "location": [
                 "Hà Nội",
-                "Cầu Giấy"
+                "Hoàng Mai",
+                "Bắc Ninh",
+                "Quế Võ",
+                "Bắc Giang",
+                "TP Bắc Giang"
             ],
-            "company": "AMIGO"
+            "company": "CÔNG TY CỔ PHẦN THƯƠNG MẠI PHÚ THÁI HÀ NỘI"
+        },
+        {
+            "title": "Chuyên Viên Cao Cấp Trải Nghiệm Khách Hàng (Senior Customer Experience Cum Project Coordinator) - Hà Nội",
+            "salary": "Thoả thuận",
+            "experience": "5 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Dịch vụ khách hàng",
+                "Kế toán / Kiểm toán",
+                "Ngân hàng / Tài chính"
+            ],
+            "location": [
+                "Hà Nội",
+                "Đống Đa"
+            ],
+            "company": "Ngân Hàng TMCP Việt Nam Thịnh Vượng (VPBank)"
+        },
+        {
+            "title": "Kỹ Thuật Viên Điện Lạnh",
+            "salary": "12 - 16 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Nam",
+            "category": [
+                "Cơ khí / Chế tạo / Tự động hóa",
+                "Điện / Điện tử / Điện lạnh",
+                "Bảo trì / Sửa chữa",
+                "Kỹ năng giao tiếp"
+            ],
+            "location": [
+                "Hà Nội",
+                "Thanh Xuân"
+            ],
+            "company": "CÔNG TY CỔ PHẦN GREEN SPEED"
+        },
+        {
+            "title": "Thư Ký Phó Tổng Giám Đốc",
+            "salary": "Thoả thuận",
+            "experience": "3 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Hành chính / Văn phòng",
+                "Luật/Pháp lý",
+                "Thư ký / Trợ lý",
+                "Tư duy logic",
+                "phân tích số liệu"
+            ],
+            "location": [
+                "Hồ Chí Minh",
+                "Quận 7"
+            ],
+            "company": "FPT Information System"
+        },
+        {
+            "title": "Trưởng Phòng Kinh Doanh Khai Thác Quản Lý Tòa Nhà",
+            "salary": "Trên 20 triệu",
+            "experience": "5 năm",
+            "position": "Trưởng/Phó phòng",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Bất động sản",
+                "Dịch vụ khách hàng",
+                "Quản lý điều hành"
+            ],
+            "location": [
+                "Hà Nội",
+                "Thanh Xuân"
+            ],
+            "company": "CÔNG TY CỔ PHẦN DỊCH VỤ QUẢN LÝ TÀI SẢN VÀ ĐẦU TƯ ASAHI JAPAN"
+        },
+        {
+            "title": "Marketing Account Lead Co-Ordinator",
+            "salary": "Thoả thuận",
+            "experience": "2 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Khách sạn / Nhà hàng",
+                "Marketing / Truyền thông / Quảng cáo",
+                "Dược phẩm / Công nghệ sinh học"
+            ],
+            "location": [
+                "Quận 1",
+                "Hồ Chí Minh"
+            ],
+            "company": "CÔNG TY TNHH H & S INTERNATIONAL ASEAN"
+        },
+        {
+            "title": "Sale Manager ( Trưởng Phòng Kinh Doanh ) - Thu Nhập Tới 20tr",
+            "salary": "18 - 20 triệu",
+            "experience": "2 năm",
+            "position": "Trưởng/Phó phòng",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Dịch vụ khách hàng",
+                "Marketing / Truyền thông / Quảng cáo",
+                "Quản Lý",
+                "Sale",
+                "Kinh Doanh",
+                "Chăm Sóc Khách Hàng",
+                "Quản Lý Kinh Doanh",
+                "Truyền Thông Quảng Cáo"
+            ],
+            "location": [
+                "Long An",
+                "Cần Giuộc"
+            ],
+            "company": "CÔNG TY TNHH LOTTE F&G VIỆT NAM"
         }
     ],
     [
         {
-            "title": "Nhân Viên Kinh Doanh Không Áp Doanh Số Đi Làm Ngay",
-            "salary": "Thoả thuận",
+            "title": "Nhân Viên Xuất Nhập Khẩu (Thu Nhập 8-15 Triệu)",
+            "salary": "8 - 15 triệu",
+            "experience": "2 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Logistics",
+                "Xuất nhập khẩu"
+            ],
+            "location": [
+                "Nam Từ Liêm",
+                "Hà Nội"
+            ],
+            "company": "HOA SAN VI NA LOGISTICS CO.,LTD HANOI BRANCH"
+        },
+        {
+            "title": "Trợ Lý Phiên Dịch Dự Án Phần Mềm (Thành Thạo Tiếng Trung )",
+            "salary": "13 - 20 triệu",
             "experience": "1 năm",
             "position": "Nhân viên",
             "type_of_job": "Toàn thời gian",
             "sex": "Không yêu cầu",
             "category": [
-                "Kinh doanh / Bán hàng",
-                "Dịch vụ khách hàng",
+                "Biên / Phiên dịch",
+                "IT Phần cứng / Mạng",
+                "IT phần mềm",
+                "Việc làm IT"
+            ],
+            "location": [
+                "Quận 7",
+                "Hồ Chí Minh"
+            ],
+            "company": "CÔNG TY TNHH PHÁT TRIỂN VĂN HÓA CÔNG NGHỆ INTERNET ATG"
+        },
+        {
+            "title": "Nhân Viên SEO Marketing",
+            "salary": "Thoả thuận",
+            "experience": "3 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
                 "Hành chính / Văn phòng",
-                "Photoshop",
-                "Teamwork",
-                "Microsoft Office",
-                "Telesales",
-                "Sales online"
+                "Marketing / Truyền thông / Quảng cáo"
             ],
             "location": [
                 "Hà Nội",
                 "Ba Đình"
             ],
-            "company": "Công Ty TNHH Công Nghệ Và Tư Vấn Hàn"
-        }
-    ],
-    [
+            "company": "CÔNG TY TNHH SẢN XUẤT VÀ PHÂN PHỐI HÀNG HÓA QUỐC TẾ HD"
+        },
+        {
+            "title": "Giáo Viên Toán",
+            "salary": "Trên 12 triệu",
+            "experience": "Dưới 1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Giáo dục / Đào tạo",
+                "Hành chính / Văn phòng",
+                "Công nghệ thông tin"
+            ],
+            "location": [
+                "Đống Đa",
+                "Hà Nội"
+            ],
+            "company": "Công ty TNHH Tư vấn giải pháp Giáo dục và Đào tạo Minh Hoàng"
+        },
         {
             "title": "Giám Sát Kỹ Thuật Sơn",
             "salary": "Thoả thuận",
@@ -108,43 +795,536 @@
             "company": "Công Ty TNHH TM SX Tân Trường Thịnh"
         },
         {
-            "title": "Trưởng Phòng Hành Chính Nhân Sự",
-            "salary": "15 - 20 triệu",
-            "experience": "5 năm",
-            "position": "Trưởng/Phó phòng",
+            "title": "Nhân Viên Bán Hàng Tại Hải Phòng (Thu Nhập 8 - 12 Triệu)",
+            "salary": "8 - 12 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Nữ",
+            "category": [
+                "Kinh doanh / Bán hàng"
+            ],
+            "location": [
+                "Lê Chân",
+                "Hải Phòng"
+            ],
+            "company": "CÔNG TY TNHH NAM TRUNG AN"
+        },
+        {
+            "title": "Marketing Staff (Salary 15-18M)",
+            "salary": "15 - 18 triệu",
+            "experience": "2 năm",
+            "position": "Nhân viên",
             "type_of_job": "Toàn thời gian",
             "sex": "Không yêu cầu",
             "category": [
-                "Hành chính / Văn phòng",
-                "Nhân sự",
-                "Quản lý điều hành"
+                "Khách sạn / Nhà hàng",
+                "Marketing / Truyền thông / Quảng cáo",
+                "Thực phẩm / Đồ uống"
             ],
             "location": [
-                "TP Vinh",
-                "Nghệ An"
+                "Hà Nội",
+                "Cầu Giấy"
             ],
-            "company": "Công ty TNHH Thương Mại và Công nghệ Kim Long"
-        }
-    ],
-    [
+            "company": "CÔNG TY TNHH JOMA VIỆT NAM"
+        },
         {
-            "title": "Nhân Viên Kinh Doanh /Tư Vấn Khách Hàng Cao Cấp (Lương Cứng Cao 12 - 18 Triệu + Phụ Cấp Đảm Bảo + Phúc Lợi Hấp Dẫn), Cơ Hội Thăng Tiến, Văn Hóa Khác Biệt",
-            "salary": "18 - 100 triệu",
+            "title": "Team Lead E-Commerce Executive",
+            "salary": "Thoả thuận",
+            "experience": "3 năm",
+            "position": "Trưởng nhóm",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Marketing / Truyền thông / Quảng cáo",
+                "Dược phẩm / Công nghệ sinh học"
+            ],
+            "location": [
+                "Quận 1",
+                "Hồ Chí Minh"
+            ],
+            "company": "CÔNG TY TNHH H & S INTERNATIONAL ASEAN"
+        },
+        {
+            "title": "Chuyên Viên Vận Hành POS - Hà Nội",
+            "salary": "Thoả thuận",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "IT Phần cứng / Mạng",
+                "Ngân hàng / Tài chính",
+                "Việc làm IT"
+            ],
+            "location": [
+                "Hà Nội",
+                "Đống Đa"
+            ],
+            "company": "Ngân Hàng TMCP Việt Nam Thịnh Vượng (VPBank)"
+        },
+        {
+            "title": "Kỹ Sư Điện Lương + Thưởng Upto 15 Triệu Đi Làm Ngay",
+            "salary": "9 - 15 triệu",
+            "experience": "Dưới 1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Cơ khí / Chế tạo / Tự động hóa",
+                "Điện / Điện tử / Điện lạnh"
+            ],
+            "location": [
+                "Thanh Xuân",
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY CỔ PHẦN ĐẦU TƯ XÂY DỰNG VÀ PHÁT TRIỂN CÔNG NGHỆ ĐẤT VIỆT"
+        },
+        {
+            "title": "Quản Trị Dự Án - PM - Tại Hà Nội - Thu Nhập 20 - 27 Triệu FIX",
+            "salary": "20 - 27 triệu",
+            "experience": "5 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "IT Phần cứng / Mạng",
+                "IT phần mềm",
+                "Công nghệ thông tin",
+                "Việc làm IT"
+            ],
+            "location": [
+                "Hà Nội",
+                "Cầu Giấy"
+            ],
+            "company": "Công Ty Cổ Phần Đầu Tư Thương Mại Và Phát Triển Công Nghệ FSI"
+        },
+        {
+            "title": "Nhân Viên Content Marketing - Thu Nhập Từ 8 Đến 15 Triệu Tại Hà Nội - Đi Làm Ngay",
+            "salary": "8 - 15 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Báo chí / Truyền hình",
+                "Marketing / Truyền thông / Quảng cáo",
+                "Tổ chức sự kiện / Quà tặng"
+            ],
+            "location": [
+                "Hai Bà Trưng",
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY CỔ PHẦN THẨM MỸ NGÂN HẠNH"
+        },
+        {
+            "title": "Chuyên Viên Đối Ngoại Cấp Cao_External Relations Specialist",
+            "salary": "Thoả thuận",
+            "experience": "Trên 5 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Công nghệ cao",
+                "Corporate Communications",
+                "Relationship Management",
+                "Planning",
+                "Negotiation Skill"
+            ],
+            "location": [
+                "Hà Nội",
+                "Nam Từ Liêm"
+            ],
+            "company": "CÔNG TY CỔ PHẦN SYSTEMATIC FUNCTIONS"
+        },
+        {
+            "title": "Chuyên Viên Quản Trị Hệ Thống (Upto 2000 USD)",
+            "salary": "Tới 2,000 USD",
+            "experience": "5 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Công nghệ cao",
+                "IT phần mềm",
+                "Công nghệ thông tin",
+                "Việc làm IT"
+            ],
+            "location": [
+                "Nam Từ Liêm",
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY CỔ PHẦN VETC"
+        },
+        {
+            "title": "Nhân Viên CSKH & Hỗ Trợ Phòng Khám Thẩm Mỹ",
+            "salary": "7 - 12 triệu",
             "experience": "Không yêu cầu kinh nghiệm",
             "position": "Nhân viên",
             "type_of_job": "Toàn thời gian",
             "sex": "Không yêu cầu",
             "category": [
-                "Bảo hiểm",
-                "Ngân hàng / Tài chính",
+                "Dịch vụ khách hàng",
+                "Tư vấn",
+                "Y tế / Dược"
+            ],
+            "location": [
+                "Thanh Xuân",
+                "Thủ Đức",
+                "Hà Nội",
+                "Hồ Chí Minh"
+            ],
+            "company": "Công ty Cổ phần Dược phẩm Vinamedic"
+        },
+        {
+            "title": "Brand Manager (Lĩnh Vực Nước Hoa + Mỹ Phẩm Cao Cấp)",
+            "salary": "Thoả thuận",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Nam",
+            "category": [
+                "Marketing / Truyền thông / Quảng cáo",
+                "Mỹ phẩm / Trang sức",
+                "Quản lý điều hành"
+            ],
+            "location": [
+                "Quận 1",
+                "Hồ Chí Minh"
+            ],
+            "company": "CÔNG TY TNHH AN HẢI VN"
+        }
+    ],
+    [
+        {
+            "title": "Nhân Viên Kinh Doanh Thu Nhập Từ 10 - 20 Triệu Không Yêu Cầu Kinh Nghiệm",
+            "salary": "10 - 20 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Hành chính / Văn phòng",
                 "Tư vấn"
             ],
             "location": [
+                "Bắc Từ Liêm",
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY TNHH MỘT THÀNH VIÊN PHẦN MỀM RIC"
+        },
+        {
+            "title": "Senior Data Architect",
+            "salary": "Thoả thuận",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Quản lý / Giám sát",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "IT Phần cứng / Mạng",
+                "IT phần mềm",
+                "Công nghệ thông tin",
+                "Việc làm IT"
+            ],
+            "location": [
+                "Hà Nội",
+                "Cầu Giấy"
+            ],
+            "company": "Công ty TNHH Tổng công ty Công nghệ & Giải pháp CMC"
+        },
+        {
+            "title": "Chăm Sóc Khách Hàng (Thu Nhập 10-20 Triệu)",
+            "salary": "10 - 20 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Tư vấn",
+                "Y tế / Dược"
+            ],
+            "location": [
+                "Thanh Xuân",
+                "Hà Nội"
+            ],
+            "company": "CÔNG TY TNHH MỘT THÀNH VIÊN ALIFACO"
+        },
+        {
+            "title": "Nhân Viên Điều Dưỡng - Thu Nhập 10 - 15 Triệu (Đi Làm Ngay Tại Bình Chánh, TP. HCM)",
+            "salary": "10 - 15 triệu",
+            "experience": "2 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Dịch vụ khách hàng",
+                "Y tế / Dược",
+                "Thư ký / Trợ lý"
+            ],
+            "location": [
+                "Bình Chánh",
+                "Hồ Chí Minh"
+            ],
+            "company": "BỆNH VIỆN ĐA KHOA QUỐC TẾ NAM SÀI GÒN"
+        },
+        {
+            "title": "Nhân Viên Kinh Doanh (Phúc Lợi Đầy Đủ, Không Yêu Cầu Kinh Nghiệm, Được Đào Tạo)",
+            "salary": "8 - 30 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Bất động sản",
+                "Hàng tiêu dùng",
+                "Kỹ năng giao tiếp",
+                "Làm việc nhóm",
+                "Kỹ năng bán hàng"
+            ],
+            "location": [
+                "Bình Định",
+                "Đắk Lắk",
+                "Đà Nẵng",
+                "Đắc Nông",
+                "Khánh Hoà",
+                "Gia Lai",
+                "Kon Tum",
+                "Phú Yên",
+                "Quảng Bình",
+                "Quảng Nam",
+                "Quảng Ngãi",
+                "Quảng Trị",
+                "Thừa Thiên Huế"
+            ],
+            "company": "Công ty Cổ phần viễn thông FPT"
+        },
+        {
+            "title": "System Engineer / System Admin",
+            "salary": "18 - 35 triệu",
+            "experience": "3 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "IT Phần cứng / Mạng",
+                "IT phần mềm",
+                "Công nghệ thông tin",
+                "Việc làm IT"
+            ],
+            "location": [
+                "Quận 7",
+                "Hồ Chí Minh"
+            ],
+            "company": "CÔNG TY TNHH PHÁT TRIỂN VĂN HÓA CÔNG NGHỆ INTERNET ATG"
+        },
+        {
+            "title": "Quản Lý /Giám Sát Vận Hành Rạp Chiếu Phim - Tại Hà Nội - Thu Nhập Hấp Dẫn",
+            "salary": "Thoả thuận",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Quản lý / Giám sát",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Dịch vụ khách hàng",
+                "Khách sạn / Nhà hàng",
+                "Thực phẩm / Đồ uống"
+            ],
+            "location": [
+                "Hà Nội",
+                "Long Biên",
+                "Hoàng Mai",
+                "Cầu Giấy",
+                "Ba Đình"
+            ],
+            "company": "Công ty TNHH CJ CGV Việt Nam"
+        },
+        {
+            "title": "Nhân Viên Kinh Doanh Logistics",
+            "salary": "8 - 20 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Logistics",
+                "Xuất nhập khẩu"
+            ],
+            "location": [
+                "Hà Nội",
+                "Cầu Giấy"
+            ],
+            "company": "CÔNG TY CP QUỐC TẾ BEEGROUP"
+        }
+    ],
+    [
+        {
+            "title": "Nhân Viên Thiết Kế Đồ Họa 2D Designer (Tuyến Nữ)",
+            "salary": "8 - 12 triệu",
+            "experience": "Dưới 1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Nữ",
+            "category": [
+                "Thiết kế đồ họa",
+                "Photoshop",
+                "ACLS Instruction"
+            ],
+            "location": [
+                "Hà Nội",
+                "Long Biên"
+            ],
+            "company": "Sunflower Ecommerce"
+        },
+        {
+            "title": "Content SEO (Lương Từ 8-12 Triệu)",
+            "salary": "8 - 12 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Marketing / Truyền thông / Quảng cáo"
+            ],
+            "location": [
                 "Ba Đình",
+                "Hà Nội"
+            ],
+            "company": "Công ty Cổ phần VJS Việt Nam"
+        },
+        {
+            "title": "Chuyên Viên Cao Cấp Phân Tích Tài Chính - Hà Nội, Hồ Chí Minh",
+            "salary": "Thoả thuận",
+            "experience": "3 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Ngân hàng / Tài chính",
+                "Tài chính / Đầu tư"
+            ],
+            "location": [
+                "Hà Nội",
+                "Hồ Chí Minh"
+            ],
+            "company": "Ngân Hàng TMCP Việt Nam Thịnh Vượng (VPBank)"
+        },
+        {
+            "title": "Y Tá (Điều Dưỡng Thẩm Mỹ Nội Khoa) - Tại Tp Hồ Chí Minh- Thu Nhập 20 - 35 Triệu - Đi Làm Ngay",
+            "salary": "20 - 35 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Nữ",
+            "category": [
+                "Y tế / Dược",
+                "Spa / Làm đẹp",
+                "Ngành nghề khác"
+            ],
+            "location": [
+                "Hồ Chí Minh",
+                "Quận 3"
+            ],
+            "company": "Công ty TNHH Lavender Sài Gòn"
+        },
+        {
+            "title": "Chuyên Viên Mua Hàng Nội Địa Lương Cứng 11 -15 Triệu",
+            "salary": "11 - 15 triệu",
+            "experience": "2 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Quản lý chất lượng (QA/QC)",
+                "Vận tải / Kho vận",
+                "Logistics"
+            ],
+            "location": [
+                "Nam Từ Liêm",
+                "Hà Nội"
+            ],
+            "company": "CTY CP XUẤT NHẬP KHẨU MAI ANH GROUP"
+        },
+        {
+            "title": "Nhân Viên Bán Hàng / Kinh Doanh Sales (Thu Nhập Từ 10 - 25 Triệu) - Nhận Việc Ngay",
+            "salary": "10 - 25 triệu",
+            "experience": "Không yêu cầu kinh nghiệm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Nam",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Cơ khí / Chế tạo / Tự động hóa",
+                "Bán hàng kỹ thuật"
+            ],
+            "location": [
+                "Hoàng Mai",
+                "Hà Nội",
+                "TP Buôn Ma Thuột",
+                "Đắk Lắk"
+            ],
+            "company": "CÔNG TY CỔ PHẦN XUẤT NHẬP KHẨU SONIC VIỆT NAM – CHI NHÁNH TẠI HÀ NỘI"
+        },
+        {
+            "title": "Nhân Viên Kỹ Thuật Bảo Trì (Làm Tại Doanh Nghiệp Châu Âu - BHXH Full Lương)",
+            "salary": "8 - 14 triệu",
+            "experience": "1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Nam",
+            "category": [
+                "Cơ khí / Chế tạo / Tự động hóa",
+                "Điện / Điện tử / Điện lạnh",
+                "Bảo trì / Sửa chữa"
+            ],
+            "location": [
+                "Quảng Nam",
+                "Đại Lộc",
+                "Điện Bàn",
+                "Đà Nẵng",
+                "Cẩm Lệ",
+                "Hòa Vang"
+            ],
+            "company": "Groz-Beckert VietNam"
+        },
+        {
+            "title": "Nhân Viên Kinh Doanh / Sales Tư Vấn Khóa Học Tại Hà Nội",
+            "salary": "8.5 - 15 triệu",
+            "experience": "Dưới 1 năm",
+            "position": "Nhân viên",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Giáo dục / Đào tạo",
+                "Marketing / Truyền thông / Quảng cáo",
+                "Công nghệ thông tin"
+            ],
+            "location": [
+                "Hà Nội",
+                "Thanh Xuân"
+            ],
+            "company": "CÔNG TY CỔ PHẦN GIÁO DỤC SỐ SỚM"
+        },
+        {
+            "title": "Trưởng Nhóm Kinh Doanh / Sale Team Leader (Được Hỗ Trợ Team, Được Chủ Động Thời Gian & Địa Điểm Làm Việc)",
+            "salary": "25 - 50 triệu",
+            "experience": "1 năm",
+            "position": "Trưởng nhóm",
+            "type_of_job": "Toàn thời gian",
+            "sex": "Không yêu cầu",
+            "category": [
+                "Kinh doanh / Bán hàng",
+                "Bảo hiểm",
+                "Ngân hàng / Tài chính"
+            ],
+            "location": [
                 "Hai Bà Trưng",
                 "Hà Nội"
             ],
-            "company": "NOUS By Sun Life Miền Bắc"
+            "company": "Exchange by AIA - Hà Nội"
         }
     ]
 ]
