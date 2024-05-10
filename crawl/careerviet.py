@@ -26,10 +26,40 @@ def getSpecificPage(url):
                 data["role"] = group_infor[5].text_content()
                 data["type"] = group_infor[2].text_content()
                 data["experience"] = re.sub(r'\s+', ' ', group_infor[4].text_content().strip())
+                data["expriration"] = group_infor[-1].text_content()
+            elif len(group_infor) == 6:
+                data["salary"] = group_infor[3].text_content()
+                data["role"] = group_infor[4].text_content()
+                data["type"] = group_infor[2].text_content()
+                data["expriration"] = group_infor[-1].text_content()
             location_element = tree.xpath("//*[@class='map']/p")
             if len(location_element):
                 data["location"] = location_element[0].text_content()
-            # detail-box has-background
+            other_info_group = tree.xpath('//*[contains(@class, "content_fck")]')
+            # print(other_info_group)
+            if len(other_info_group):
+                other_info = other_info_group[0]
+                sex_element = other_info.xpath('./descendant::*[contains(text(), "Giới tính")]')
+                if len(sex_element):
+                    data["sex"] = sex_element[0].text_content().replace("Giới tính:", "").strip()
+                age_element = other_info.xpath('./descendant::*[contains(text(), "Độ tuổi")]')
+                if len(age_element):
+                    data["age"] = age_element[0].text_content().replace("Độ tuổi:", "").strip()
+                certificate_element = other_info.xpath('./descendant::*[contains(text(), "Bằng cấp")]')
+                if len(certificate_element):
+                    data["certificate"] = certificate_element[0].text_content().replace("Bằng cấp:", "").strip()
+            job_des_element = tree.xpath("//*[@class='detail-row reset-bullet']/p")
+            if(len(job_des_element)):
+                arr = []
+                for des in job_des_element:
+                    arr.append(des.text_content().replace("\xa0", ""))
+                data["description"] = arr
+            job_require_element = tree.xpath("//div[@class='detail-row'][@reset-bullet]/p")
+            if(len(job_require_element)):
+                arr = []
+                for req in job_require_element:
+                    arr.append(req.text_content().replace("\xa0", ""))
+                data["requirement"] = arr
         time.sleep(1)
     except Exception as e:
         print(e)
