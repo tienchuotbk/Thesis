@@ -40,6 +40,7 @@ def crawl_product_page(url):
             tree = html.fromstring(response.content)
             data = {}
             title_elemet = tree.xpath('//*[@id="header-job-info"]/h1')
+            data["url"] = url
             if title_elemet:
                 data['title'] = title_elemet[0].text_content().strip()
             else:

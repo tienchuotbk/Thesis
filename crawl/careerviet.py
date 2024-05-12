@@ -2,6 +2,7 @@ import requests
 from lxml import html
 import time
 import re
+import json
 
 user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'
 def getSpecificPage(url):
@@ -9,6 +10,7 @@ def getSpecificPage(url):
     try:
         response = requests.get(url, headers={'User-agent': user_agent })
         if response.status_code == 200:
+            data["url"] = url
             tree = html.fromstring(response.content)
             title_element = tree.xpath("//*[@class='search-result-list-detail template-2']//h1")
             if len(title_element):
@@ -65,12 +67,13 @@ def getSpecificPage(url):
         print(e)
     finally:
         print(data)
-        pass
+        return data
+
 
 try:
     count = 0
     temp_data = []
-    for i in range (1, 2):
+    for i in range (1, 5):
         url = "https://careerviet.vn/viec-lam/tat-ca-viec-lam-trang-"+ str(i)+"-vi.html"
 
         response = requests.get(url, headers={'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'})
@@ -86,6 +89,17 @@ try:
             count += 1
             print(count)
             data = getSpecificPage(job_url)
+            if any(data.values()):
+                temp_data.append(data)
+        try:
+            with open('careerviet.json', 'r', encoding='utf-8') as f:
+                existing_data = json.load(f)
+                existing_data.extend(temp_data)
+            with open('careerviet.json', 'w', encoding='utf-8') as file:
+                json.dump(existing_data, file, indent=4, ensure_ascii=False)
+                temp_data = []
+        except Exception as e:
+            print("Error when read/write file:" + str(e))
 
         
 except Exception as e:
