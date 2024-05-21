@@ -118,10 +118,10 @@ try:
             if(jobData):
                 data.extend(jobData)
                 try:
-                    with open('output.json', 'r', encoding='utf-8') as f:
+                    with open('topcv.json', 'r', encoding='utf-8') as f:
                         existing_data = json.load(f)
                         existing_data.extend(data)
-                    with open('output.json', 'w', encoding='utf-8') as file:
+                    with open('topcv.json', 'w', encoding='utf-8') as file:
                         json.dump(existing_data, file, indent=4, ensure_ascii=False)
                         data = []
 
@@ -139,10 +139,10 @@ try:
                 temp = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@class="box-pagination"]/ul/li[3]')))
                 print(temp.text)
                 if(temp and index <4):
-                    subprocess.run(["nmcli", "radio", "wifi", "off"])
-                    time.sleep(2)
-                    subprocess.run(["nmcli", "radio", "wifi", "on"])
-                    time.sleep(10)
+                    # subprocess.run(["nmcli", "radio", "wifi", "off"])
+                    # time.sleep(2)
+                    # subprocess.run(["nmcli", "radio", "wifi", "on"])
+                    # time.sleep(10)
                     temp.click()
                     time.sleep(5)
                 else:

@@ -31,10 +31,10 @@ def getSpecificPage(url):
             if len(title_group_element):
                 group_element = title_group_element[0].xpath("//p[@class='']")
                 if(len(group_element) == 2):
-                    data["expriration"] = group_element[0].text_content()
+                    data["expiration"] = group_element[0].text_content()
                     data["location"] = group_element[1].text_content()
             else:
-                print("Cannot get expriration and location")
+                print("Cannot get expiration and location")
             group_element = tree.xpath("//*[@class='jsx-d84db6a84feb175e px-4 md:px-10 py-4 bg-white shadow-sd-12 rounded-sm']")
             if len(group_element):
                 role_element = group_element[0].xpath('.//p[contains(text(), "Cấp bậc")]/..//p[@class="text-14"]')
@@ -62,10 +62,10 @@ def getSpecificPage(url):
                 if len(group_des_element) == 0:
                     group_des_element = group_info_element[0].xpath(".//li/text()")
                 data["description"] = [x.replace('\xa0\xa0\xa0\xa0\xa0', "") for x in group_des_element]
-                group_benifit_element = group_info_element[1].xpath(".//p/text()")
-                if len(group_benifit_element) == 0:
-                    group_benifit_element = group_info_element[1].xpath(".//li/text()")
-                data["benifit"] = [x.replace('\xa0\xa0\xa0', "") for x in group_benifit_element]
+                group_benefit_element = group_info_element[1].xpath(".//p/text()")
+                if len(group_benefit_element) == 0:
+                    group_benefit_element = group_info_element[1].xpath(".//li/text()")
+                data["benefit"] = [x.replace('\xa0\xa0\xa0', "") for x in group_benefit_element]
                 # print(group_des_element)
             group_location_element = tree.xpath(".//*[@class='jsx-d84db6a84feb175e text-primary font-medium pt-[1px] text-12']/text()")
             if len(group_location_element):
@@ -82,7 +82,7 @@ def getSpecificPage(url):
 try:
     count = 0
     temp_data = []
-    for i in range (1, 5):
+    for i in range (1, 25):
         url = "https://vieclam24h.vn/tim-kiem-viec-lam-nhanh?page="+ str(i)
 
         response = requests.get(url, headers={'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'})

@@ -28,12 +28,12 @@ def getSpecificPage(url):
                 data["role"] = group_infor[5].text_content()
                 data["type"] = group_infor[2].text_content()
                 data["experience"] = re.sub(r'\s+', ' ', group_infor[4].text_content().strip())
-                data["expriration"] = group_infor[-1].text_content()
+                data["expiration"] = group_infor[-1].text_content()
             elif len(group_infor) == 6:
                 data["salary"] = group_infor[3].text_content()
                 data["role"] = group_infor[4].text_content()
                 data["type"] = group_infor[2].text_content()
-                data["expriration"] = group_infor[-1].text_content()
+                data["expiration"] = group_infor[-1].text_content()
             location_element = tree.xpath("//*[@class='map']/p")
             if len(location_element):
                 data["location"] = location_element[0].text_content()
