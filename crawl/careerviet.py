@@ -34,9 +34,15 @@ def getSpecificPage(url):
                 data["role"] = group_infor[4].text_content()
                 data["type"] = group_infor[2].text_content()
                 data["expiration"] = group_infor[-1].text_content()
-            location_element = tree.xpath("//*[@class='map']/p")
+            #//*[@id="maps-tab-1"]//ul[@class='clearall']/li/a
+            location_element = tree.xpath("//*[@id='maps-tab-1']//ul[@class='clearall']/li/a")
             if len(location_element):
+                if(len(location_element) >= 2):
+                    print("Location lengh > 2")
                 data["location"] = location_element[0].text_content()
+            else:
+                data["location"] = None
+                
             other_info_group = tree.xpath('//*[contains(@class, "content_fck")]')
             # print(other_info_group)
             if len(other_info_group):
