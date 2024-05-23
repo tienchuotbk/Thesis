@@ -73,8 +73,18 @@ def getSpecificPage(url):
             location_element = tree.xpath("*//h2[contains(text(), 'Địa điểm làm việc')]")
             if(len(location_element)):
                 parent_element = location_element[0].getparent()
-                location_final_element = parent_element.xpath("./descendant::span[@class='jsx-d84db6a84feb175e']/text()")
-                data["location"] = location_final_element
+                location_element_contaner = parent_element.xpath("./descendant::span[@class='jsx-d84db6a84feb175e']")
+                if(len(location_element_contaner)):
+                    locations = []
+                    for ele in location_element_contaner:
+                        full_text = ''.join(ele.xpath('./text()'))
+                        print(full_text)        
+                        sub_span_text = ele.xpath("./descendant::span[@class='jsx-d84db6a84feb175e text-primary font-medium pt-[1px] text-12']/text()")
+                        if len(sub_span_text):
+                            locations.append(f"{full_text}, {sub_span_text[0]}")
+                        else:
+                            locations.append(f"{full_text}")
+                    data["location"] = locations
                         
         time.sleep(1)
     except Exception as e:
