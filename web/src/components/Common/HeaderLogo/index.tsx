@@ -1,4 +1,3 @@
-
 export default function HeaderLogo() {
   return (
     <span className="w-[82px] inline-block mr-8 cursor-pointer">
