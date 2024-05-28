@@ -1,3 +1,10 @@
+import JobTable from "@/components/JobTable";
+import { Layout } from "antd";
+
 export default function Index() {
-  return <div className="bg-red-600">home index</div>;
+  return (
+    <Layout.Content className="container mx-auto px-4">
+      <JobTable />
+    </Layout.Content>
+  );
 }
