@@ -137,7 +137,8 @@ try:
     temp_data = []
     for i in range (1, 25):
         try:
-            url = "https://vieclam24h.vn/tim-kiem-viec-lam-nhanh?page="+ str(i)
+            # https://vieclam24h.vn/tim-kiem-viec-lam-nhanh?page=2&sort_q=actived_at_by_box%2Cdesc
+            url = "https://vieclam24h.vn/tim-kiem-viec-lam-nhanh?page="+ str(i)+ "&sort_q=actived_at_by_box%2Cdesc"
 
             response = requests.get(url, headers={'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'})
 
