@@ -137,7 +137,7 @@ def getSpecificPage(url):
 try:
     count = 0
     temp_data = []
-    for i in range (1, 25):
+    for i in range (1, 50):
         try:
             # https://vieclam24h.vn/tim-kiem-viec-lam-nhanh?page=2&sort_q=actived_at_by_box%2Cdesc
             url = "https://vieclam24h.vn/tim-kiem-viec-lam-nhanh?page="+ str(i)+ "&sort_q=actived_at_by_box%2Cdesc"

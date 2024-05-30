@@ -88,7 +88,7 @@ def getSpecificPage(url):
                 else:
                     list_benefit = job_des_parent.xpath(".//p/text()")
                     data["benefit"] = list_benefit
-        time.sleep(1)
+        time.sleep(0.5)
     except Exception as e:
         print(e)
     finally:
@@ -99,7 +99,7 @@ def getSpecificPage(url):
 try:
     count = 0
     temp_data = []
-    for i in range (1, 100):
+    for i in range (1, 1000):
         try:
             url = "https://careerviet.vn/viec-lam/tat-ca-viec-lam-sortdv-trang-"+ str(i)+"-vi.html"
 
