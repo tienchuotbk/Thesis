@@ -12,7 +12,6 @@ export default (app) => {
     })
 
     process.on('unhandledRejection', async (ex) => {
-        // console.log(ex);
         logger('00002', '', ex.message, 'Unhandled Rejection', '');
     });
 
@@ -22,4 +21,31 @@ export default (app) => {
     app.use(morgan("dev"))
     app.use(helmet())
     app.use(prefix, routes)
+
+    app.use((_req, _res, next) => {
+        const error = new Error('Endpoint could not find!');
+        error.status = 404;
+        next(error);
+    });
+
+    app.use((error, req, res, _next) => {
+        res.status(error.status || 500);
+        let resultCode = '00015';
+        let level = 'External Error';
+        if (error.status === 500) {
+            resultCode = '00013';
+            level = 'Server Error';
+        } else if (error.status === 404) {
+            resultCode = '00014';
+            level = 'Client Error';
+        }
+        return res.json({
+            resultMessage: {
+                en: error.message,
+                vi: error.message
+            },
+            resultCode: resultCode,
+        });
+
+    });
 }
