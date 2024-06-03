@@ -25,7 +25,7 @@ export default function Header() {
   }, []);
 
   return (
-    <Layout.Header className="bg-[#f5f5f5] border-b-2 border-[#d9d9d9]">
+    <Layout.Header className="bg-[#f5f5f5] border-b-[1px] border-[#d9d9d9]">
       <div className="container mx-auto">
         <Row>
           <Col span={12} className="flex items-center">

@@ -5,7 +5,7 @@ export default async () => {
     mongoose.set("strictQuery", false)
     await mongoose.connect(dbUri, {})
         .then(() => {
-            console.log('Mongodb Connection');
+            console.log('Mongodb Connected');
         })
         .catch(err => {
             console.log('Mongodb connect failed: ', err);
