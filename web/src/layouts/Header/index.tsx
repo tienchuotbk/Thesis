@@ -18,6 +18,10 @@ export default function Header() {
       title: "Job Offer",
       href: "/job-offer",
     },
+    {
+      title: "Insight",
+      href: "/insight",
+    },
   ];
 
   const handleNavbarClick = useCallback((href: string) => {

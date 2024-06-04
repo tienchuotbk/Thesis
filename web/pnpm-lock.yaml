@@ -14,6 +14,12 @@ dependencies:
   axios:
     specifier: ^1.7.1
     version: 1.7.1
+  highcharts:
+    specifier: ^11.4.3
+    version: 11.4.3
+  highcharts-react-official:
+    specifier: ^3.2.1
+    version: 3.2.1(highcharts@11.4.3)(react@18.3.1)
   react:
     specifier: ^18.2.0
     version: 18.3.1
@@ -1895,6 +1901,20 @@ packages:
     dependencies:
       function-bind: 1.1.2
     dev: true
+
+  /highcharts-react-official@3.2.1(highcharts@11.4.3)(react@18.3.1):
+    resolution: {integrity: sha512-hyQTX7ezCxl7JqumaWiGsroGWalzh24GedQIgO3vJbkGOZ6ySRAltIYjfxhrq4HszJOySZegotEF7v+haQ75UA==}
+    peerDependencies:
+      highcharts: '>=6.0.0'
+      react: '>=16.8.0'
+    dependencies:
+      highcharts: 11.4.3
+      react: 18.3.1
+    dev: false
+
+  /highcharts@11.4.3:
+    resolution: {integrity: sha512-rMmvYvcdwyUVfnRPfiZ0PnW6TgVhoS0FTBI8fc4Fp8l8ocoC9dMecvxS6E6tm7h7LrnSGoEo3b/0IRHuLatD2w==}
+    dev: false
 
   /ignore@5.3.1:
     resolution: {integrity: sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==}

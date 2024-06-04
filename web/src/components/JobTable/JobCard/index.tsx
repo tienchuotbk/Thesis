@@ -23,7 +23,9 @@ export default function JobCard({ jobInfo }: IProps) {
         break;
       case 2:
         text = (
-          <p className="text-sky-500 font-semibold text-base">{salary.fixed} Triệu</p>
+          <p className="text-sky-500 font-semibold text-base">
+            {salary.fixed} Triệu
+          </p>
         );
         break;
       case 3:
@@ -41,14 +43,12 @@ export default function JobCard({ jobInfo }: IProps) {
         );
         break;
       case 5:
-          text = (
-            <p className="text-sky-500 font-semibold text-base">
-              Thảo thuận
-            </p>
-          );
-          break;
+        text = (
+          <p className="text-sky-500 font-semibold text-base">Thảo thuận</p>
+        );
+        break;
       default:
-        text = <p>None</p> 
+        text = <p>None</p>;
     }
     return text;
   }
@@ -60,10 +60,10 @@ export default function JobCard({ jobInfo }: IProps) {
           width={"4.5em"}
           src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
         />
-        <div>
+        <Flex justify="space-start" gap="small" vertical>
           <div className="font-bold text-slate-700">{jobInfo.title}</div>
           <div className="text-xs">{jobInfo.company}</div>
-        </div>
+        </Flex>
       </Flex>
       <Flex gap="small" align="center" justify="flex-end">
         <p className="text-blue-500">Lương:</p>
