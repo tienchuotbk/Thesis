@@ -12,6 +12,10 @@ export default function Search() {
     });
   }
   const src = "location.svg";
+  const filterOption = (
+    input: string,
+    option?: { label: string; value: string }
+  ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
   return (
     <div className="">
@@ -33,10 +37,15 @@ export default function Search() {
             placeholder=""
             onChange={handleChange}
             options={provinces}
+            filterOption={filterOption}
+            defaultValue={"all"}
+            showSearch
           />
         </Col>
         <Col span={3}>
-          <Button type="primary" loading={true} iconPosition="end">Search</Button>
+          <Button type="primary" loading={true} iconPosition="end">
+            Search
+          </Button>
         </Col>
       </Row>
     </div>

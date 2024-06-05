@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Layout.Content className="min-h-[calc(100vh-130px)] py-4 bg-[#f5f5f5]">
+      <Layout.Content className="min-h-[calc(100vh-130px)] bg-[#f5f5f5]">
         <Routes pages={pages} />
       </Layout.Content>
       <Footer />
