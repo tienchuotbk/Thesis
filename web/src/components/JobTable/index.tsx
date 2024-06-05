@@ -213,7 +213,8 @@ export default function JobTable() {
         minHeight: "100vh",
       }}
     >
-      <Layout.Sider style={{ background: "white" }}>
+      <Layout.Sider width={"15vw"} style={{ background: "white" }}>
+        <Layout.Header />
         <Filter />
       </Layout.Sider>
       <Layout>
