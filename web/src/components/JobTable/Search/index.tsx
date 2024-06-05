@@ -1,5 +1,5 @@
-import { SearchOutlined } from "@ant-design/icons";
-import { Col, Input, Row, Select, SelectProps } from "antd";
+import provinces from "@/const/province";
+import { Button, Col, Input, Row, Select, SelectProps } from "antd";
 
 export default function Search() {
   const handleChange = (value: string) => {};
@@ -11,41 +11,32 @@ export default function Search() {
       label: i.toString(36) + i,
     });
   }
+  const src = "location.svg";
 
   return (
     <div className="">
-      <Row gutter={16}>
-        <Col span={6} className="w-full">
-          <div className="border-gray-300 border-[1px] rounded-md">
-            <Input
-              prefix={<SearchOutlined />}
-              placeholder="Search Job Title Or Keyword"
-              className="bg-white placeholder-black"
-              variant="borderless"
-            />
-          </div>
+      <Row gutter={20}>
+        <Col span={15} className="w-full">
+          {/* <div className="border-gray-300 border-[1px] rounded-md"> */}
+          <Input
+            placeholder="Nhập thông tin bạn muốn tìm kiếm"
+            className="bg-white placeholder-black"
+            variant="outlined"
+          />
+          {/* </div> */}
         </Col>
-        <Col span={3}>
-          <div className="border-gray-300 border-[ rounded-md">
-            <Select
-              className="w-full"
-              defaultValue={"vietname"}
-              onChange={handleChange}
-              options={[
-                { value: "vietnam", label: "vietnam" },
-                { value: "indonesia", label: "indonesia" },
-              ]}
-            />
-          </div>
-        </Col>
-        <Col span={6}>
+        <Col span={5}>
           <Select
             className="w-full border-gray-300 border-[ rounded-md"
-            mode="tags"
+            prefixCls="HUHU"
+            suffixIcon={<img src={src} height={17} width={17}></img>}
             placeholder=""
             onChange={handleChange}
-            options={options}
+            options={provinces}
           />
+        </Col>
+        <Col span={3}>
+          <Button type="primary" loading={true} iconPosition="end">Search</Button>
         </Col>
       </Row>
     </div>

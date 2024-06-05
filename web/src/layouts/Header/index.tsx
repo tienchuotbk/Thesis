@@ -46,7 +46,7 @@ export default function Header() {
               );
             })}
           </Col>
-          <Col span={12}>2</Col>
+          <Col span={12}>Job</Col>
         </Row>
       </div>
     </Layout.Header>
