@@ -13,20 +13,7 @@ import JobCard from "./JobCard";
 import Search from "./Search";
 import Filter from "./Filter";
 import type { MenuProps } from "antd";
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
 
-// type Data = {
-//   _id: number;
-//   title: string;
-//   location: string;
-//   salary: object;
-// };
 const data = [
   {
     salary: {
