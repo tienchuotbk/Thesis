@@ -5,14 +5,16 @@ const  jobController = {
         try {
             // console.log(page)
             const filter = {}
-            const options = { limit: 10 }
+
+            const options = { limit: 12, skip: (parseInt(page) -1)* 12 }
             const project = { title: 1, url: 1, update_time: 1, category: 1, salary: 1 }
             const jobs = await findAll(filter, project, options);
-            res.status(200).json({ message: "OK", data: jobs })
+            console.log(jobs)
+            res.status(200).json({ message: "OK", data: jobs });
         }
         catch(e){
             console.log(e);
-            res.status(404).json({ message: "ERROR"+ e, data: [] })
+            res.status(404).json({ message: "ERROR"+ e, data: [] });
         }
     },
     getById: async(req, res) => {
