@@ -4,29 +4,24 @@ import {
   Col,
   Flex,
   Layout,
-  Menu,
   Pagination,
   Row,
   Select,
   Spin,
-  Typography,
   Empty,
   theme,
 } from "antd";
 import JobCard from "./JobCard";
 import Search from "./Search";
 import Filter from "./Filter";
-import type { MenuProps } from "antd";
-import { useForm } from "react-hook-form";
 import { useCallback, useEffect, useState } from "react";
+import { defaultFilter } from "@/const/options";
 
 export default function JobTable() {
-  type MenuItem = Required<MenuProps>["items"][number];
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const [isFirstLoading, setIsFirstLoading] = useState(true);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [pagination, setPagination] = useState({
@@ -35,26 +30,8 @@ export default function JobTable() {
     totalCount: 0,
   });
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    control,
-    reset,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      type: null,
-      role: null,
-      sex: null,
-      exp: null,
-      age: null,
-      salary: undefined,
-      level: null,
-      carrer: null,
-    },
-  });
+  const [filter, setFilter] = useState(defaultFilter);
+  const [order, setOrder] = useState("lastest");
 
   const handleChangePage = useCallback(
     (val: number) => {
@@ -63,20 +40,48 @@ export default function JobTable() {
     [pagination]
   );
 
-  async function getJobData(filter: any, currentPage: number, sortBy: string) {
+  const handleChangeOrder = useCallback((val: string)=> {
+    setOrder(val);
+  }, []);
+
+  const typedKeys = <T extends object>(obj: T): (keyof T)[] => {
+    return Object.keys(obj) as (keyof T)[];
+  };
+
+  async function getJobData(clickSearch = false) {
     setLoading(true);
     try {
-      const jobs = await fetch(`http://localhost:3003/api?page=${currentPage}`);
+      let filterString: string[] = [];
+      typedKeys(filter).map((val) => {
+        if (val === "text") {
+          if (filter[val] !== ""){
+            filterString.push(val.toString() + "=" + filter[val]);
+          }
+        } else if (val === "province") {
+          if (filter[val] !== "all") {
+            filterString.push(val.toString() + "=" + filter[val]);
+          }
+        } else if(filter[val] != null || filter[val] != undefined) {
+          filterString.push(val.toString() + "=" + filter[val]);
+        }
+      });
+      let params = "";
+      if (filterString.length > 0) {
+        params = '&'+ filterString.join("&");
+      }
+
+      const jobs = await fetch(
+        `http://localhost:3003/api?page=${clickSearch ? 1 : pagination.currentPage}&order=${order}${params}`
+      );
+
       const jobData = await jobs.json();
       if (jobData && jobs.status === 200) {
-        console.log(jobData.data.jobs);
         setData(jobData.data.jobs);
         setPagination({
           currentPage: jobData.data.currentPage,
           totalPage: jobData.data.totalPage,
           totalCount: jobData.data.totalCount,
         });
-        setIsFirstLoading(false);
       }
     } catch (e) {
       console.log(e);
@@ -85,8 +90,8 @@ export default function JobTable() {
   }
 
   useEffect(() => {
-    getJobData({}, pagination.currentPage, "lastest");
-  }, [pagination.currentPage]);
+    getJobData();
+  }, [pagination.currentPage, order]);
 
   return (
     <Layout
@@ -96,11 +101,11 @@ export default function JobTable() {
     >
       <Layout.Sider width={"15vw"} style={{ background: "white" }}>
         <Layout.Header />
-        <Filter />
+        <Filter filter={filter} setData={setFilter} />
       </Layout.Sider>
       <Layout>
         <Layout.Header>
-          <Search />
+          <Search filter={filter} setFilter={setFilter} getJobData={getJobData} loading={loading}/>
         </Layout.Header>
         <Layout.Content style={{ margin: "0 16px" }}>
           <Flex align="flex-start" justify="space-between">
@@ -124,6 +129,8 @@ export default function JobTable() {
                   { value: "fit", label: "Relevant" },
                   { value: "salary", label: "Salary" },
                 ]}
+                onChange={handleChangeOrder}
+                value={order}
               />
             </Flex>
           </Flex>
@@ -164,7 +171,7 @@ export default function JobTable() {
               </div>
             </div>
           ) : (
-            <Empty style={{ marginTop: "4em" }}/>
+            <Empty style={{ marginTop: "4em" }} />
           )}
         </Layout.Content>
       </Layout>

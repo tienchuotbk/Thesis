@@ -58,7 +58,7 @@ export default function JobCard({ jobInfo }: IProps) {
       <Flex justify="space-start" gap={"middle"}>
         <Image
           width={"4.5em"}
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          src={jobInfo.logo}
         />
         <Flex justify="space-start" gap="small" vertical>
           <div className="font-bold text-slate-700">{jobInfo.title}</div>

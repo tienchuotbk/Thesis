@@ -1,16 +1,24 @@
+import { filterInterface } from "@/const/options";
 import provinces from "@/const/province";
 import { Button, Col, Input, Row, Select, SelectProps } from "antd";
+import { useCallback, useState } from "react";
+interface ChildComponentProps {
+  setFilter: React.Dispatch<React.SetStateAction<any>>;
+  filter: filterInterface,
+  getJobData: Function,
+  loading: boolean,
+}
 
-export default function Search() {
-  const handleChange = (value: string) => {};
-  const options: SelectProps["options"] = [];
+const Search: React.FC<ChildComponentProps> = ({ filter, setFilter, getJobData, loading }) => {
+  const handleChangeLocation = (value: string) => {
+    console.log(value)
+    setFilter((preVal: any) => ({... preVal, province: value}))
+  };
 
-  for (let i = 10; i < 36; i++) {
-    options.push({
-      value: i.toString(36) + i,
-      label: i.toString(36) + i,
-    });
-  }
+  const handleChangeTextInput = (event: any) => {
+    setFilter((preVal: any) => ({... preVal, text: event.target.value}))
+  };
+
   const src = "location.svg";
   const filterOption = (
     input: string,
@@ -26,16 +34,17 @@ export default function Search() {
             placeholder="Nhập thông tin bạn muốn tìm kiếm"
             className="bg-white placeholder-black"
             variant="outlined"
+            value={filter.text}
+            onChange={handleChangeTextInput}
           />
           {/* </div> */}
         </Col>
         <Col span={5}>
           <Select
             className="w-full border-gray-300 border-[ rounded-md"
-            prefixCls="HUHU"
             suffixIcon={<img src={src} height={17} width={17}></img>}
             placeholder=""
-            onChange={handleChange}
+            onChange={handleChangeLocation}
             options={provinces}
             filterOption={filterOption}
             defaultValue={"all"}
@@ -43,7 +52,7 @@ export default function Search() {
           />
         </Col>
         <Col span={3}>
-          <Button type="primary" loading={true} iconPosition="end">
+          <Button type="primary" loading={loading} iconPosition="end" onClick={()=> getJobData(true)}>
             Search
           </Button>
         </Col>
@@ -51,3 +60,4 @@ export default function Search() {
     </div>
   );
 }
+export default Search;

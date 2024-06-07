@@ -1,9 +1,10 @@
 import Job from "../models/job.js";
 import mongoose from "mongoose";
-export const findAll = (filter, project = {}, options = {}) => {
+import { filterAggregate } from "../helper/filter.js";
+export const findAll = (filter, order, project = {}, options = {}) => {
   // return Job.find(filter, project, options)
   return Job.aggregate([
-    { $match: filter },
+    ...filterAggregate(filter),
     {
       $facet: {
         totalData: [
