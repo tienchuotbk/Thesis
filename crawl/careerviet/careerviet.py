@@ -8,7 +8,7 @@ user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 def getSpecificPage(url):
     data = {}
     try:
-        response = requests.get(url, headers={'User-agent': user_agent })
+        response = requests.get(url, headers={'User-agent': user_agent }, timeout= 10)
         if response.status_code == 200:
             data["url"] = url
             tree = html.fromstring(response.content)
@@ -42,15 +42,15 @@ def getSpecificPage(url):
             if len(province_element):
                 data["province"] = province_element
             company_info = tree.xpath("//li[@id='tabs-job-company']//a/@href")
-            print(company_info)
+            # print(company_info)
             if len(company_info):
                 try:
-                    res = response.get(company_info[0])
+                    res = requests.get(company_info[0].strip(), headers={'User-agent': user_agent}, timeout=5)
                     if res.status_code == 200:
                         subtree = html.fromstring(res.content)
                         logo_element = subtree.xpath("//*[@class='company-introduction']//div[@class='img']/img/@src")
                         if(len(logo_element)):
-                            data["logo"] = logo_element[0]
+                            data["logo"] = logo_element[0].strip()
                 except Exception as e:
                     print(e)
                 
@@ -101,7 +101,7 @@ def getSpecificPage(url):
     except Exception as e:
         print(e)
     finally:
-        print(data)
+        # print(data)
         return data
 
 
@@ -110,6 +110,7 @@ try:
     temp_data = []
     for i in range (1, 1000):
         try:
+            print("Page "+ str(i))
             url = "https://careerviet.vn/viec-lam/tat-ca-viec-lam-sortdv-trang-"+ str(i)+"-vi.html"
 
             response = requests.get(url, headers={'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'})
