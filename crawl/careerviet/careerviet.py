@@ -35,15 +35,24 @@ def getSpecificPage(url):
                 data["role"] = group_infor[4].text_content()
                 data["type"] = group_infor[2].text_content()
                 data["expiration"] = group_infor[-1].text_content()
-            #//*[@id="maps-tab-1"]//ul[@class='clearall']/li/a
             location_element = tree.xpath("//*[@id='maps-tab-1']//ul[@class='clearall']/li/a/text()")
             if len(location_element):
                 data["location"] = location_element
-            #     if(len(location_element) >= 2):
-            #         print("Location lengh > 2")
-            #     data["location"] = location_element[0].text_content()
-            # else:
-            #     data["location"] = None
+            province_element = tree.xpath("//*[@class='job-detail-content']//div[@class='map']/p/a/text()")
+            if len(province_element):
+                data["province"] = province_element
+            company_info = tree.xpath("//li[@id='tabs-job-company']//a/@href")
+            print(company_info)
+            if len(company_info):
+                try:
+                    res = response.get(company_info[0])
+                    if res.status_code == 200:
+                        subtree = html.fromstring(res.content)
+                        logo_element = subtree.xpath("//*[@class='company-introduction']//div[@class='img']/img/@src")
+                        if(len(logo_element)):
+                            data["logo"] = logo_element[0]
+                except Exception as e:
+                    print(e)
                 
             other_info_group = tree.xpath('//*[contains(@class, "content_fck")]')
             # print(other_info_group)
@@ -92,7 +101,7 @@ def getSpecificPage(url):
     except Exception as e:
         print(e)
     finally:
-        # print(data)
+        print(data)
         return data
 
 
