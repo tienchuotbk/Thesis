@@ -3,14 +3,17 @@ const  jobController = {
     findAll: async (req, res) => {
         const { page } = req.query;
         try {
-            // console.log(page)
             const filter = {}
-
             const options = { limit: 12, skip: (parseInt(page) -1)* 12 }
             const project = { title: 1, url: 1, update_time: 1, category: 1, salary: 1 }
             const jobs = await findAll(filter, project, options);
-            console.log(jobs)
-            res.status(200).json({ message: "OK", data: jobs });
+            const jobData = {
+                jobs: jobs[0].totalData,
+                totalPage: Math.ceil(jobs[0].totalCount[0].total / 12),
+                currentPage: parseInt(page),
+                totalCount: jobs[0].totalCount[0].total
+            }
+            res.status(200).json({ message: "OK", data: jobData });
         }
         catch(e){
             console.log(e);

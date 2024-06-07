@@ -8,6 +8,7 @@ import {
 } from "antd";
 import { useCallback, useState } from "react";
 import type { SliderSingleProps } from "antd";
+import { Controller } from "react-hook-form";
 
 export default function Filter() {
   const [type, setType] = useState(null);
@@ -17,7 +18,7 @@ export default function Filter() {
   const [age, setAge] = useState(undefined);
   const [salary, setSalary] = useState(undefined);
   const [level, setLevel] = useState(null);
-  const [carrer, setCarrer] = useState(null);
+  const [career, setCareer] = useState(null);
   const [salaryChecked, setSalaryChecked] = useState(false);
   const [ageChecked, setAgeChecked] = useState(false);
   const handleClearAll = () => {};
@@ -40,8 +41,8 @@ export default function Filter() {
     setType(value);
   };
 
-  const handleChangeCarrer = (value: any) => {
-    setCarrer(value);
+  const handleChangeCareer = (value: any) => {
+    setCareer(value);
   };
 
   const handleChangeRole = useCallback((value: any) => {
@@ -120,12 +121,12 @@ export default function Filter() {
         <p>Ngành nghề</p>
         <Select
           style={{ width: "90%" }}
-          onChange={handleChangeCarrer}
+          onChange={handleChangeCareer}
           options={[
             { value: null, label: "Tất cả" },
             { value: 1, label: "IT" },
           ]}
-          value={carrer}
+          value={career}
           defaultValue={null}
         />
       </Flex>
