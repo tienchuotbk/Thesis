@@ -12,16 +12,24 @@
 // }
 export function filterAggregate(filter) {
   let result = [];
-  if (filter.type) {
-    result.push({
-      $match: { type: { $elemMatch: { $eq: parseInt(filter.type) } } },
-    });
-  }
   if (filter.role) {
     result.push({ $match: { role: parseInt(filter.role) } });
   }
   if (filter.sex) {
     result.push({ $match: { sex: parseInt(filter.sex) } });
+  }
+  if( filter.level) {
+    result.push({ $match: { certificate: parseInt(filter.level) } });
+  }
+  if (filter.type) {
+    result.push({
+      $match: { type: { $elemMatch: { $eq: parseInt(filter.type) } } },
+    });
+  }
+  if(filter.province){
+    result.push({
+        $match: { location: { $elemMatch: { "province": filter.province } } },
+      });
   }
   if (filter.salary) {
     let salary = parseInt(filter.salary);
@@ -34,8 +42,6 @@ export function filterAggregate(filter) {
             "salary.max": { $gte: salary },
           },
           { "salary.type": 2, "salary.fixed": salary },
-          // Uncomment the following line if you want to include type 3
-        //   { "salary.type": 3, "min": { $exists: false }, "max": { $exists: false } },
           { "salary.type": 4, "salary.max": { $gte: salary } },
           { "salary.type": 5, "salary.min": { $lte: salary } },
         ],
@@ -54,12 +60,50 @@ export function filterAggregate(filter) {
           },
           { "age.type": 2, "age.fixed": age },
           { "age.type": 3, "age.max": { $gte: age } },
-          { "age.type": 4, "age.min": { $lte: age } }
+          { "age.type": 4, "age.min": { $lte: age } },
         ],
       },
     });
   }
 
-  console.log(result);
+  if (filter.exp !== null && filter.exp !== undefined && filter.exp.length) {
+    let experience = parseInt(filter.exp);
+    if (experience === 0) {
+      result.push({
+        $match: {
+          "experience.type": 0,
+        },
+      });
+    } else if (experience === 6) {
+      result.push({
+        $match: {
+          $or: [
+            {
+              "experience.type": 1,
+              "experience.min": { $gt: 5 },
+            },
+            { "experience.type": 2, "experience.fixed": { $gt: 5 } },
+            { "experience.type": 4, "experience.min": { $gt: 5 } },
+          ],
+        },
+      });
+    } else {
+      result.push({
+        $match: {
+          $or: [
+            {
+              "experience.type": 1,
+              "experience.min": { $lt: experience },
+              "experience.max": { $gte: experience },
+            },
+            { "experience.type": 2, "experience.fixed": experience },
+            { "experience.type": 3, "experience.max": { $gt: experience } },
+            { "experience.type": 4, "experience.min": { $lt: experience } },
+          ],
+        },
+      });
+    }
+  }
+
   return result;
 }
