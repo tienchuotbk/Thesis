@@ -16,6 +16,7 @@ import { useCallback, useEffect, useState } from "react";
 import Filter from "./Filter";
 import JobCard from "./JobCard";
 import Search from "./Search";
+import JobApi from "@/network/job";
 
 export default function JobTable() {
   const {
@@ -27,7 +28,7 @@ export default function JobTable() {
   const [pagination, setPagination] = useState({
     currentPage: 1,
     totalPage: 1,
-    totalCount: 0
+    totalCount: 0,
   });
 
   const [filter, setFilter] = useState(defaultFilter);
@@ -40,7 +41,7 @@ export default function JobTable() {
     [pagination]
   );
 
-  const handleChangeOrder = useCallback((val: string)=> {
+  const handleChangeOrder = useCallback((val: string) => {
     setOrder(val);
   }, []);
 
@@ -49,7 +50,7 @@ export default function JobTable() {
   };
 
   async function handleSearch() {
-    if(pagination.currentPage == 1){
+    if (pagination.currentPage == 1) {
       await getJobData();
     } else {
       setPagination({ ...pagination, currentPage: 1 });
@@ -59,31 +60,29 @@ export default function JobTable() {
   async function getJobData() {
     setLoading(true);
     try {
-      let filterString: string[] = [];
+      let filtered: any = {};
       typedKeys(filter).map((val) => {
         if (val === "text") {
-          if (filter[val] !== ""){
-            filterString.push(val.toString() + "=" + filter[val]);
+          if (filter[val] !== "") {
+            filtered[val.toString()] = filter[val];
           }
         } else if (val === "province") {
           if (filter[val] !== "all") {
-            filterString.push(val.toString() + "=" + filter[val]);
+            filtered[val.toString()] = filter[val];
           }
-        } else if(filter[val] != null || filter[val] != undefined) {
-          filterString.push(val.toString() + "=" + filter[val]);
+        } else if (filter[val] != null || filter[val] != undefined) {
+          filtered[val.toString()] = filter[val];
         }
       });
-      let params = "";
-      if (filterString.length > 0) {
-        params = '&'+ filterString.join("&");
-      }
 
-      const jobs = await fetch(
-        `http://localhost:3003/api?page=${pagination.currentPage}&order=${order}${params}`
-      );
+      const configParams = {
+        page: pagination.currentPage,
+        order: order,
+        ...filtered,
+      };
+      const jobData = await JobApi.getAll({ params: configParams });
 
-      const jobData = await jobs.json();
-      if (jobData && jobs.status === 200) {
+      if (jobData && jobData.data) {
         setData(jobData.data.jobs);
         setPagination({
           currentPage: jobData.data.currentPage,
@@ -109,11 +108,16 @@ export default function JobTable() {
     >
       <Layout.Sider width={"15vw"} style={{ background: "white" }}>
         <Layout.Header />
-        <Filter filter={filter} setData={setFilter}/>
+        <Filter filter={filter} setData={setFilter} />
       </Layout.Sider>
       <Layout>
         <Layout.Header>
-          <Search filter={filter} setFilter={setFilter} getJobData={handleSearch} loading={loading}/>
+          <Search
+            filter={filter}
+            setFilter={setFilter}
+            getJobData={handleSearch}
+            loading={loading}
+          />
         </Layout.Header>
         <Layout.Content style={{ margin: "0 16px" }}>
           <Flex align="flex-start" justify="space-between">
@@ -135,7 +139,7 @@ export default function JobTable() {
                 options={[
                   { value: "lastest", label: "Lastest " },
                   { value: "fit", label: "Relevant" },
-                  { value: "title", label: "Title" }
+                  { value: "title", label: "Title" },
                 ]}
                 onChange={handleChangeOrder}
                 value={order}

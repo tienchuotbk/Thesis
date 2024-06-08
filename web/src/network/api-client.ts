@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: `${process.env.VITE_API_URL}/api`,
+  baseURL: `${import.meta.env.VITE_API_URL}/api`,
   timeout: 10000,
   headers: {
     Accept: "application/json",
@@ -11,6 +11,9 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.response.use(
   function (response) {
+    if (response.statusText === "OK") {
+      return response.data;
+    }
     return response;
   },
   function (error) {

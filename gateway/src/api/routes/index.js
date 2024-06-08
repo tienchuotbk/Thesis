@@ -2,5 +2,5 @@ import { Router } from "express";
 import job from "./job.js";
 const router = Router()
 
-router.get("/job", job)
+router.use("/jobs", job)
 export default router

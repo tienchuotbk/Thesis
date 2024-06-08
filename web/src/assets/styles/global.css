@@ -16,3 +16,16 @@ html {
     margin: 0;
     box-sizing: border-box;
 }
+
+.job-detail__info--section-icon {
+    align-items: center;
+    background: linear-gradient(11deg, #00bf5d, #00907c);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 40px;
+    justify-content: center;
+    padding: 10px;
+    width: 40px
+}
