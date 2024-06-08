@@ -10,6 +10,7 @@
 //     text: text,
 //     province: province
 // }
+
 export function filterAggregate(filter) {
   let result = [];
   if (filter.role) {

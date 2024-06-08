@@ -1,6 +1,10 @@
-export default function HeaderLogo() {
+type Props = {
+  onClick: () => void;
+};
+
+export default function HeaderLogo({ onClick }: Props) {
   return (
-    <span className="w-[82px] inline-block mr-8 cursor-pointer">
+    <span className="w-[82px] inline-block mr-8 cursor-pointer" onClick={onClick}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 102 28" role="img" aria-hidden="true">
         <path
           fill="#14a800"

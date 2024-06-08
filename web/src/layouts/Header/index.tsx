@@ -33,7 +33,7 @@ export default function Header() {
       <div className="container mx-auto">
         <Row>
           <Col span={12} className="flex items-center">
-            <HeaderLogo />
+            <HeaderLogo onClick={() => navigate("/")} />
             {navbars.map((navbar: Navbar, index: number) => {
               return (
                 <Typography.Link
