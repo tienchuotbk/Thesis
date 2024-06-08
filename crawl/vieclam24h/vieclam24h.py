@@ -17,6 +17,9 @@ def getSpecificPage(url):
                 data["title"] = title_element[0].text_content()
             else:
                 print("Cannot get title")
+            logo_element = tree.xpath("//*[contains(@class, 'md:flex w-full items-start')]//img[@alt='logo']/@src")
+            if len(logo_element):
+                data['logo'] = logo_element[0]
             company_element = tree.xpath("//*[@class='md:ml-7 w-full']/a")
             if len(company_element):
                 data["company"] = company_element[0].text_content()

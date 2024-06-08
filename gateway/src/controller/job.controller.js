@@ -18,8 +18,8 @@ const  jobController = {
             const options = { limit: 12, skip: (parseInt(page) -1)* 12 }
             const project = { title: 1, url: 1, update_time: 1, category: 1, salary: 1 }
             const jobs = await findAll(filter, order, project, options);
-            console.log(jobs[0])
-            console.log(jobs[0].totalCount[0])
+            // console.log(jobs[0])
+            // console.log(jobs[0].totalCount[0])
             const jobData = {
                 jobs: jobs[0].totalData,
                 totalPage: jobs[0].totalData.length ? (Math.ceil(jobs[0].totalCount[0].total / 12)) : 0,

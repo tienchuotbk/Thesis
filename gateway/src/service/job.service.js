@@ -3,14 +3,33 @@ import mongoose from "mongoose";
 import { filterAggregate } from "../helper/filter.js";
 export const findAll = (filter, order, project = {}, options = {}) => {
   // return Job.find(filter, project, options)
+  let orderOption = [];
+
+  if (order == "lastest") {
+    orderOption = [{ $sort: { "update_time": 1 } }];
+  } else if (order == "title") {
+    orderOption = [{ $sort: { "title": 1 } }];
+  }
+
   return Job.aggregate([
     ...filterAggregate(filter),
     {
       $facet: {
         totalData: [
+          ...orderOption,
           { $skip: options.skip },
           { $limit: options.limit },
-          { $project: { _id: 1, title: 1, salary: 1, category: 1, company: 1  } }, // Include other fields you want to retrieve
+          {
+            $project: {
+              _id: 1,
+              title: 1,
+              salary: 1,
+              category: 1,
+              company: 1,
+              logo: 1,
+              update_time: 1
+            },
+          }, // Include other fields you want to retrieve
         ],
         totalCount: [{ $group: { _id: null, total: { $sum: 1 } } }],
       },
