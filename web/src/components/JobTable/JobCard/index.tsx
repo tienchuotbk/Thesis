@@ -1,9 +1,12 @@
 import { Card, Image, Flex, Tag, Divider } from "antd";
+import { useNavigate } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 interface IProps {
   jobInfo: any;
 }
 export default function JobCard({ jobInfo }: IProps) {
+  const navigate = useNavigate()
   function getSalaryText(salary: any) {
     let text: any;
     switch (salary.type) {
@@ -61,7 +64,7 @@ export default function JobCard({ jobInfo }: IProps) {
           src={jobInfo.logo}
         />
         <Flex justify="space-start" gap="small" vertical>
-          <div className="font-bold text-slate-700">{jobInfo.title}</div>
+          <a className="font-bold text-slate-700" href={"/job/"+ jobInfo._id}>{jobInfo.title}</a>
           <div className="text-xs">{jobInfo.company}</div>
         </Flex>
       </Flex>

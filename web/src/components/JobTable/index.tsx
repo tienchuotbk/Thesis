@@ -127,7 +127,7 @@ export default function JobTable() {
                 options={[
                   { value: "lastest", label: "Lastest " },
                   { value: "fit", label: "Relevant" },
-                  { value: "salary", label: "Salary" },
+                  { value: "title", label: "Title" }
                 ]}
                 onChange={handleChangeOrder}
                 value={order}
