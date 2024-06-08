@@ -1,12 +1,9 @@
 import { Card, Image, Flex, Tag, Divider } from "antd";
-import { useNavigate } from "react-router-dom";
-import { Route } from "react-router-dom";
 
 interface IProps {
   jobInfo: any;
 }
 export default function JobCard({ jobInfo }: IProps) {
-  const navigate = useNavigate()
   function getSalaryText(salary: any) {
     let text: any;
     switch (salary.type) {

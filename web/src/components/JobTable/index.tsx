@@ -27,7 +27,7 @@ export default function JobTable() {
   const [pagination, setPagination] = useState({
     currentPage: 1,
     totalPage: 1,
-    totalCount: 0,
+    totalCount: 0
   });
 
   const [filter, setFilter] = useState(defaultFilter);
@@ -48,7 +48,15 @@ export default function JobTable() {
     return Object.keys(obj) as (keyof T)[];
   };
 
-  async function getJobData(clickSearch = false) {
+  async function handleSearch() {
+    if(pagination.currentPage == 1){
+      await getJobData();
+    } else {
+      setPagination({ ...pagination, currentPage: 1 });
+    }
+  }
+
+  async function getJobData() {
     setLoading(true);
     try {
       let filterString: string[] = [];
@@ -71,7 +79,7 @@ export default function JobTable() {
       }
 
       const jobs = await fetch(
-        `http://localhost:3003/api?page=${clickSearch ? 1 : pagination.currentPage}&order=${order}${params}`
+        `http://localhost:3003/api?page=${pagination.currentPage}&order=${order}${params}`
       );
 
       const jobData = await jobs.json();
@@ -101,11 +109,11 @@ export default function JobTable() {
     >
       <Layout.Sider width={"15vw"} style={{ background: "white" }}>
         <Layout.Header />
-        <Filter filter={filter} setData={setFilter} />
+        <Filter filter={filter} setData={setFilter}/>
       </Layout.Sider>
       <Layout>
         <Layout.Header>
-          <Search filter={filter} setFilter={setFilter} getJobData={getJobData} loading={loading}/>
+          <Search filter={filter} setFilter={setFilter} getJobData={handleSearch} loading={loading}/>
         </Layout.Header>
         <Layout.Content style={{ margin: "0 16px" }}>
           <Flex align="flex-start" justify="space-between">

@@ -26,6 +26,7 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
     30: "30",
     40: "40",
     50: "50",
+    60: "60",
   };
   const salaryMarks: SliderSingleProps["marks"] = {
     0: "0",
@@ -69,7 +70,7 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
 
   const onChangeDisplaySalary = useCallback(
     () => {
-      if (!salaryChecked) {
+      if (salaryChecked) {
         setData((preData: any)=> ({...preData, salary: undefined}));
       }
       setSalaryChecked(!salaryChecked);
@@ -79,7 +80,7 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
 
   const onChangeDisplayAge = useCallback(
     () => {
-      if (!ageChecked) {
+      if (ageChecked) {
         setData((preData: any)=> ({...preData, age: undefined}));
       }
       setAgeChecked(!ageChecked);
