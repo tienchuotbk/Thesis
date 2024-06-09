@@ -8,7 +8,6 @@ import requests
 from lxml import html
 import time
 import random
-import subprocess
 # import undetected_chromedriver as uc
 # driver = uc.Chrome()
 
