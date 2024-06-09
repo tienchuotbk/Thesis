@@ -59,6 +59,7 @@ export default function JobCard({ jobInfo }: IProps) {
         <Image
           width={"4.5em"}
           src={jobInfo.logo}
+          preview={false}
         />
         <Flex justify="space-start" gap="small" vertical>
           <a className="font-bold text-slate-700" href={"/job/"+ jobInfo._id}>{jobInfo.title}</a>

@@ -53,7 +53,7 @@ const Search: React.FC<ChildComponentProps> = ({ filter, setFilter, getJobData, 
         </Col>
         <Col span={3}>
           <Button type="primary" loading={loading} iconPosition="end" onClick={()=> getJobData()}>
-            Search
+            Tìm kiếm
           </Button>
         </Col>
       </Row>
