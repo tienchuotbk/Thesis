@@ -1,17 +1,18 @@
-import {
-  Button,
-  Checkbox,
-  Divider,
-  Flex,
-  Select,
-  Slider,
-} from "antd";
+import { Button, Checkbox, Divider, Flex, Select, Slider } from "antd";
 import React, { useCallback, useState } from "react";
 import type { SliderSingleProps } from "antd";
-import { careerOptions, defaultFilter, expOptions, levelOptions, roleOptions, sexOptions, typeOptions } from "@/const/options";
+import {
+  careerOptions,
+  defaultFilter,
+  expOptions,
+  levelOptions,
+  roleOptions,
+  sexOptions,
+  typeOptions,
+} from "@/const/options";
 interface ChildComponentProps {
   setData: React.Dispatch<React.SetStateAction<any>>;
-  filter: any
+  filter: any;
 }
 
 const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
@@ -37,70 +38,59 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
     50: "Trên 50",
   };
   const handleChangeType = (value: any) => {
-    setData((preData: any)=> ({...preData, type: value}));
+    setData((preData: any) => ({ ...preData, type: value }));
   };
 
   const handleChangeCareer = (value: any) => {
-    setData((preData: any)=> ({...preData, career: value}));
+    setData((preData: any) => ({ ...preData, career: value }));
   };
 
   const handleChangeRole = useCallback((value: any) => {
-    setData((preData: any)=> ({...preData, role: value}));
+    setData((preData: any) => ({ ...preData, role: value }));
   }, []);
 
   const handleChangeSex = useCallback((value: any) => {
-    setData((preData: any)=> ({...preData, sex: value}));
+    setData((preData: any) => ({ ...preData, sex: value }));
   }, []);
 
   const handleChangeExp = useCallback((value: any) => {
-    setData((preData: any)=> ({...preData, exp: value}));
+    setData((preData: any) => ({ ...preData, exp: value }));
   }, []);
 
   const handleChangeAge = useCallback((value: any) => {
-    setData((preData: any)=> ({...preData, age: value}));
+    setData((preData: any) => ({ ...preData, age: value }));
   }, []);
 
   const handleChangeSalary = useCallback((value: any) => {
-    setData((preData: any)=> ({...preData, salary: value}));
+    setData((preData: any) => ({ ...preData, salary: value }));
   }, []);
 
   const handleChangeLevel = useCallback((value: any) => {
-    setData((preData: any)=> ({...preData, level: value}));
+    setData((preData: any) => ({ ...preData, level: value }));
   }, []);
 
-  const onChangeDisplaySalary = useCallback(
-    () => {
-      if (salaryChecked) {
-        setData((preData: any)=> ({...preData, salary: undefined}));
-      }
-      setSalaryChecked(!salaryChecked);
-    },
-    [salaryChecked]
-  );
+  const onChangeDisplaySalary = useCallback(() => {
+    if (salaryChecked) {
+      setData((preData: any) => ({ ...preData, salary: undefined }));
+    }
+    setSalaryChecked(!salaryChecked);
+  }, [salaryChecked]);
 
-  const onChangeDisplayAge = useCallback(
-    () => {
-      if (ageChecked) {
-        setData((preData: any)=> ({...preData, age: undefined}));
-      }
-      setAgeChecked(!ageChecked);
-    },
-    [ageChecked]
-  );
+  const onChangeDisplayAge = useCallback(() => {
+    if (ageChecked) {
+      setData((preData: any) => ({ ...preData, age: undefined }));
+    }
+    setAgeChecked(!ageChecked);
+  }, [ageChecked]);
 
   return (
     <div className="text-base md-4 px-4">
       <Flex align="end" justify="space-between">
-        {/* <span className="font-bold text-base">Filter</span> */}
-        <Button
-          type="link"
-          onClick={handleClearAll}
-          className="font-bold md-2 pt-4"
-        >
-          Clear All
+        <Button type="link" onClick={handleClearAll} className="font-bold md-2 pt-4">
+          Xóa
         </Button>
       </Flex>
-      <Divider style={{ margin: "24px 0 12px 0" }}/>
+      <Divider style={{ margin: "24px 0 12px 0" }} />
       <Flex vertical>
         <p>Loại việc làm</p>
         <Select
@@ -111,7 +101,7 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
           defaultValue={null}
         />
       </Flex>
-      <Divider style={{ margin: "14px 0" }}/>
+      <Divider style={{ margin: "14px 0" }} />
       <Flex vertical>
         <p>Ngành nghề</p>
         <Select
@@ -122,7 +112,7 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
           defaultValue={null}
         />
       </Flex>
-      <Divider style={{ margin: "14px 0" }}/>
+      <Divider style={{ margin: "14px 0" }} />
       <Flex vertical>
         <p>Chức vụ</p>
         <Select
@@ -133,7 +123,7 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
           defaultValue={null}
         />
       </Flex>
-      <Divider style={{ margin: "14px 0" }}/>
+      <Divider style={{ margin: "14px 0" }} />
       <Flex vertical>
         <p>Giới tính</p>
         <Select
@@ -144,7 +134,7 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
           defaultValue={null}
         />
       </Flex>
-      <Divider style={{ margin: "14px 0" }}/>
+      <Divider style={{ margin: "14px 0" }} />
       <Flex vertical>
         <p>Kinh nghiệm</p>
         <Select
@@ -155,7 +145,7 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
           defaultValue={null}
         />
       </Flex>
-      <Divider style={{ margin: "14px 0" }}/>
+      <Divider style={{ margin: "14px 0" }} />
       <Flex vertical>
         <Checkbox onChange={onChangeDisplayAge} checked={ageChecked}>
           <p className="text-base">Tuổi</p>
@@ -171,7 +161,7 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
           />
         ) : null}
       </Flex>
-      <Divider style={{ margin: "14px 0" }}/>
+      <Divider style={{ margin: "14px 0" }} />
       <Flex vertical>
         <p>Trình độ</p>
         <Select
@@ -182,7 +172,7 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
           defaultValue={null}
         />
       </Flex>
-      <Divider style={{ margin: "14px 0" }}/>
+      <Divider style={{ margin: "14px 0" }} />
       <Flex vertical>
         <Checkbox onChange={onChangeDisplaySalary} checked={salaryChecked}>
           <p className="text-base">Mức lương</p>
@@ -200,5 +190,5 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
       </Flex>
     </div>
   );
-}
+};
 export default Filter;

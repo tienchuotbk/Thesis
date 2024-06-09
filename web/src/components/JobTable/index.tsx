@@ -133,7 +133,7 @@ export default function JobTable() {
               justify="space-between"
               gap="small"
             >
-              <p>Sort by </p>
+              <p>Sắp xếp theo </p>
               <Select
                 defaultValue="lastest"
                 options={[
@@ -152,14 +152,12 @@ export default function JobTable() {
                 message="Fetching data"
                 description="This may takes several second. Calm down!"
                 type="info"
-                // style={{ display:"flex", alignContent: "center" }}
               />
             </Spin>
           ) : data.length ? (
             <div
               style={{
                 padding: 24,
-                // minHeight: 360,
                 background: colorBgContainer,
                 borderRadius: borderRadiusLG,
               }}

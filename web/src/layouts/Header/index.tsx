@@ -11,7 +11,7 @@ export default function Header() {
   const navigate = useNavigate();
   const navbars: Navbar[] = [
     {
-      title: "Dashboard",
+      title: "Trang chủ",
       href: "/",
     },
     {
@@ -19,7 +19,7 @@ export default function Header() {
       href: "/job-offer",
     },
     {
-      title: "Insight",
+      title: "Khám phá",
       href: "/insight",
     },
   ];

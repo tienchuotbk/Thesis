@@ -4,6 +4,7 @@ type Props = {
   job: JobType;
 };
 import salarySvg from "@/assets/svg/salary.svg";
+import { ClockCircleOutlined } from "@ant-design/icons";
 export default function JobInfomation({ job }: Props) {
   console.log(job);
   return (
@@ -32,6 +33,14 @@ export default function JobInfomation({ job }: Props) {
               <div>Kinh nghiệm</div>
               <div className="font-bold">{job.experience.max} năm</div>
             </div>
+          </div>
+        </div>
+        <div className="flex">
+          <div className="mt-6 bg-[#f2f4f5] text-[#263a4d] flex py-[2px] px-2 rounded">
+            <ClockCircleOutlined />
+            <span className="ml-2">
+              Hạn nộp hồ sơ: {new Date(job.expiration).toLocaleDateString()}
+            </span>
           </div>
         </div>
       </Card>
