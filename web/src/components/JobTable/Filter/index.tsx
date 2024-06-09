@@ -84,12 +84,27 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
   }, [ageChecked]);
 
   return (
-    <div className="text-base md-4 px-4">
-      <Flex align="end" justify="space-between">
-        <Button type="link" onClick={handleClearAll} className="font-bold md-2 pt-4">
-          Xóa
-        </Button>
-      </Flex>
+    <div
+      className="text-base md-4 px-4"
+      style={{
+        position: "sticky",
+        top: 1,
+        zIndex: 1,
+        width: "100%",
+        // display: 'flex',
+        alignItems: "center",
+        height: "fit-content",
+      }}
+    >
+      {/* <Flex align="end" justify="space-between"> */}
+      <Button
+        type="link"
+        onClick={handleClearAll}
+        className="font-bold md-2 pt-4"
+      >
+        Xóa
+      </Button>
+      {/* </Flex> */}
       <Divider style={{ margin: "24px 0 12px 0" }} />
       <Flex vertical>
         <p>Loại việc làm</p>

@@ -106,12 +106,29 @@ export default function JobTable() {
         minHeight: "100vh",
       }}
     >
-      <Layout.Sider width={"15vw"} style={{ background: "white" }}>
-        <Layout.Header />
+      <Layout.Sider
+        width={"15vw"}
+        style={{ background: "white", position: "sticky" }}
+      >
+        <Layout.Header
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 100,
+            width: "100%",
+          }}
+        />
         <Filter filter={filter} setData={setFilter} />
       </Layout.Sider>
       <Layout>
-        <Layout.Header>
+        <Layout.Header
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 100,
+            width: "100%",
+          }}
+        >
           <Search
             filter={filter}
             setFilter={setFilter}
@@ -122,9 +139,10 @@ export default function JobTable() {
         <Layout.Content style={{ margin: "0 16px" }}>
           <Flex align="flex-start" justify="space-between">
             <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>Jobs</Breadcrumb.Item>
+              <Breadcrumb.Item>Tất cả việc làm</Breadcrumb.Item>
               <Breadcrumb.Item>
-                Showing {data.length}/{pagination.totalCount} jobs
+                Hiển thị <strong>{data.length}</strong>/
+                <strong>{pagination.totalCount}</strong> việc làm
               </Breadcrumb.Item>
             </Breadcrumb>
             <Flex
@@ -137,9 +155,9 @@ export default function JobTable() {
               <Select
                 defaultValue="lastest"
                 options={[
-                  { value: "lastest", label: "Lastest " },
-                  { value: "fit", label: "Relevant" },
-                  { value: "title", label: "Title" },
+                  { value: "lastest", label: "Mới nhất" },
+                  { value: "fit", label: "Phù hợp nhất" },
+                  { value: "title", label: "Tên" },
                 ]}
                 onChange={handleChangeOrder}
                 value={order}

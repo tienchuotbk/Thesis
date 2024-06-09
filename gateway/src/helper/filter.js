@@ -105,6 +105,8 @@ export function filterAggregate(filter) {
       });
     }
   }
+  console.log("0 ne")
+  console.log(result)
 
   return result;
 }

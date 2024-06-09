@@ -27,6 +27,7 @@ export default async (req, res) => {
         res.status(200).json({ message: "OK", data: jobData });
     }
     catch (e) {
+        console.log(e)
         res.status(404).json({ message: "ERROR" + e, data: [] });
     }
 }
