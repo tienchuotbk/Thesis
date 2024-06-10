@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from datetime import datetime
 import time
 
 service = Service(executable_path=r'/usr/bin/chromedriver')
@@ -184,6 +185,7 @@ def getPageContent(id):
                         text_benefit += ": " + sub_title.text
                     text_benefits.append(text_benefit)
                 data["benefit"] = text_benefits
+        data["crawl_time"] = datetime.now().day
         
     except Exception as e:
         print(e)
