@@ -68,6 +68,7 @@ body = {
         "languageSelectedId"
     ]
 }
+today = datetime.now()
 def getRequiremnet(string):
     paragraphs = []
     soup = BeautifulSoup(string, 'lxml')
@@ -185,7 +186,7 @@ def getPageContent(id):
                         text_benefit += ": " + sub_title.text
                     text_benefits.append(text_benefit)
                 data["benefit"] = text_benefits
-        data["crawl_time"] = datetime.now().day
+        data["crawl_time"] = today
         
     except Exception as e:
         print(e)
@@ -195,7 +196,7 @@ def getPageContent(id):
 try: 
     count = 0
     final_data = []
-    for i in range(77, 100):
+    for i in range(80, 100):
         body["page"] = i
         print("Page "+ str(i))
         response = requests.post('https://ms.vietnamworks.com/job-search/v1.0/search', json=body)
