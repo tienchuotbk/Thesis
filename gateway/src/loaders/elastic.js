@@ -1,10 +1,10 @@
 import { Client } from "@elastic/elasticsearch";
 const client = new Client({
   node: "http://localhost:9200",
-  auth: {
-    username: "elastic",
-    password: "R*wyXcr3+OawT5A-g40R", // Replace with the actual password generated during setup
-  },
+  // auth: {
+  //   username: "elastic",
+  //   password: "R*wyXcr3+OawT5A-g40R", // Replace with the actual password generated during setup
+  // },
 });
 export default async (indexName) => {
   try {

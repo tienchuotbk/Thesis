@@ -13,13 +13,16 @@
 
 export function filterAggregate(filter) {
   let result = [];
+  if (filter.text && filter.text.length) {
+    result.push({ $match: { $text: { $search: filter.text } } });
+  }
   if (filter.role) {
     result.push({ $match: { role: parseInt(filter.role) } });
   }
   if (filter.sex) {
     result.push({ $match: { sex: parseInt(filter.sex) } });
   }
-  if( filter.level) {
+  if (filter.level) {
     result.push({ $match: { certificate: parseInt(filter.level) } });
   }
   if (filter.type) {
@@ -27,10 +30,10 @@ export function filterAggregate(filter) {
       $match: { type: { $elemMatch: { $eq: parseInt(filter.type) } } },
     });
   }
-  if(filter.province){
+  if (filter.province) {
     result.push({
-        $match: { location: { $elemMatch: { "province": filter.province } } },
-      });
+      $match: { location: { $elemMatch: { province: filter.province } } },
+    });
   }
   if (filter.salary) {
     let salary = parseInt(filter.salary);
@@ -105,8 +108,6 @@ export function filterAggregate(filter) {
       });
     }
   }
-  console.log("0 ne")
-  console.log(result)
 
   return result;
 }

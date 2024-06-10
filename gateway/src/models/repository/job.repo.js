@@ -1,15 +1,18 @@
 import mongoose from "mongoose";
 import { filterAggregate } from "../../helper/filter.js";
 import Job from "../job.js"
+// import searchFullText from "./elastic.js";
 
 const jobRepo = {
-    findAll: (filter, order, project = {}, options = {}) => {
+    findAll: async (filter, order, project = {}, options = {}) => {
         let orderOption = [];
 
         if (order == "lastest") {
             orderOption = [{ $sort: { "update_time": 1 } }];
         } else if (order == "title") {
             orderOption = [{ $sort: { "title": 1 } }];
+        } else {
+            orderOption = [{ $sort:  { score: { $meta: "textScore" } } }];
         }
 
         return Job.aggregate([
@@ -28,7 +31,8 @@ const jobRepo = {
                                 category: 1,
                                 company: 1,
                                 logo: 1,
-                                update_time: 1
+                                update_time: 1,
+                                score: { $meta: "textScore" },
                             },
                         }, // Include other fields you want to retrieve
                     ],
