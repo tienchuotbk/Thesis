@@ -2,7 +2,6 @@ import { Button, Checkbox, Divider, Flex, Select, Slider } from "antd";
 import React, { useCallback, useState } from "react";
 import type { SliderSingleProps } from "antd";
 import {
-  careerOptions,
   defaultFilter,
   expOptions,
   levelOptions,
@@ -21,6 +20,7 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
   const handleClearAll = () => {
     setData(defaultFilter);
   };
+
   const marks: SliderSingleProps["marks"] = {
     16: "16",
     20: "20",
@@ -39,10 +39,6 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
   };
   const handleChangeType = (value: any) => {
     setData((preData: any) => ({ ...preData, type: value }));
-  };
-
-  const handleChangeCareer = (value: any) => {
-    setData((preData: any) => ({ ...preData, career: value }));
   };
 
   const handleChangeRole = useCallback((value: any) => {
@@ -113,17 +109,6 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
           onChange={handleChangeType}
           options={typeOptions}
           value={filter.type}
-          defaultValue={null}
-        />
-      </Flex>
-      <Divider style={{ margin: "14px 0" }} />
-      <Flex vertical>
-        <p>Ngành nghề</p>
-        <Select
-          style={{ width: "90%" }}
-          onChange={handleChangeCareer}
-          options={careerOptions}
-          value={filter.career}
           defaultValue={null}
         />
       </Flex>

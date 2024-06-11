@@ -6,7 +6,7 @@ export interface filterInterface {
     age: null | number,
     salary: undefined | number,
     level: null | number,
-    carrer: null | number,
+    career: null | number,
     text: string,
     province: string
   }
@@ -18,7 +18,7 @@ export const defaultFilter: filterInterface = {
     age: null,
     salary: undefined,
     level: null,
-    carrer: null,
+    career: null,
     text: '',
     province: 'all'
 }
@@ -32,8 +32,28 @@ export const typeOptions = [
   { value: 5, label: "Khác" },
 ];
 export const careerOptions = [
-    { value: null, label: "Tất cả" },
-    { value: 1, label: "IT" }
+    { value: '', label: "Tất cả ngành nghề" },
+    { value: "hc_ql", label: "Hành chính - Quản lý" },
+    { value: "gd_dt", label: "Giáo dục - Đào tạo" },
+    { value: "nn_ln_ts", label: "Nông nghiệp - Lâm nghiệp - Thủy sản" },
+    { value: "at_an", label: "An toàn - An ninh" },
+    { value: "vt", label: "Vận tải - Giao nhận" },
+    { value: "kd", label: "Bán hàng - Kinh doanh " },
+    { value: "kh_kt", label: "Khoa học - Kỹ thuật" },
+    { value: "it", label: "Công nghệ thông tin" },
+    { value: "tc_kt", label: "Tài chính - Kế toán" },
+    { value: "tk_kt_nt", label: "Thiết kế - Kiến trúc - Nghệ thuật" },
+    { value: "xd", label: "Xây dựng " },
+    { value: "cn_sx", label: "Công nghiệp - Sản xuất" },
+    { value: "yt_sk", label: "Y tế - Chăm sóc sức khỏe" },
+    { value: "tt_mkt", label: "Truyền thông - Quảng cáo" },
+    { value: "dv", label: "Dịch vụ khách hàng" },
+    { value: "ldpt", label: "Lao động phổ thông" },
+    { value: "law", label: "Văn bản - Pháp lý -  Bảo hiểm" },
+    { label: "Xuất bản - In ấn", value: "xb" },
+    { label: "Phân tích - Thống kê", value: "pt_tk" },
+    { value: "tp", label: "Thực phẩm" },
+    { value: "bds", label: "Bất động sản" },
 ]
 export const roleOptions = [
     { value: null, label: "Tất cả" },

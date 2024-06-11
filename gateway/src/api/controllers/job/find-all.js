@@ -1,7 +1,7 @@
 import jobRepo from "../../../models/repository/job.repo.js";
 
 export default async (req, res) => {
-    const { page, order, type, role, sex, exp, age, salary, level, carrer, text, province } = req.query;
+    const { page, order, type, role, sex, exp, age, salary, level, career, text, province } = req.query;
     try {
         const filter = {
             type: type,
@@ -11,7 +11,7 @@ export default async (req, res) => {
             age: age,
             salary: salary,
             level: level,
-            // career: carrer,
+            career: career,
             text: text,
             province: province
         }

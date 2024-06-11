@@ -30,6 +30,11 @@ export function filterAggregate(filter) {
       $match: { type: { $elemMatch: { $eq: parseInt(filter.type) } } },
     });
   }
+  if(filter.career) {
+    result.push({
+      $match: { field: { $elemMatch: { $eq: filter.career } } },
+    });
+  }
   if (filter.province) {
     result.push({
       $match: { location: { $elemMatch: { province: filter.province } } },

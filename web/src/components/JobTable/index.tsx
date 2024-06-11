@@ -62,7 +62,7 @@ export default function JobTable() {
     try {
       let filtered: any = {};
       typedKeys(filter).map((val) => {
-        if (val === "text") {
+        if (val === "text" || val === "career") {
           if (filter[val] !== "") {
             filtered[val.toString()] = filter[val];
           }

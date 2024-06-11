@@ -1,22 +1,31 @@
-import { filterInterface } from "@/const/options";
+import { careerOptions, filterInterface } from "@/const/options";
 import provinces from "@/const/province";
 import { Button, Col, Input, Row, Select, SelectProps } from "antd";
 import { useCallback, useState } from "react";
 interface ChildComponentProps {
   setFilter: React.Dispatch<React.SetStateAction<any>>;
-  filter: filterInterface,
-  getJobData: Function,
-  loading: boolean,
+  filter: filterInterface;
+  getJobData: Function;
+  loading: boolean;
 }
 
-const Search: React.FC<ChildComponentProps> = ({ filter, setFilter, getJobData, loading }) => {
+const Search: React.FC<ChildComponentProps> = ({
+  filter,
+  setFilter,
+  getJobData,
+  loading,
+}) => {
   const handleChangeLocation = (value: string) => {
-    console.log(value)
-    setFilter((preVal: any) => ({... preVal, province: value}))
+    console.log(value);
+    setFilter((preVal: any) => ({ ...preVal, province: value }));
   };
 
   const handleChangeTextInput = (event: any) => {
-    setFilter((preVal: any) => ({... preVal, text: event.target.value}))
+    setFilter((preVal: any) => ({ ...preVal, text: event.target.value }));
+  };
+
+  const handleChangeCareer = (value: any) => {
+    setFilter((preData: any) => ({ ...preData, career: value }));
   };
 
   const src = "location.svg";
@@ -28,7 +37,7 @@ const Search: React.FC<ChildComponentProps> = ({ filter, setFilter, getJobData, 
   return (
     <div className="">
       <Row gutter={20}>
-        <Col span={15} className="w-full">
+        <Col span={10} className="w-full">
           {/* <div className="border-gray-300 border-[1px] rounded-md"> */}
           <Input
             placeholder="Nhập thông tin bạn muốn tìm kiếm"
@@ -38,6 +47,18 @@ const Search: React.FC<ChildComponentProps> = ({ filter, setFilter, getJobData, 
             onChange={handleChangeTextInput}
           />
           {/* </div> */}
+        </Col>
+        <Col span={5}>
+          <Select
+            style={{ width: "90%" }}
+            onChange={handleChangeCareer}
+            options={careerOptions}
+            value={filter.career}
+            defaultValue={""}
+            filterOption={filterOption}
+            showSearch
+            placeholder="Ngành nghề"
+          />
         </Col>
         <Col span={5}>
           <Select
@@ -52,12 +73,17 @@ const Search: React.FC<ChildComponentProps> = ({ filter, setFilter, getJobData, 
           />
         </Col>
         <Col span={3}>
-          <Button type="primary" loading={loading} iconPosition="end" onClick={()=> getJobData()}>
+          <Button
+            type="primary"
+            loading={loading}
+            iconPosition="end"
+            onClick={() => getJobData()}
+          >
             Tìm kiếm
           </Button>
         </Col>
       </Row>
     </div>
   );
-}
+};
 export default Search;
