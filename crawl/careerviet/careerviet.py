@@ -32,7 +32,6 @@ def getSpecificPage(url):
                 if len(job_salary):
                     data["salary"] = job_salary[0]
                 job_category = group_info_ele.xpath(".//*[@class='detail-box has-background']//a/text()")
-                print(job_category)
                 if len(job_category):
                     data["category"] = [  item.replace('\r\n', '').replace('  ', '').strip() for item in job_category ]
                 job_exp = group_info_ele.xpath(".//strong[contains(text(), 'Kinh nghiệm')]/../p/text()")
