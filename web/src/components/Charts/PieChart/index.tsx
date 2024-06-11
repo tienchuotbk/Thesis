@@ -1,19 +1,28 @@
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 
-export default function PieChart() {
+export default function PieChart({
+  title,
+  subtitle,
+  data
+}: {
+  title: string;
+  subtitle: string;
+  data: { name: string; y: number; selected?: boolean; sliced?: boolean }[];
+}) {
+  console.log(data)
   const options = {
     chart: {
       type: "pie",
     },
     title: {
-      text: "Egg Yolk Composition",
+      text: title,
     },
     tooltip: {
       valueSuffix: "%",
     },
     subtitle: {
-      text: 'Source:<a href="https://www.mdpi.com/2072-6643/11/3/684/htm" target="_default">MDPI</a>',
+      text: subtitle,
     },
     plotOptions: {
       series: {
@@ -42,36 +51,7 @@ export default function PieChart() {
         ],
       },
     },
-    series: [
-      {
-        name: "Percentage",
-        colorByPoint: true,
-        data: [
-          {
-            name: "Water",
-            y: 55.02,
-          },
-          {
-            name: "Fat",
-            sliced: true,
-            selected: true,
-            y: 26.71,
-          },
-          {
-            name: "Carbohydrates",
-            y: 1.09,
-          },
-          {
-            name: "Protein",
-            y: 15.5,
-          },
-          {
-            name: "Ash",
-            y: 1.68,
-          },
-        ],
-      },
-    ],
+    series: data
   };
   return <HighchartsReact highcharts={Highcharts} options={options} />;
 }

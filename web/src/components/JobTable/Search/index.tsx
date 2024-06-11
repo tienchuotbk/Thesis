@@ -1,7 +1,6 @@
 import { careerOptions, filterInterface } from "@/const/options";
 import provinces from "@/const/province";
-import { Button, Col, Input, Row, Select, SelectProps } from "antd";
-import { useCallback, useState } from "react";
+import { Button, Col, Input, Row, Select } from "antd";
 interface ChildComponentProps {
   setFilter: React.Dispatch<React.SetStateAction<any>>;
   filter: filterInterface;

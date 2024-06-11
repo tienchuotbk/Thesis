@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import HighchartsMap from "highcharts/modules/map";
 HighchartsMap(Highcharts);
 
-export default function HighcharMap() {
+export default function HighcharMap({ title }: { title: string}) {
   const [topology, setTopology] = useState([]);
 
   const data = [
@@ -93,7 +93,7 @@ export default function HighcharMap() {
     },
 
     title: {
-      text: "Highcharts Maps basic demo",
+      text:  title,
     },
 
     subtitle: {
@@ -106,11 +106,19 @@ export default function HighcharMap() {
         verticalAlign: "bottom",
       },
     },
-
     colorAxis: {
       min: 0,
-    },
+      max: 100,
+      stops: [
+          [0, '#00ff00'],
+          [1, '#ff0000']
+      ],
+      labels: {
+          format: '{value}'
+      }
+  },
     width: "80vw",
+    colors: '#786c3a',
     series: [
       {
         // Specify the series data
