@@ -22,19 +22,38 @@ def getSpecificPage(url):
                 data["company"] = company_element[0].text_content()
             else:
                 print("Cannot get company")
-            group_infor = tree.xpath("//*[@class='detail-box has-background']/ul/li/p")
-            if len(group_infor) == 7:
-                data["update_time"] = group_infor[0].text_content()
-                data["salary"] = group_infor[3].text_content()
-                data["role"] = group_infor[5].text_content()
-                data["type"] = group_infor[2].text_content()
-                data["experience"] = re.sub(r'\s+', ' ', group_infor[4].text_content().strip())
-                data["expiration"] = group_infor[-1].text_content()
-            elif len(group_infor) == 6:
-                data["salary"] = group_infor[3].text_content()
-                data["role"] = group_infor[4].text_content()
-                data["type"] = group_infor[2].text_content()
-                data["expiration"] = group_infor[-1].text_content()
+            group_info_element = tree.xpath("//*[@class='job-detail-content']/div[@class='bg-blue']")
+            if len(group_info_element):
+                group_info_ele = group_info_element[0]
+                job_update_time = group_info_ele.xpath(".//strong[contains(text(), 'Ngày cập nhật')]/../p/text()")
+                if len(job_update_time):
+                    data["update_time"] = job_update_time[0]
+                job_salary = group_info_ele.xpath(".//strong[contains(text(), 'Lương')]/../p/text()")
+                if len(job_salary):
+                    data["salary"] = job_salary[0]
+                job_category = group_info_ele.xpath(".//*[@class='detail-box has-background']//a/text()")
+                print(job_category)
+                if len(job_category):
+                    data["category"] = [  item.replace('\r\n', '').replace('  ', '').strip() for item in job_category ]
+                job_exp = group_info_ele.xpath(".//strong[contains(text(), 'Kinh nghiệm')]/../p/text()")
+                if len(job_exp):
+                    data["experience"] = job_exp[0].replace('\r\n', '').replace('  ', '').strip()
+                job_exp = group_info_ele.xpath(".//strong[contains(text(), 'Kinh nghiệm')]/../p/text()")
+                if len(job_exp):
+                    data["experience"] = job_exp[0].replace('\r\n', '').replace('  ', '').strip()
+
+                job_role = group_info_ele.xpath(".//strong[contains(text(), 'Cấp bậc')]/../p/text()")
+                if len(job_role):
+                    data["role"] = job_role[0]
+
+                job_type = group_info_ele.xpath(".//strong[contains(text(), 'Hình thức')]/../p/text()")
+                if len(job_type):
+                    data["type"] = job_type[0]
+                
+                job_expiration = group_info_ele.xpath(".//strong[contains(text(), 'Hết hạn nộp')]/../p/text()")
+                if len(job_expiration):
+                    data["expiration"] = job_expiration[0]
+
             location_element = tree.xpath("//*[@id='maps-tab-1']//ul[@class='clearall']/li/a/text()")
             if len(location_element):
                 data["location"] = location_element
