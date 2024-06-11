@@ -36,7 +36,7 @@ const Search: React.FC<ChildComponentProps> = ({
 
   return (
     <div className="">
-      <Row gutter={20}>
+      <Row gutter={24}>
         <Col span={10} className="w-full">
           {/* <div className="border-gray-300 border-[1px] rounded-md"> */}
           <Input
@@ -50,14 +50,13 @@ const Search: React.FC<ChildComponentProps> = ({
         </Col>
         <Col span={5}>
           <Select
-            style={{ width: "90%" }}
+            className="w-full border-gray-300 border-[ rounded-md"
             onChange={handleChangeCareer}
             options={careerOptions}
             value={filter.career}
             defaultValue={""}
             filterOption={filterOption}
             showSearch
-            placeholder="Ngành nghề"
           />
         </Col>
         <Col span={5}>

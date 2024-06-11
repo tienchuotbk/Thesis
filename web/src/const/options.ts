@@ -6,7 +6,7 @@ export interface filterInterface {
     age: null | number,
     salary: undefined | number,
     level: null | number,
-    career: null | number,
+    career: null | string,
     text: string,
     province: string
   }
@@ -18,7 +18,7 @@ export const defaultFilter: filterInterface = {
     age: null,
     salary: undefined,
     level: null,
-    career: null,
+    career: '',
     text: '',
     province: 'all'
 }
@@ -32,7 +32,7 @@ export const typeOptions = [
   { value: 5, label: "Khác" },
 ];
 export const careerOptions = [
-    { value: '', label: "Tất cả ngành nghề" },
+    { value: "", label: "Tất cả ngành nghề" },
     { value: "hc_ql", label: "Hành chính - Quản lý" },
     { value: "gd_dt", label: "Giáo dục - Đào tạo" },
     { value: "nn_ln_ts", label: "Nông nghiệp - Lâm nghiệp - Thủy sản" },
