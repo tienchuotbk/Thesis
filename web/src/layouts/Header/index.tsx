@@ -15,11 +15,7 @@ export default function Header() {
       href: "/",
     },
     {
-      title: "Job Offer",
-      href: "/job-offer",
-    },
-    {
-      title: "Khám phá",
+      title: "Phân tích",
       href: "/insight",
     },
   ];

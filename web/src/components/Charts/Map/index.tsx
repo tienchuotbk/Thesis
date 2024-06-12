@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import HighchartsMap from "highcharts/modules/map";
 HighchartsMap(Highcharts);
 
-export default function HighcharMap({ title }: { title: string}) {
+export default function HighcharMap({ title }: { title: string }) {
   const [topology, setTopology] = useState([]);
 
   const data = [
@@ -81,7 +81,8 @@ export default function HighcharMap({ title }: { title: string}) {
     if (data) {
       setTopology(data);
     }
-    console.log(data);
+    // console.log(data.objects.default.geometries);
+    // console.log(data.objects.default.geometries.map((val: any)=> ({ "key": val.properties['hc-key'], "value": val.properties["name"] })))
   }
   useEffect(() => {
     fetchData();
@@ -93,7 +94,7 @@ export default function HighcharMap({ title }: { title: string}) {
     },
 
     title: {
-      text:  title,
+      text: title,
     },
 
     subtitle: {
@@ -110,15 +111,15 @@ export default function HighcharMap({ title }: { title: string}) {
       min: 0,
       max: 100,
       stops: [
-          [0, '#00ff00'],
-          [1, '#ff0000']
+        [0, "#00ff00"],
+        [1, "#ff0000"],
       ],
       labels: {
-          format: '{value}'
-      }
-  },
+        format: "{value}",
+      },
+    },
     width: "80vw",
-    colors: '#786c3a',
+    colors: "#786c3a",
     series: [
       {
         // Specify the series data
@@ -133,9 +134,9 @@ export default function HighcharMap({ title }: { title: string}) {
         },
         // type: "area",
         ataLabels: {
-            enabled: true,
-            format: '{point.name}'
-        }
+          enabled: true,
+          format: "{point.name}",
+        },
       },
       // }]
     ],
