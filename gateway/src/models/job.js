@@ -46,5 +46,6 @@ const jobSchema = new Schema({
     timestamps: true
 })
 
+jobSchema.index({ title: "text" })
 const Job = model("Jobs", jobSchema)
 export default Job

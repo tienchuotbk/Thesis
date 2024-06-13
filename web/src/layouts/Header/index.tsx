@@ -1,14 +1,26 @@
 import { Col, Layout, Row, Typography } from "antd";
+import { useCallback, useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import HeaderLogo from "../../components/Common/HeaderLogo";
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 
 type Navbar = {
   title: string;
   href: string;
 };
+
 export default function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const className = useMemo(() => {
+    let classes = "bg-[#f5f5f5] border-b-[1px] border-[#d9d9d9]";
+    if (location.pathname.includes("/job/")) {
+      classes += " !z-[2]";
+    }
+
+    return classes;
+  }, [location.pathname]);
+  
   const navbars: Navbar[] = [
     {
       title: "Trang chủ",
@@ -26,12 +38,12 @@ export default function Header() {
 
   return (
     <Layout.Header
-      className="bg-[#f5f5f5] border-b-[1px] border-[#d9d9d9]"
+      className={className}
       style={{
         position: "sticky",
         top: 0,
         zIndex: 0,
-        width: "100%"
+        width: "100%",
       }}
     >
       <div className="container mx-auto">
