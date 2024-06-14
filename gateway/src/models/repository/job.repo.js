@@ -50,6 +50,45 @@ const jobRepo = {
     const objectId = new mongoose.Types.ObjectId(id);
     return Job.findOne(objectId, project, options);
   },
+  getAgeLine: () => {
+    return Job.aggregate([
+      {
+        $project: {
+          ageRange: {
+            $switch: {
+              branches: [
+                {
+                  case: { $eq: ["$age.type", 1] },
+                  then: { $range: ["$age.min", { $add: ["$age.max", 1] }] }, // range(min, max+1)
+                },
+                {
+                  case: { $eq: ["$age.type", 2] },
+                  then: ["$age.fixed"], // single value as array
+                },
+                {
+                  case: { $eq: ["$age.type", 3] },
+                  then: { $range: ["$age.min", 61] }, // range(min, 60+1)
+                },
+                {
+                  case: { $eq: ["$age.type", 4] },
+                  then: { $range: [16, { $add: ["$age.max", 1] }] }, // range(16, max+1)
+                },
+              ],
+              default: [],
+            },
+          },
+        },
+      },
+      { $unwind: "$ageRange" },
+      {
+        $group: {
+          _id: "$ageRange",
+          count: { $sum: 1 },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]);
+  },
 };
 
 export default jobRepo;

@@ -4,11 +4,30 @@ import HighcharMap from "@/components/Charts/Map";
 import PieChart from "@/components/Charts/PieChart";
 import TableChart from "@/components/Charts/Table";
 import { Layout, Breadcrumb, Flex, Col, Row, theme } from "antd";
+import { useEffect, useState } from "react";
 
 export default function Insigh() {
   const {
     token: { colorBgBase, colorBgLayout },
   } = theme.useToken();
+
+  const [lineData, setLineData] = useState([])
+
+  async function fetchData() {
+    const res = await fetch(import.meta.env.VITE_API_URL+ '/api/analysis/line');
+
+    if(res.status === 200){
+      const result: any = await res.json();
+      setLineData(result.data);
+    }
+    
+  } 
+
+  console.log(lineData)
+
+  useEffect(()=> {
+    fetchData();
+  }, []);
   const pieData = [
     {
       name: "Không yêu cầu",
@@ -172,7 +191,7 @@ export default function Insigh() {
                 <TableChart title="Hello" data={[""]} subtitle="Hihi" align="center"/>
                 {/* <TableChart title="Hello" data={[""]} subtitle="Hihi" align="center"/>
                 <TableChart title="Hello" data={[""]} subtitle="Hihi" align="center"/> */}
-                <LineChart title="Line chart" align="center" subtitle="Subtitle of line chart" data={[]}/>
+                <LineChart title="Line chart" align="center" subtitle="Subtitle of line chart" data={lineData}/>
                 {/* <LollipopChart title="Top 10 job trending" subtitle="Subtitle trending job" data={[]} yTitle={"Y title"} /> */}
               </Layout.Content>
             </Layout>
