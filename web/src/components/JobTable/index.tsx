@@ -1,4 +1,6 @@
 import { defaultFilter } from "@/const/options";
+import JobApi from "@/network/job";
+import { useQuery } from "@tanstack/react-query";
 import {
   Alert,
   Breadcrumb,
@@ -12,54 +14,33 @@ import {
   Spin,
   theme,
 } from "antd";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import Filter from "./Filter";
 import JobCard from "./JobCard";
 import Search from "./Search";
-import JobApi from "@/network/job";
+
+const typedKeys = <T extends object>(obj: T): (keyof T)[] => {
+  return Object.keys(obj) as (keyof T)[];
+};
 
 export default function JobTable() {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
   const [pagination, setPagination] = useState({
     currentPage: 1,
     totalPage: 1,
+    pageSize: 10,
     totalCount: 0,
   });
 
   const [filter, setFilter] = useState(defaultFilter);
   const [order, setOrder] = useState("lastest");
 
-  const handleChangePage = useCallback(
-    (val: number) => {
-      setPagination({ ...pagination, currentPage: val });
-    },
-    [pagination]
-  );
-
-  const handleChangeOrder = useCallback((val: string) => {
-    setOrder(val);
-  }, []);
-
-  const typedKeys = <T extends object>(obj: T): (keyof T)[] => {
-    return Object.keys(obj) as (keyof T)[];
-  };
-
-  async function handleSearch() {
-    if (pagination.currentPage == 1) {
-      await getJobData();
-    } else {
-      setPagination({ ...pagination, currentPage: 1 });
-    }
-  }
-
-  async function getJobData() {
-    setLoading(true);
-    try {
+  const { isPending, data: dataQuery } = useQuery({
+    queryKey: ["fetchListJob", pagination, filter, order],
+    queryFn: async () => {
       let filtered: any = {};
       typedKeys(filter).map((val) => {
         if (val === "text" || val === "career") {
@@ -78,27 +59,43 @@ export default function JobTable() {
       const configParams = {
         page: pagination.currentPage,
         order: order,
+        limit: pagination.pageSize,
         ...filtered,
       };
-      const jobData = await JobApi.getAll({ params: configParams });
+      const responseData = await JobApi.getAll({ params: configParams });
 
-      if (jobData && jobData.data) {
-        setData(jobData.data.jobs);
-        setPagination({
-          currentPage: jobData.data.currentPage,
-          totalPage: jobData.data.totalPage,
-          totalCount: jobData.data.totalCount,
-        });
+      if (responseData?.data?.jobs?.length) {
+        setPagination((pagination) => ({
+          ...pagination,
+          currentPage: responseData.data.currentPage,
+          totalPage: responseData.data.totalPage,
+          totalCount: responseData.data.totalCount,
+        }));
+        return responseData.data.jobs;
+      } else {
+        return null;
       }
-    } catch (e) {
-      console.log(e);
-    }
-    setLoading(false);
+    },
+  });
+  console.log(dataQuery);
+  const handleChangePage = useCallback(
+    (val: number) => {
+      setPagination({ ...pagination, currentPage: val });
+    },
+    [pagination]
+  );
+
+  const handleChangeOrder = useCallback((val: string) => {
+    setOrder(val);
+  }, []);
+
+  function handleSearch() {
+    setPagination({ ...pagination, currentPage: 1 });
   }
 
-  useEffect(() => {
-    getJobData();
-  }, [pagination.currentPage, order]);
+  function handlePageSizeChange(_page: number, pageSize: number) {
+    setPagination({ ...pagination, pageSize });
+  }
 
   return (
     <Layout
@@ -106,10 +103,7 @@ export default function JobTable() {
         minHeight: "100vh",
       }}
     >
-      <Layout.Sider
-        width={"15vw"}
-        style={{ background: "white", position: "sticky" }}
-      >
+      <Layout.Sider width={"15vw"} style={{ background: "white", position: "sticky" }}>
         <Layout.Header
           style={{
             position: "sticky",
@@ -133,7 +127,7 @@ export default function JobTable() {
             filter={filter}
             setFilter={setFilter}
             getJobData={handleSearch}
-            loading={loading}
+            loading={isPending}
           />
         </Layout.Header>
         <Layout.Content style={{ margin: "0 16px" }}>
@@ -141,7 +135,7 @@ export default function JobTable() {
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Tất cả việc làm</Breadcrumb.Item>
               <Breadcrumb.Item>
-                Hiển thị <strong>{data.length}</strong>/
+                Hiển thị <strong>{dataQuery?.length}</strong>/
                 <strong>{pagination.totalCount}</strong> việc làm
               </Breadcrumb.Item>
             </Breadcrumb>
@@ -164,7 +158,7 @@ export default function JobTable() {
               />
             </Flex>
           </Flex>
-          {loading ? (
+          {isPending ? (
             <Spin tip="Loading...">
               <Alert
                 message="Fetching data"
@@ -172,7 +166,7 @@ export default function JobTable() {
                 type="info"
               />
             </Spin>
-          ) : data.length ? (
+          ) : dataQuery?.length ? (
             <div
               style={{
                 padding: 24,
@@ -181,7 +175,7 @@ export default function JobTable() {
               }}
             >
               <Row gutter={16}>
-                {data.map((job: any) => {
+                {dataQuery?.map((job: any) => {
                   return (
                     <Col key={job._id} span={6} className="mb-4">
                       <JobCard jobInfo={job} />
@@ -194,12 +188,13 @@ export default function JobTable() {
                   defaultCurrent={1}
                   current={pagination.currentPage}
                   onChange={handleChangePage}
+                  onShowSizeChange={handlePageSizeChange}
                   total={pagination.totalPage * 10}
                 />
               </div>
             </div>
           ) : (
-            <Empty style={{ marginTop: "4em" }} />
+            <Empty className="mt-[4rem]" />
           )}
         </Layout.Content>
       </Layout>

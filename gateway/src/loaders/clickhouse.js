@@ -1,5 +1,6 @@
-import client from "../models/clickhouse.js";
 import fs from "fs";
+import client from "../models/clickhouse.js";
+import { logger } from "../utils/logger.js";
 import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
@@ -58,7 +59,7 @@ export default async () => {
         wait_end_of_query: 1,
       },
     });
-    const filePath = path.resolve(__dirname, "../../data/jobs.json");
+    const filePath = `${process.cwd}/datas.json`
     let rawdata = fs.readFileSync(filePath, "utf8");
     let parseData = JSON.parse(rawdata);
 
@@ -86,6 +87,6 @@ export default async () => {
     // let final = await example.json()
     // console.log(final[0].location)
   } catch (e) {
-    console.log("Errror run init clickhouse", e);
+    logger.error(import.meta.url, "APP", 'Error run init clickhouse: ', e.message)
   }
 };

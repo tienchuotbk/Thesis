@@ -1,7 +1,12 @@
 import jobRepo from "../../../models/repository/job.repo.js";
 
 export default async (req, res) => {
-    const { page, order, type, role, sex, exp, age, salary, level, career, text, province } = req.query;
+    const { page, order, type, role, sex, exp, age, salary, level, career, text, province, } = req.query;
+    let limit = 1;
+    if (req.query.limit && !isNaN(req.query.limit)) {
+        limit = parseInt(req.query.limit)
+    }
+    
     try {
         const filter = {
             type: type,
@@ -15,7 +20,8 @@ export default async (req, res) => {
             text: text,
             province: province
         }
-        const options = { limit: 12, skip: (parseInt(page) - 1) * 12 }
+        const options = { limit, skip: (parseInt(page) - 1) * limit }
+        console.log({ options })
         const project = { title: 1, url: 1, update_time: 1, category: 1, salary: 1 }
         const jobs = await jobRepo.findAll(filter, order, project, options);
         const jobData = {
