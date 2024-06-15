@@ -1,5 +1,5 @@
 import JobApi from "@/network/job";
-import { Col, Layout, Row, Skeleton } from "antd";
+import { Card, Col, Layout, Row, Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CompanyInformation from "./CompanyInformation";
@@ -34,12 +34,31 @@ export default function JobDetail() {
       {loading && <Skeleton />}
       {!loading && job && (
         <>
-          <Row gutter={8}>
+          <Row gutter={24}>
             <Col span={18}>
               <JobInfomation job={job} />
             </Col>
             <Col span={6}>
               <CompanyInformation job={job} />
+              <Card className="mt-4">
+                <div className="text-[20px] font-[600]">Ngành nghề</div>
+                <div className="box-category-tags mt-2">
+                  {job?.category?.map((category, index) => (
+                    <div key={index} className="box-category-tag">
+                      {category}
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-6"></div>
+                <div className="text-[20px] font-[600]">Khu Vực</div>
+                <div className="box-category-tags mt-2">
+                  {job?.location?.map((location, index) => (
+                    <div key={index} className="box-category-tag">
+                      {location.province}
+                    </div>
+                  ))}
+                </div>
+              </Card>
             </Col>
           </Row>
         </>

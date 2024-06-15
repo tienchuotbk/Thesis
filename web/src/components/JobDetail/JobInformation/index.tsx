@@ -6,7 +6,6 @@ type Props = {
 import salarySvg from "@/assets/svg/salary.svg";
 import { ClockCircleOutlined } from "@ant-design/icons";
 export default function JobInfomation({ job }: Props) {
-  console.log(job);
   return (
     <>
       <Card title={<span className="text-[20px]">{job.title}</span>}>
