@@ -1,4 +1,4 @@
-import defaultCompany from "@/assets/images/default_company.jpg";
+import { getLogoSrc } from "@/helpers/job.helper";
 import { Card } from "antd";
 
 type Props = {
@@ -9,7 +9,7 @@ export default function CompanyInformation({ job }: Props) {
     <Card>
       <div className="flex">
         <div className="max-w-[88px]">
-          <img src={job.logo || defaultCompany} className="w-full h-auto" />
+          <img src={getLogoSrc(job.logo)} className="w-full h-auto" />
         </div>
         <div className="font-[500] text-[20px] pl-4">{job.company}</div>
       </div>
