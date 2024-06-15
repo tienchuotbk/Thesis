@@ -1,7 +1,6 @@
 import client from "../../models/clickhouse.js";
 const clickHouseRepo = {
   getProprotionAge: async () => {
-    let result = [];
     const res = await client.query({
       query: `
             SELECT
@@ -32,7 +31,7 @@ const clickHouseRepo = {
                 countIf(age.type = 3 AND age.max > value) +
                 countIf(age.type = 4 AND age.min < value) AS count
             FROM
-                jobs
+                thesis.jobs
             ARRAY JOIN values_array AS value
             GROUP BY
                 value
@@ -42,7 +41,7 @@ const clickHouseRepo = {
     });
     let data = await res.json();
     if (data && data.length) {
-      result = data.map((val) => val.count);
+      result = data.map((val) => parseInt(val.count));
     }
     return result;
   },

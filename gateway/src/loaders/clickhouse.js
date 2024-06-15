@@ -59,7 +59,7 @@ export default async () => {
         wait_end_of_query: 1,
       },
     });
-    const filePath = `${process.cwd}/datas.json`
+    const filePath = path.resolve(__dirname, '../../data/jobs.json');
     let rawdata = fs.readFileSync(filePath, "utf8");
     let parseData = JSON.parse(rawdata);
 
@@ -87,6 +87,7 @@ export default async () => {
     // let final = await example.json()
     // console.log(final[0].location)
   } catch (e) {
+    console.log(e)
     logger.error(import.meta.url, "APP", 'Error run init clickhouse: ', e.message)
   }
 };
