@@ -31,6 +31,7 @@ export default function JobTable() {
   const [pagination, setPagination] = useState({
     currentPage: 1,
     totalPage: 1,
+    pageSize: 10,
     totalCount: 0,
   });
 
@@ -58,23 +59,25 @@ export default function JobTable() {
       const configParams = {
         page: pagination.currentPage,
         order: order,
+        limit: pagination.pageSize,
         ...filtered,
       };
       const responseData = await JobApi.getAll({ params: configParams });
 
       if (responseData?.data?.jobs?.length) {
-        setPagination({
+        setPagination((pagination) => ({
+          ...pagination,
           currentPage: responseData.data.currentPage,
           totalPage: responseData.data.totalPage,
           totalCount: responseData.data.totalCount,
-        });
+        }));
         return responseData.data.jobs;
       } else {
         return null;
       }
     },
   });
-
+  console.log(dataQuery);
   const handleChangePage = useCallback(
     (val: number) => {
       setPagination({ ...pagination, currentPage: val });
@@ -88,6 +91,10 @@ export default function JobTable() {
 
   function handleSearch() {
     setPagination({ ...pagination, currentPage: 1 });
+  }
+
+  function handlePageSizeChange(_page: number, pageSize: number) {
+    setPagination({ ...pagination, pageSize });
   }
 
   return (
@@ -128,7 +135,7 @@ export default function JobTable() {
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Tất cả việc làm</Breadcrumb.Item>
               <Breadcrumb.Item>
-                {/* Hiển thị <strong>{dataQuery?.length}</strong>/ */}
+                Hiển thị <strong>{dataQuery?.length}</strong>/
                 <strong>{pagination.totalCount}</strong> việc làm
               </Breadcrumb.Item>
             </Breadcrumb>
@@ -181,12 +188,13 @@ export default function JobTable() {
                   defaultCurrent={1}
                   current={pagination.currentPage}
                   onChange={handleChangePage}
+                  onShowSizeChange={handlePageSizeChange}
                   total={pagination.totalPage * 10}
                 />
               </div>
             </div>
           ) : (
-            <Empty style={{ marginTop: "4em" }} />
+            <Empty className="mt-[4rem]" />
           )}
         </Layout.Content>
       </Layout>

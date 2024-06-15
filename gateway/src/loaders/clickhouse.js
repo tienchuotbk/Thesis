@@ -1,10 +1,6 @@
-import client from "../models/clickhouse.js";
 import fs from "fs";
-import { Transform } from "stream";
-import path from "path";
-import { fileURLToPath } from "url";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import client from "../models/clickhouse.js";
+import { logger } from "../utils/logger.js";
 
 const createString = `CREATE TABLE IF NOT EXISTS thesis.jobs (
 _id String,
@@ -61,15 +57,14 @@ export default async () => {
         wait_end_of_query: 1,
       },
     });
-    const filePath = path.resolve(__dirname, "../../data/jobs.json");
+    const filePath = `${process.cwd}/datas.json`
     let rawdata = fs.readFileSync(filePath, "utf8");
     let parseData = JSON.parse(rawdata);
 
-    console.log(parseData.length);
-    if( parseData.length){
-        await client.command({
-            query: 'TRUNCATE TABLE thesis.jobs'
-        });
+    if (parseData.length) {
+      await client.command({
+        query: 'TRUNCATE TABLE thesis.jobs'
+      });
     }
     await client.insert({
       table: "jobs",
@@ -83,6 +78,6 @@ export default async () => {
     // let final = await example.json()
     // console.log(final)
   } catch (e) {
-    console.log("Errror run init clickhouse", e);
+    logger.error(import.meta.url, "APP", 'Error run init clickhouse: ', e.message)
   }
 };
