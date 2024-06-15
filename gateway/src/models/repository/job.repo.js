@@ -89,6 +89,55 @@ const jobRepo = {
       { $sort: { _id: 1 } },
     ]);
   },
+  getLine: () => {
+    const values = Array.from({ length: 60 - 16 + 1 }, (_, i) => i + 16);
+
+    // Build the facets dynamically
+    const facets = values.reduce((acc, value) => {
+      acc[value] = [
+        {
+          $match: {
+            $or: [
+              {
+                $and: [
+                  { "age.type": 1 },
+                  { "age.min": { $lte: value } },
+                  { "age.max": { $gte: value } },
+                ],
+              },
+              { $and: [{ "age.type": 2 }, { "age.fixed": value }] },
+              { $and: [{ "age.type": 3 }, { "age.max": { $gt: value } }] },
+              { $and: [{ "age.type": 4 }, { "age.min": { $lt: value } }] },
+            ],
+          },
+        },
+        { $count: "count" },
+      ];
+      return acc;
+    }, {});
+
+    return Job.aggregate([
+      {
+        $facet: facets,
+      },
+      {
+        $project: {
+          counts: {
+            $objectToArray: "$$ROOT",
+          },
+        },
+      },
+      {
+        $unwind: "$counts",
+      },
+      {
+        $project: {
+          age: "$counts.k",
+          count: { $ifNull: [{ $arrayElemAt: ["$counts.v.count", 0] }, 0] },
+        },
+      },
+    ]);
+  },
 };
 
 export default jobRepo;

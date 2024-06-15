@@ -1,52 +1,52 @@
 import client from "../models/clickhouse.js";
 import fs from "fs";
-import { Transform } from "stream";
 import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const createString = `CREATE TABLE IF NOT EXISTS thesis.jobs (
-_id String,
-age Nested(
-type Int,
-min Int,
-max Int,
-fixed Int
-),
-benefit Array(String),
-category Array(String),
-certificate Int,
-company String,
-description Array(String),
-experience Nested(
-type Int,
-fixed Int,
-min Int,
-max Int
-),
-expiration DateTime,
-location Nested(
-province String,
-district String,
-address String
-),
-logo String,
-requirement Array(String),
-role Int,
-salary Nested(
-type Int,
-min Int,
-max Int
-),
-sex Int,
-title String,
-type Array(Int),
-update_time DateTime,
-url String,
-field Array(String)
+    _id String,
+    age Tuple (
+        type UInt8,
+        min Nullable(UInt8),
+        max Nullable(UInt8),
+        fixed Nullable(UInt8)
+    ),
+    benefit Array(String),
+    category Array(String),
+    certificate UInt8,
+    company String,
+    description Array(String),
+    experience Tuple (
+        type UInt8,
+        min Nullable(UInt8),
+        max Nullable(UInt8),
+        fixed Nullable(UInt8)
+    ),
+    expiration DateTime,
+    location Array( Tuple(
+        province LowCardinality(String),
+        district String,
+        address String
+    )),
+    logo String,
+    requirement Array(String),
+    role UInt8,
+    salary Tuple (
+        type UInt8,
+        min Nullable(Float32),
+        max Nullable(Float32),
+        fixed Nullable(Float32)
+    ),
+    sex UInt8,
+    title String,
+    type Array(UInt8),
+    update_time DateTime,
+    url String,
+    field Array(String)
 ) ENGINE = MergeTree()
-ORDER BY (_id);`;
+ORDER BY _id;`;
 
 // clickHouseClient
 
@@ -54,9 +54,6 @@ export default async () => {
   try {
     await client.command({
       query: createString,
-      // Recommended for cluster usage to avoid situations where a query processing error occurred after the response code,
-      // and HTTP headers were already sent to the client.
-      // See https://clickhouse.com/docs/en/interfaces/http/#response-buffering
       clickhouse_settings: {
         wait_end_of_query: 1,
       },
@@ -65,23 +62,29 @@ export default async () => {
     let rawdata = fs.readFileSync(filePath, "utf8");
     let parseData = JSON.parse(rawdata);
 
-    console.log(parseData.length);
     if( parseData.length){
         await client.command({
             query: 'TRUNCATE TABLE thesis.jobs'
         });
+        console.log("Insert " + parseData.length + " jobs sucess");
     }
-    await client.insert({
-      table: "jobs",
-      values: parseData,
-      format: "JSON",
-    });
+    try {
+      await client.insert({
+        table: "jobs",
+        values: parseData,
+        format: "JSON",
+      });
+    }
+    catch(e){
+      console.log("Error when insert data to clickhouse", e)
+    }
+
     // const example = await client.query({
-    //     query: `select * from jobs where _id = '666b0a9fabdeafc3478125cf'`,
+    //     query: `SELECT * from thesis.jobs WHERE _id = '666b0a9fabdeafc3478125cf'`,
     //     format: 'JSONEachRow',
     // })
     // let final = await example.json()
-    // console.log(final)
+    // console.log(final[0].location)
   } catch (e) {
     console.log("Errror run init clickhouse", e);
   }
