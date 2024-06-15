@@ -77,12 +77,12 @@ export default function JobTable() {
       }
     },
   });
-  console.log(dataQuery);
+
   const handleChangePage = useCallback(
     (val: number) => {
-      setPagination({ ...pagination, currentPage: val });
+      setPagination(pagination => ({ ...pagination, currentPage: val }));
     },
-    [pagination]
+    []
   );
 
   const handleChangeOrder = useCallback((val: string) => {
@@ -93,9 +93,9 @@ export default function JobTable() {
     setPagination({ ...pagination, currentPage: 1 });
   }
 
-  function handlePageSizeChange(_page: number, pageSize: number) {
-    setPagination({ ...pagination, pageSize });
-  }
+  const handlePageSizeChange = useCallback((_page: number, pageSize: number) => {
+    setPagination((pagination) => ({ ...pagination, pageSize: pageSize }));
+  }, [])
 
   return (
     <Layout
@@ -158,6 +158,13 @@ export default function JobTable() {
               />
             </Flex>
           </Flex>
+          <div
+              style={{
+                padding: 24,
+                background: colorBgContainer,
+                borderRadius: borderRadiusLG,
+              }}
+            >
           {isPending ? (
             <Spin tip="Loading...">
               <Alert
@@ -167,13 +174,6 @@ export default function JobTable() {
               />
             </Spin>
           ) : dataQuery?.length ? (
-            <div
-              style={{
-                padding: 24,
-                background: colorBgContainer,
-                borderRadius: borderRadiusLG,
-              }}
-            >
               <Row gutter={16}>
                 {dataQuery?.map((job: any) => {
                   return (
@@ -183,19 +183,19 @@ export default function JobTable() {
                   );
                 })}
               </Row>
-              <div style={{ justifyContent: "center", display: "flex" }}>
-                <Pagination
-                  defaultCurrent={1}
-                  current={pagination.currentPage}
-                  onChange={handleChangePage}
-                  onShowSizeChange={handlePageSizeChange}
-                  total={pagination.totalPage * 10}
-                />
-              </div>
-            </div>
           ) : (
             <Empty className="mt-[4rem]" />
           )}
+          {pagination.totalCount ? <div style={{ justifyContent: "center", display: "flex" }}>
+            <Pagination
+              defaultCurrent={1}
+              current={pagination.currentPage}
+              onChange={handleChangePage}
+              onShowSizeChange={handlePageSizeChange}
+              total={pagination.totalPage * 10}
+            />
+          </div> : ''}
+        </div>
         </Layout.Content>
       </Layout>
     </Layout>
