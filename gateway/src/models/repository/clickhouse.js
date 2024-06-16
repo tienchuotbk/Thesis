@@ -46,38 +46,82 @@ const clickHouseRepo = {
     }
     return result;
   },
-  countByAllProvinces: async () => {
+  getProvincesData: async () => {
     let result = [];
     const res = await client.query({
       query: `
       WITH 
           array(${provinces.map((val)=> `\'${val}\'`).join(",")}) AS provinces
       SELECT
-          loc.province as province,
-          COUNT(DISTINCT _id) AS count 
+          province,
+          COUNT(DISTINCT _id) AS count,
+          AVG(
+              CASE
+                WHEN salaryType = 1 THEN (salaryMin + salaryMax) / 2
+                WHEN salaryType = 2 THEN salaryFixed
+                WHEN salaryType = 3 THEN salaryMax
+                WHEN salaryType = 4 THEN salaryMin
+              END
+          ) as average
       FROM (
           SELECT 
               _id,
-              loc.province
+              loc.province as province,
+              salary.type as salaryType,
+              salary.min as salaryMin,
+              salary.max as salaryMax,
+              salary.fixed as salaryFixed
           FROM 
               thesis.jobs 
           ARRAY JOIN 
               location AS loc 
           WHERE 
-              loc.province IN provinces
+              loc.province != ''
       )
       GROUP BY 
-          loc.province
+          province
       ORDER BY
-          loc.province;`,
+          province;`,
       format: "JSONEachRow",
     });
     let data = await res.json();
-    if (data && data.length) {
-      result = data.map((val) => parseInt(val.count));
-    }
-    return result;
+    return data;
   },
+
+  // calculateAverageSalaryByProvince: async () => {
+  //   let result = []
+  //   const res = await client.query({
+  //     query: `
+  //       SELECT
+  //         province,
+  //           AVG(
+  //             CASE
+  //               WHEN salaryType = 1 THEN (salaryMin + salaryMax) / 2
+  //               WHEN salaryType = 2 THEN salaryFixed
+  //               WHEN salaryType = 3 THEN salaryMax
+  //               WHEN salaryType = 4 THEN salaryMin
+  //             END
+  //           ) as average
+  //       FROM
+  //         (
+  //           SELECT 
+  //             _id,
+  //             loc.province as province,
+  //             salary.type as salaryType,
+  //             salary.min as salaryMin,
+  //             salary.max as salaryMax,
+  //             salary.fixed as salaryFixed
+  //           FROM 
+  //             thesis.jobs 
+  //           ARRAY JOIN 
+  //             location AS loc
+  //           WHERE loc.province != ''
+  //         )
+  //       GROUP BY province
+  //     `,
+  //     format: "JSONEachRow",
+  //   })
+  // }
 
 };
 

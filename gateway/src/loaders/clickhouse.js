@@ -59,15 +59,15 @@ export default async () => {
         wait_end_of_query: 1,
       },
     });
-    const filePath = path.resolve(__dirname, '../../data/jobs.json');
+    const filePath = path.resolve(__dirname, "../../data/jobs.json");
     let rawdata = fs.readFileSync(filePath, "utf8");
     let parseData = JSON.parse(rawdata);
 
-    if( parseData.length){
-        await client.command({
-            query: 'TRUNCATE TABLE thesis.jobs'
-        });
-        console.log("Insert " + parseData.length + " jobs sucess");
+    if (parseData.length) {
+      await client.command({
+        query: "TRUNCATE TABLE thesis.jobs",
+      });
+      console.log("Insert " + parseData.length + " jobs sucess");
     }
     try {
       await client.insert({
@@ -75,9 +75,8 @@ export default async () => {
         values: parseData,
         format: "JSON",
       });
-    }
-    catch(e){
-      console.log("Error when insert data to clickhouse", e)
+    } catch (e) {
+      console.log("Error when insert data to clickhouse", e);
     }
 
     // const example = await client.query({
@@ -87,7 +86,12 @@ export default async () => {
     // let final = await example.json()
     // console.log(final[0].location)
   } catch (e) {
-    console.log(e)
-    logger.error(import.meta.url, "APP", 'Error run init clickhouse: ', e.message)
+    console.log(e);
+    logger.error(
+      import.meta.url,
+      "APP",
+      "Error run init clickhouse: ",
+      e.message
+    );
   }
 };

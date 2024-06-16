@@ -47,7 +47,6 @@ export default function LineChart({
           connectorAllowed: false,
         },
         pointStart: 16,
-        // pointRange: ,
         pointInterval: 1
       },
     },
