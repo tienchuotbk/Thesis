@@ -78,12 +78,9 @@ export default function JobTable() {
     },
   });
 
-  const handleChangePage = useCallback(
-    (val: number) => {
-      setPagination(pagination => ({ ...pagination, currentPage: val }));
-    },
-    []
-  );
+  const handleChangePage = useCallback((val: number) => {
+    setPagination((pagination) => ({ ...pagination, currentPage: val }));
+  }, []);
 
   const handleChangeOrder = useCallback((val: string) => {
     setOrder(val);
@@ -95,7 +92,7 @@ export default function JobTable() {
 
   const handlePageSizeChange = useCallback((_page: number, pageSize: number) => {
     setPagination((pagination) => ({ ...pagination, pageSize: pageSize }));
-  }, [])
+  }, []);
 
   return (
     <Layout
@@ -159,43 +156,47 @@ export default function JobTable() {
             </Flex>
           </Flex>
           <div
-              style={{
-                padding: 24,
-                background: colorBgContainer,
-                borderRadius: borderRadiusLG,
-              }}
-            >
-          {isPending ? (
-            <Spin tip="Loading...">
-              <Alert
-                message="Fetching data"
-                description="This may takes several second. Calm down!"
-                type="info"
-              />
-            </Spin>
-          ) : dataQuery?.length ? (
+            style={{
+              padding: 24,
+              background: colorBgContainer,
+              borderRadius: borderRadiusLG,
+            }}
+          >
+            {isPending ? (
+              <Spin tip="Loading...">
+                <Alert
+                  message="Fetching data"
+                  description="This may takes several second. Calm down!"
+                  type="info"
+                />
+              </Spin>
+            ) : dataQuery?.length ? (
               <Row gutter={16}>
                 {dataQuery?.map((job: any) => {
                   return (
-                    <Col key={job._id} span={6} className="mb-4">
+                    <Col key={job._id} xs={24} sm={12} md={8} lg={6} className="mb-4">
                       <JobCard jobInfo={job} />
                     </Col>
                   );
                 })}
               </Row>
-          ) : (
-            <Empty className="mt-[4rem]" />
-          )}
-          {pagination.totalCount ? <div style={{ justifyContent: "center", display: "flex" }}>
-            <Pagination
-              defaultCurrent={1}
-              current={pagination.currentPage}
-              onChange={handleChangePage}
-              onShowSizeChange={handlePageSizeChange}
-              total={pagination.totalPage * 10}
-            />
-          </div> : ''}
-        </div>
+            ) : (
+              <Empty className="mt-[4rem]" />
+            )}
+            {pagination.totalCount ? (
+              <div style={{ justifyContent: "center", display: "flex" }}>
+                <Pagination
+                  defaultCurrent={1}
+                  current={pagination.currentPage}
+                  onChange={handleChangePage}
+                  onShowSizeChange={handlePageSizeChange}
+                  total={pagination.totalPage * 10}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
         </Layout.Content>
       </Layout>
     </Layout>

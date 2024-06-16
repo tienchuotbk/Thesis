@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
 import axiosClient from "./api-client";
 
 const JobApi = {
@@ -7,6 +7,9 @@ const JobApi = {
   },
   getById: (id: string) => {
     return axiosClient.get(`/jobs/${id}`);
+  },
+  getListRecommendById: (id: string): Promise<{ payload: any }> => {
+    return axiosClient.get(`/jobs/${id}/recommend`);
   },
 };
 
