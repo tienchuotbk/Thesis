@@ -8,6 +8,9 @@ const AnalysisApi = {
   getPie: (config: AxiosRequestConfig) => {
     return axiosClient.get(`/analysis/pie`, config);
   },
+  getTable: (config: AxiosRequestConfig) => {
+    return axiosClient.get(`/analysis/table`, config);
+  },
 };
 
 export default AnalysisApi;

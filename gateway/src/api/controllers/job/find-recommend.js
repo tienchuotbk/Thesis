@@ -40,7 +40,6 @@ export default async (req, res) => {
             const topN = 5;
             const recommendedJobs = similarities.slice(0, topN).map(similarity => {
                 const { _id, title, logo, company, salary, location } = similarity.job
-                console.log({ logo })
                 return { _id, title, logo, company, salary, location }
             });
 

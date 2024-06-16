@@ -1,16 +1,27 @@
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
+import Highcharts, { color } from "highcharts";
 
 export default function TableChart({
   title,
   subtitle,
   align,
-  data
+  data,
+  description,
+  yText,
+  valueSuffix,
+  color
 }: {
   title: string;
   subtitle: string;
   align: string;
-  data: any[];
+  data: {
+    x_title: string[],
+    value: number[]
+  };
+  yText: string;
+  description: string,
+  valueSuffix: string,
+  color: string
 }) {
   const options = {
     chart: {
@@ -25,20 +36,20 @@ export default function TableChart({
       align: align
     },
     xAxis: {
-      categories: ['USA', 'China', 'Brazil', 'EU', 'India', 'Russia'],
+      categories: data.x_title,
       crosshair: true,
       accessibility: {
-        description: 'Countries'
+        description: description
       }
     },
     yAxis: {
       min: 0,
       title: {
-        text: '1000 metric tons (MT)'
+        text: yText,
       }
     },
     tooltip: {
-      valueSuffix: ' (1000 MT)'
+      valueSuffix: valueSuffix
     },
     plotOptions: {
       column: {
@@ -46,14 +57,11 @@ export default function TableChart({
         borderWidth: 0
       }
     },
+    // colors: "#ebac1a",
     series: [
       {
-        name: 'Corn',
-        data: [406292, 260000, 107000, 68300, 27500, 14500]
-      },
-      {
-        name: 'Wheat',
-        data: [51086, 136000, 5500, 141000, 107180, 77000]
+        name: title,
+        data: data.value
       }
     ]
   };

@@ -130,6 +130,92 @@ const clickHouseRepo = {
     let data = await res.json();
     return data;
   },
+  getTableRoleData: async () => {
+    const res = await client.query({
+      query: `
+        SELECT 
+            role, COUNT(role) as count
+        FROM thesis.jobs
+        GROUP BY role
+      `,
+      format: "JSONEachRow",
+    });
+    let data = await res.json();
+    return data;
+  },
+  getTableExperienceData: async () => {
+    const res = await client.query({
+      query: `
+        SELECT 
+            SUM(CASE WHEN experience.type = 0 THEN 1 ELSE 0 END) AS none,
+            SUM(CASE WHEN experience.max = 1 THEN 1 ELSE 0 END) AS under_one_year,
+            SUM(CASE WHEN experience.fixed = 1 OR experience.min = 1 THEN 1 ELSE 0 END) AS one_year,
+            SUM(CASE WHEN experience.fixed = 2 OR experience.min = 2 THEN 1 ELSE 0 END) AS two_years,
+            SUM(CASE WHEN experience.fixed = 3 OR experience.min = 3 THEN 1 ELSE 0 END) AS three_years,
+            SUM(CASE WHEN experience.fixed = 4 OR experience.min = 4 THEN 1 ELSE 0 END) AS four_years,
+            SUM(CASE WHEN experience.fixed = 5 THEN 1 ELSE 0 END) AS five_years,
+            SUM(CASE WHEN experience.min = 5 THEN 1 ELSE 0 END) AS over_five_years
+        FROM 
+            thesis.jobs;
+      `,
+      format: "JSONEachRow",
+    });
+    let data = await res.json();
+    return data;
+  },
+  getNumAndSalaryByField: async () => {
+    const res = await client.query({
+      query: `
+        SELECT
+            field_name,
+            COUNT(*) AS count,
+            AVG(
+                CASE
+                    WHEN salary.type = 1 THEN (salary.min + salary.max) / 2
+                    WHEN salary.type = 2 THEN salary.fixed
+                    WHEN salary.type = 3 THEN salary.max
+                    WHEN salary.type = 4 THEN salary.min
+                    ELSE NULL
+                END
+            ) AS average_salary
+        FROM
+        (
+            SELECT arrayJoin(field) AS field_name, salary
+            FROM thesis.jobs
+        )
+        GROUP BY field_name;
+        `,
+      format: "JSONEachRow",
+    });
+    let data = await res.json();
+    return data;
+  },
+  getSalaryByField: async () => {
+    const res = await client.query({
+      query: `
+        SELECT
+            field_value,
+            AVG()
+        FROM
+        (
+            SELECT arrayJoin(field) AS field_value
+            FROM thesis.jobs
+        )
+        GROUP BY field_value
+        ORDER BY count DESC;`,
+      format: "JSONEachRow",
+    });
+    let data = await res.json();
+    return data;
+  },
+  getT: async () => {
+    const res = await client.query({
+      query: ``,
+      format: "JSONEachRow",
+    });
+    let data = await res.json();
+    return data;
+  },
 };
 
 export default clickHouseRepo;
