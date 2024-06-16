@@ -1,27 +1,3 @@
-export interface filterInterface {
-    type: null | number,
-    role: null | number,
-    sex: null | number,
-    exp: null| number,
-    age: null | number,
-    salary: undefined | number,
-    level: null | number,
-    career: null | string,
-    text: string,
-    province: string
-  }
-export const defaultFilter: filterInterface = {
-    type: null,
-    role: null,
-    sex: null,
-    exp: null,
-    age: null,
-    salary: undefined,
-    level: null,
-    career: '',
-    text: '',
-    province: 'all'
-}
 export const typeOptions = [
   { value: null, label: "Tất cả" },
   { value: 0, label: "Toàn thời gian cố định" },
