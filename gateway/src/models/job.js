@@ -30,6 +30,7 @@ const jobSchema = new Schema({
             address: { type: String }
         }
     ],
+    logo: { type: String },
     requirement: [String],
     role: { type: Number },
     salary: {

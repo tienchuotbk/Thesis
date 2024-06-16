@@ -55,3 +55,36 @@ html {
     line-height: 16px;
     padding: 4px;
 }
+
+.job-list-default .job-item-default {
+    background: #fff;
+    border: 1px solid #f4f4f4;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    gap: 16px;
+    grid-template-columns: 1fr 5fr;
+    margin: auto auto 16px;
+    padding: 12px;
+    position: relative;
+    transition: all .1s;
+}
+
+.label-content {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.label-content label {
+    background: #e9eaec;
+    border-radius: 3px;
+    color: #212f3f;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 4px 8px;
+}
