@@ -1,3 +1,4 @@
+import { provinces } from "../../contants/analysis.js";
 import client from "../../models/clickhouse.js";
 const clickHouseRepo = {
   getProprotionAge: async () => {
@@ -45,6 +46,39 @@ const clickHouseRepo = {
     }
     return result;
   },
+  countByAllProvinces: async () => {
+    let result = [];
+    const res = await client.query({
+      query: `
+      WITH 
+          array(${provinces.map((val)=> `\'${val}\'`).join(",")}) AS provinces
+      SELECT
+          loc.province as province,
+          COUNT(DISTINCT _id) AS count 
+      FROM (
+          SELECT 
+              _id,
+              loc.province
+          FROM 
+              thesis.jobs 
+          ARRAY JOIN 
+              location AS loc 
+          WHERE 
+              loc.province IN provinces
+      )
+      GROUP BY 
+          loc.province
+      ORDER BY
+          loc.province;`,
+      format: "JSONEachRow",
+    });
+    let data = await res.json();
+    if (data && data.length) {
+      result = data.map((val) => parseInt(val.count));
+    }
+    return result;
+  },
+
 };
 
 export default clickHouseRepo;

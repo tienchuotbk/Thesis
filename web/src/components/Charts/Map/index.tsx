@@ -82,7 +82,7 @@ export default function HighcharMap({ title }: { title: string }) {
       setTopology(data);
     }
     // console.log(data.objects.default.geometries);
-    // console.log(data.objects.default.geometries.map((val: any)=> ({ "key": val.properties['hc-key'], "value": val.properties["name"] })))
+    console.log(data.objects.default.geometries.map((val: any)=> ({ "key": val.properties['hc-key'], "value": val.properties["name"] })))
   }
   useEffect(() => {
     fetchData();
