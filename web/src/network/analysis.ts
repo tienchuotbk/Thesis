@@ -6,7 +6,7 @@ const AnalysisApi = {
     return axiosClient.get(`/analysis/map`, config);
   },
   getPie: (config: AxiosRequestConfig) => {
-    return axiosClient.get(`/analysis/map`, config);
+    return axiosClient.get(`/analysis/pie`, config);
   },
 };
 

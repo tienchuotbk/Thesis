@@ -15,9 +15,7 @@ const MapAnalysis = () => {
     queryFn: async () => {
       const configParams = {};
       const responseData = await AnalysisApi.getMap({ params: configParams });
-
       if (responseData?.data?.length) {
-        console.log(responseData.data);
         return responseData.data;
       } else {
         return null;

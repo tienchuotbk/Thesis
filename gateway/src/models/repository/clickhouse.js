@@ -47,11 +47,10 @@ const clickHouseRepo = {
     return result;
   },
   getProvincesData: async () => {
-    let result = [];
     const res = await client.query({
       query: `
       WITH 
-          array(${provinces.map((val)=> `\'${val}\'`).join(",")}) AS provinces
+          array(${provinces.map((val) => `\'${val}\'`).join(",")}) AS provinces
       SELECT
           province,
           COUNT(DISTINCT _id) AS count,
@@ -88,41 +87,49 @@ const clickHouseRepo = {
     return data;
   },
 
-  // calculateAverageSalaryByProvince: async () => {
-  //   let result = []
-  //   const res = await client.query({
-  //     query: `
-  //       SELECT
-  //         province,
-  //           AVG(
-  //             CASE
-  //               WHEN salaryType = 1 THEN (salaryMin + salaryMax) / 2
-  //               WHEN salaryType = 2 THEN salaryFixed
-  //               WHEN salaryType = 3 THEN salaryMax
-  //               WHEN salaryType = 4 THEN salaryMin
-  //             END
-  //           ) as average
-  //       FROM
-  //         (
-  //           SELECT 
-  //             _id,
-  //             loc.province as province,
-  //             salary.type as salaryType,
-  //             salary.min as salaryMin,
-  //             salary.max as salaryMax,
-  //             salary.fixed as salaryFixed
-  //           FROM 
-  //             thesis.jobs 
-  //           ARRAY JOIN 
-  //             location AS loc
-  //           WHERE loc.province != ''
-  //         )
-  //       GROUP BY province
-  //     `,
-  //     format: "JSONEachRow",
-  //   })
-  // }
+  getProportionData: async () => {
+    const res = await client.query({
+      query: `
+        SELECT
+            'sex' AS category,
+            sex AS value,
+            COUNT(*) AS count,
+            COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS percentage
+        FROM
+            thesis.jobs
+        GROUP BY
+            sex
 
+        UNION ALL
+
+        SELECT
+            'certificate' AS category,
+            certificate AS value,
+            COUNT(*) AS count,
+            COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS percentage
+        FROM
+            thesis.jobs
+        GROUP BY
+            certificate
+
+        UNION ALL
+
+        SELECT
+            'type' AS category,
+            type_value AS value,
+            COUNT(*) AS count,
+            COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS percentage
+        FROM
+            (SELECT arrayJoin(type) AS type_value FROM thesis.jobs)
+        GROUP BY
+            type_value
+        ORDER BY
+            category, value;`,
+      format: "JSONEachRow",
+    });
+    let data = await res.json();
+    return data;
+  },
 };
 
 export default clickHouseRepo;
