@@ -1,27 +1,36 @@
 import { Layout, Breadcrumb, theme } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import LineChart from "@/components/Charts/LineChart";
+import { useQuery } from "@tanstack/react-query";
+import AnalysisApi from "@/network/analysis";
 
 const LineAnalysis = () => {
   const {
     token: { colorBgBase },
   } = theme.useToken();
 
-  const [lineData, setLineData] = useState([])
+  const { isLoading, data: dataQuery } = useQuery({
+    queryKey: ["fetchLineData"],
+    queryFn: async () => {
+      const configParams = {};
+      const responseData = await AnalysisApi.getLine({ params: configParams });
+      if (responseData?.data) {
+        return responseData.data;
+      } else {
+        return null;
+      }
+    },
+  });
 
-  async function fetchData() {
-    const res = await fetch(import.meta.env.VITE_API_URL+ '/api/analysis/line');
+  console.log(dataQuery);
 
-    if(res.status === 200){
-      const result: any = await res.json();
-      setLineData(result.data);
-    }
-    
-  } 
+  const ageData = useMemo(() => {
+    return dataQuery ? dataQuery.age : [];
+  }, [dataQuery]);
 
-  useEffect(()=> {
-    fetchData();
-  }, []);
+  const salaryData = useMemo(() => {
+    return dataQuery ? dataQuery.salary : [];
+  }, [dataQuery]);
 
   return (
     <Layout
@@ -42,7 +51,26 @@ const LineAnalysis = () => {
         </Breadcrumb>
       </Layout.Header>
       <Layout.Content>
-        <LineChart title="Line chart" align="center" subtitle="Subtitle of line chart" data={lineData}/>
+        <LineChart
+          title="Số lượng công việc phân bố theo độ tuổi"
+          align="center"
+          subtitle="Dữ liệu số lượng công việc tính theo độ tuổi từ 16 đến 60"
+          yTitle="Số lượng công việc"
+          series={[{ name: "Số lượng công việc", data: ageData }]}
+          start={16}
+          interval={1}
+          xTitle={"Độ tuổi"}
+        />
+        <LineChart
+          title="Số lượng công việc phân bổ theo mức lương"
+          align="center"
+          subtitle="Dữ liệu mức lương tính theo đơn vị triệu VND"
+          series={[{ name: "Số lượng công việc", data: salaryData }]}
+          yTitle="Số lượng công việc"
+          start={1}
+          interval={1}
+          xTitle={"Mức lương hiển thị"}
+        />
       </Layout.Content>
     </Layout>
   );

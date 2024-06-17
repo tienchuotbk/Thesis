@@ -2,11 +2,31 @@ import clickHouseRepo from "../../../models/repository/clickhouse.js";
 
 export default async (req, res) => {
   try {
-    let result = []
-    result = await clickHouseRepo.getLineAge();
+    let result = {};
+    const totalData = Promise.allSettled([
+      clickHouseRepo.getLineAge(),
+      clickHouseRepo.getLineSalary(),
+    ]);
+
+    const promiseResults = await totalData;
+
+    // Processing the result
+    promiseResults.forEach((promiseResult, index) => {
+      if (promiseResult.status === "fulfilled") {
+        if (index === 0) {
+          result.age = promiseResult.value;
+        } else {
+          result.salary = promiseResult.value;
+        }
+      } else {
+        console.error(
+          `Promise ${index} rejected with reason:`,
+          promiseResult.reason
+        );
+      }
+    });
     res.status(200).json({ message: "OK", data: result });
   } catch (e) {
-    console.log(e);
     res.status(500).json({ message: "ERROR: " + e, data: null });
   }
 };

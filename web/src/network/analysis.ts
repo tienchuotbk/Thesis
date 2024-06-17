@@ -11,6 +11,9 @@ const AnalysisApi = {
   getTable: (config: AxiosRequestConfig) => {
     return axiosClient.get(`/analysis/table`, config);
   },
+  getLine: (config: AxiosRequestConfig) => {
+    return axiosClient.get(`/analysis/line`, config);
+  },
 };
 
 export default AnalysisApi;

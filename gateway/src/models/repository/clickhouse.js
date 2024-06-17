@@ -46,6 +46,33 @@ const clickHouseRepo = {
     }
     return result;
   },
+  getLineSalary: async () => {
+    let result = [];
+
+    const res = await client.query({
+      query: `
+        WITH array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50) AS values_array
+        SELECT
+          value,
+          countIf(salary.type = 1 AND salary.min <= value AND salary.max >= value) +
+          countIf(salary.type = 2 AND salary.fixed = value) +
+          countIf(salary.type = 3 AND salary.max = value) +
+          countIf(salary.type = 4 AND salary.max = value) AS count
+        FROM
+          thesis.jobs
+        ARRAY JOIN values_array AS value
+        GROUP BY
+          value
+        ORDER BY
+          value;`,
+      format: "JSONEachRow",
+    });
+    let data = await res.json();
+    if (data && data.length) {
+      result = data.map((val) => parseInt(val.count));
+    }
+    return result;
+  },
   getProvincesData: async () => {
     const res = await client.query({
       query: `
@@ -153,8 +180,7 @@ const clickHouseRepo = {
             SUM(CASE WHEN experience.fixed = 2 OR experience.min = 2 THEN 1 ELSE 0 END) AS two_years,
             SUM(CASE WHEN experience.fixed = 3 OR experience.min = 3 THEN 1 ELSE 0 END) AS three_years,
             SUM(CASE WHEN experience.fixed = 4 OR experience.min = 4 THEN 1 ELSE 0 END) AS four_years,
-            SUM(CASE WHEN experience.fixed = 5 THEN 1 ELSE 0 END) AS five_years,
-            SUM(CASE WHEN experience.min = 5 THEN 1 ELSE 0 END) AS over_five_years
+            SUM(CASE WHEN experience.fixed = 5 OR experience.min = 5 THEN 1 ELSE 0 END) AS from_five_years
         FROM 
             thesis.jobs;
       `,

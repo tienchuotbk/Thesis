@@ -5,12 +5,20 @@ export default function LineChart({
   title,
   subtitle,
   align,
-  data,
+  series,
+  yTitle,
+  xTitle,
+  start,
+  interval
 }: {
   title: string;
   subtitle: string;
   align: string;
-  data: any[];
+  yTitle: string,
+  xTitle: string,
+  start: number,
+  interval: number
+  series: { name: string, data: number[] }[];
 }) {
   const options = {
     title: {
@@ -25,13 +33,16 @@ export default function LineChart({
 
     yAxis: {
       title: {
-        text: "Number of Employees",
+        text: yTitle,
       },
     },
 
     xAxis: {
       accessibility: {
         rangeDescription: "Range: 16 to 60",
+      },
+      title: {
+        text: xTitle,
       },
     },
 
@@ -46,18 +57,12 @@ export default function LineChart({
         label: {
           connectorAllowed: false,
         },
-        pointStart: 16,
-        pointInterval: 1
+        pointStart: start,
+        pointInterval: interval
       },
     },
 
-    series: [
-      {
-        name: "Number of jobs",
-        data: data,
-      },
-      
-    ],
+    series: series,
 
     responsive: {
       rules: [

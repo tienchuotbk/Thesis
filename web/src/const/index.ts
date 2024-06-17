@@ -29,8 +29,7 @@ export const experienceMap = new Map([
     ["two_years", "2 năm"],
     ["three_years", "3 năm"],
     ["four_years", "4 năm"],
-    ["five_years", "5 năm" ],
-    ["over_five_years", "Trên 5 năm"]
+    ["from_five_years", "Từ 5 năm"]
 ])
 
 export const rolesMap = new Map([
