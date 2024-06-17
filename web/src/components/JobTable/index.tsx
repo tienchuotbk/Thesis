@@ -90,9 +90,12 @@ export default function JobTable() {
     setPagination({ ...pagination, currentPage: 1 });
   }
 
-  const handlePageSizeChange = useCallback((_page: number, pageSize: number) => {
-    setPagination((pagination) => ({ ...pagination, pageSize: pageSize }));
-  }, []);
+  const handlePageSizeChange = useCallback(
+    (_page: number, pageSize: number) => {
+      setPagination((pagination) => ({ ...pagination, pageSize: pageSize }));
+    },
+    []
+  );
 
   return (
     <Layout
@@ -100,7 +103,10 @@ export default function JobTable() {
         minHeight: "100vh",
       }}
     >
-      <Layout.Sider width={"15vw"} style={{ background: "white", position: "sticky" }}>
+      <Layout.Sider
+        width={"15vw"}
+        style={{ background: "white", position: "sticky", zIndex: 100 }}
+      >
         <Layout.Header
           style={{
             position: "sticky",
@@ -174,7 +180,14 @@ export default function JobTable() {
               <Row gutter={16}>
                 {dataQuery?.map((job: any) => {
                   return (
-                    <Col key={job._id} xs={24} sm={12} md={8} lg={6} className="mb-4">
+                    <Col
+                      key={job._id}
+                      xs={24}
+                      sm={12}
+                      md={8}
+                      lg={6}
+                      className="mb-4"
+                    >
                       <JobCard jobInfo={job} />
                     </Col>
                   );

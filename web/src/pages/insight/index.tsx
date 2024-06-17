@@ -5,7 +5,6 @@ import TableAnalysis from "@/components/Analytic/Table";
 import { Layout, Breadcrumb } from "antd";
 
 export default function Insigh() {
-  
   return (
     <Layout.Content className="container" style={{ minWidth: "100vw" }}>
       <Layout
@@ -19,7 +18,7 @@ export default function Insigh() {
         >
           <Layout.Header
             style={{
-              position: "sticky",
+              // position: "sticky",
               top: 0,
               zIndex: 100,
               width: "100%",
@@ -30,7 +29,7 @@ export default function Insigh() {
         <Layout>
           <Layout.Header
             style={{
-              position: "sticky",
+              // position: "sticky",
               top: 0,
               zIndex: 100,
               width: "100%",
