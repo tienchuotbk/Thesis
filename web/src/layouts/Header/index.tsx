@@ -20,7 +20,7 @@ export default function Header() {
 
     return classes;
   }, [location.pathname]);
-  
+
   const navbars: Navbar[] = [
     {
       title: "Trang chủ",
@@ -44,6 +44,7 @@ export default function Header() {
         top: 0,
         zIndex: 1,
         width: "100%",
+        backgroundColor: "#020433"
       }}
     >
       <div className="container mx-auto">

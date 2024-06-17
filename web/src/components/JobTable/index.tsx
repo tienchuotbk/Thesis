@@ -113,6 +113,7 @@ export default function JobTable() {
             top: 0,
             zIndex: 100,
             width: "100%",
+            backgroundColor: "#02054d"
           }}
         />
         <Filter filter={filter} setData={setFilter} />
@@ -124,6 +125,7 @@ export default function JobTable() {
             top: 0,
             zIndex: 100,
             width: "100%",
+            backgroundColor: "#02054d"
           }}
         >
           <Search
