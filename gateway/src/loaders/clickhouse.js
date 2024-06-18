@@ -67,7 +67,6 @@ export default async () => {
       await client.command({
         query: "TRUNCATE TABLE thesis.jobs",
       });
-      console.log("Insert " + parseData.length + " jobs sucess");
     }
     try {
       await client.insert({
@@ -75,6 +74,7 @@ export default async () => {
         values: parseData,
         format: "JSON",
       });
+      console.log("Insert " + parseData.length + " jobs sucess");
     } catch (e) {
       console.log("Error when insert data to clickhouse", e);
     }

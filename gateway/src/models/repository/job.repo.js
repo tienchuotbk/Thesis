@@ -16,7 +16,11 @@ const jobRepo = {
     } else if (order == "title") {
       orderOption = [{ $sort: { title: 1 } }];
     } else {
-      orderOption = [{ $sort: { ...filter_score } }];
+      if(filter.text)
+        orderOption = [{ $sort: { ...filter_score } }];
+      else {
+        orderOption =[]
+      }
     }
 
     return Job.aggregate([

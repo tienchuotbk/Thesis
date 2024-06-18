@@ -15,6 +15,7 @@ export default function HighcharMap({
   colorMax,
   maxValue,
   minValue,
+  yTitle
 }: {
   loading: boolean,
   title: string;
@@ -24,6 +25,7 @@ export default function HighcharMap({
   colorMax: string;
   maxValue: number;
   minValue: number;
+  yTitle: string
 }) {
   const options = {
     chart: {
@@ -41,7 +43,9 @@ export default function HighcharMap({
     mapNavigation: {
       enabled: true,
       buttonOptions: {
-        verticalAlign: "bottom",
+        // verticalAlign: "bottom",
+        alignTo: 'spacingBox',
+        x: 10
       },
     },
     colorAxis: {
@@ -55,13 +59,18 @@ export default function HighcharMap({
         format: "{value}",
       },
     },
-    width: "80vw",
+    legend: {
+      layout: 'vertical',
+      align: 'left',
+      verticalAlign: 'bottom'
+    },
+    // width: "80vw",
     colors: "#786c3a",
     series: [
       {
         // Specify the series data
         data: data,
-        name: "Random data",
+        name: yTitle,
         states: {
           hover: {
             color: "#a4edba",

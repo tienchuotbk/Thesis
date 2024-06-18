@@ -49,7 +49,6 @@ const Search: React.FC<ChildComponentProps> = ({
     <div className="">
       <Row gutter={24}>
         <Col span={10} className="w-full">
-          {/* <div className="border-gray-300 border-[1px] rounded-md"> */}
           <Input
             placeholder="Nhập thông tin bạn muốn tìm kiếm"
             className="bg-white placeholder-black"

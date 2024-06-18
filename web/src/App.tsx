@@ -16,7 +16,10 @@ function App() {
       },
     },
   });
-  const pages = import.meta.glob("./pages/**/!(*.test.[jt]sx)*.([jt]sx)", { eager: true });
+  console.log("hehe")
+  const pages = import.meta.glob("./pages/**/!(*.test.[jt]sx)*.([jt]sx)", {
+    eager: true,
+  });
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>

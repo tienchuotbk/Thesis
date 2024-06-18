@@ -108,13 +108,17 @@ export default function JobTable() {
         minHeight: "100vh",
       }}
     >
-      <Layout.Sider width={"15vw"} style={{ background: "white", position: "sticky" }}>
+      <Layout.Sider
+        width={"15vw"}
+        style={{ background: "white", position: "sticky", zIndex: 100 }}
+      >
         <Layout.Header
           style={{
             position: "sticky",
             top: 0,
             zIndex: 100,
             width: "100%",
+            backgroundColor: "#02054d"
           }}
         />
         <Filter />
@@ -126,6 +130,7 @@ export default function JobTable() {
             top: 0,
             zIndex: 100,
             width: "100%",
+            backgroundColor: "#02054d"
           }}
         >
           <Search
@@ -180,7 +185,14 @@ export default function JobTable() {
               <Row gutter={16}>
                 {dataQuery?.jobs.map((job: any) => {
                   return (
-                    <Col key={job._id} xs={24} sm={12} md={8} lg={6} className="mb-4">
+                    <Col
+                      key={job._id}
+                      xs={24}
+                      sm={12}
+                      md={8}
+                      lg={6}
+                      className="mb-4"
+                    >
                       <JobCard jobInfo={job} />
                     </Col>
                   );

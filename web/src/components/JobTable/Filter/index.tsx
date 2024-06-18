@@ -69,7 +69,7 @@ const Filter: React.FC = () => {
       style={{
         position: "sticky",
         top: 1,
-        zIndex: 1,
+        zIndex: 100,
         width: "100%",
         // display: 'flex',
         alignItems: "center",

@@ -2,10 +2,17 @@ import LineAnalysis from "@/components/Analytic/Line";
 import MapAnalysis from "@/components/Analytic/Map";
 import PieAnalysis from "@/components/Analytic/Pie";
 import TableAnalysis from "@/components/Analytic/Table";
+import AnalysisFilter from "@/components/Analytic/Filter";
 import { Layout, Breadcrumb } from "antd";
+import { useState } from "react";
 
 export default function Insigh() {
-  
+  const [filter, setFilter] = useState({
+    exp: null,
+    level: null,
+    career: "",
+  });
+
   return (
     <Layout.Content className="container" style={{ minWidth: "100vw" }}>
       <Layout
@@ -17,27 +24,25 @@ export default function Insigh() {
           width={"15vw"}
           style={{ background: "white", position: "sticky" }}
         >
-          <Layout.Header
+          {/* <Layout.Header
             style={{
-              position: "sticky",
               top: 0,
               zIndex: 100,
               width: "100%",
+              backgroundColor: "#02054d"
             }}
-          />
-          HIc hic
+          /> */}
+          <AnalysisFilter filter={filter} setData={setFilter} />
         </Layout.Sider>
         <Layout>
-          <Layout.Header
+          {/* <Layout.Header
             style={{
-              position: "sticky",
-              top: 0,
+              // top: 0,
               zIndex: 100,
               width: "100%",
+              backgroundColor: "#02054d"
             }}
-          >
-            Hihi
-          </Layout.Header>
+          ></Layout.Header> */}
           <Layout.Content style={{ margin: "0 16px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Tất cả việc làm</Breadcrumb.Item>

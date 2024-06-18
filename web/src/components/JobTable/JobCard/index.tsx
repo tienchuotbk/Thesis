@@ -5,6 +5,7 @@ interface IProps {
   jobInfo: any;
 }
 export default function JobCard({ jobInfo }: IProps) {
+  console.log(jobInfo)
   const navigate = useNavigate();
   function getSalaryText(salary: any) {
     let text: any;
@@ -23,13 +24,13 @@ export default function JobCard({ jobInfo }: IProps) {
         text = <p className="text-sky-500 font-semibold text-base">{salary.fixed} Triệu</p>;
         break;
       case 3:
-        text = <p className="text-sky-500 font-semibold text-base">Lên đến {salary.max} Triệu</p>;
+        text = <p className="text-sky-500 font-semibold text-base">Thảo thuận</p>;
         break;
       case 4:
-        text = <p className="text-sky-500 font-semibold text-base">Trên {salary.min} Triệu</p>;
+        text = <p className="text-sky-500 font-semibold text-base">Lên đến {salary.max} Triệu</p>;
         break;
       case 5:
-        text = <p className="text-sky-500 font-semibold text-base">Thảo thuận</p>;
+        text = <p className="text-sky-500 font-semibold text-base">Trên {salary.min} Triệu</p>;
         break;
       default:
         text = <p>None</p>;
@@ -58,7 +59,7 @@ export default function JobCard({ jobInfo }: IProps) {
       <Divider />
       <Flex gap={4} wrap align="center">
         {/* <span>Categories:</span> */}
-        {jobInfo.category.map((tag: string) => (
+        {jobInfo.category?.map((tag: string) => (
           <Tag
             key={tag}
             // onChange={(checked) => handleChange(tag, checked)}

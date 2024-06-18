@@ -1,4 +1,4 @@
-import { Layout, Flex, theme } from "antd";
+import { Layout, theme, Row, Col } from "antd";
 import HighcharMap from "@/components/Charts/Map";
 import { useQuery } from "@tanstack/react-query";
 import AnalysisApi from "@/network/analysis";
@@ -36,7 +36,7 @@ const MapAnalysis = () => {
     () =>
       dataQuery?.map((val: any) => {
         let title: string = provinceAnalysisMap.get(val.province) || "";
-        return [ title, parseFloat(val.average)];
+        return [title, parseFloat(val.average)];
       }),
     [dataQuery]
   );
@@ -47,35 +47,46 @@ const MapAnalysis = () => {
       style={{ backgroundColor: colorBgLayout, paddingBottom: "2em" }}
     >
       <Layout.Header style={{ backgroundColor: "white", borderTop: "2px" }}>
-        <h2>Heaher ne</h2>
+      Các công việc được hiển thị theo bản đồ Việt Nam. 
       </Layout.Header>
       <Layout.Content>
-        <Flex
+        {/* <Flex
           justify="space-around"
           align="center"
           style={{ marginTop: "1em", marginBottom: "1em" }}
-        >
-          <HighcharMap
-            title={"Thống kê Số lượng công việc theo địa điểm"}
-            subtitle={""}
-            data = { countJobData }
-            colorMin={"#21ed4d"} 
-            colorMax={"#0a4012"}
-            maxValue={100}
-            minValue={0}
-            loading={isLoading}
-          />
-          <HighcharMap
-            title={"Phân phối mức lương trung bình công việc theo địa điểm"}
-            subtitle={"Map 2"}
-            data={ averageSalaryData }
-            colorMin={"#dece1b"} 
-            colorMax={"#cc0808"}
-            maxValue={30}
-            minValue={5}
-            loading={isLoading}
-          />
-        </Flex>
+        > */}
+        <Row style={{ marginTop: "1em", marginBottom: "1em" }} justify="space-evenly">
+          <Col span={11}>
+            <HighcharMap
+              title={"Thống kê Số lượng công việc theo địa điểm"}
+              subtitle={""}
+              data={countJobData}
+              colorMin={"#21ed4d"}
+              colorMax={"#0a4012"}
+              maxValue={100}
+              minValue={0}
+              loading={isLoading}
+              yTitle="Số lượng công việc"
+            />
+          </Col>
+          <Col span={11}>
+            <HighcharMap
+              title={"Phân phối mức lương trung bình công việc theo địa điểm"}
+              subtitle={""}
+              data={averageSalaryData}
+              colorMin={"#dece1b"}
+              colorMax={"#cc0808"}
+              maxValue={30}
+              minValue={5}
+              loading={isLoading}
+              yTitle="Mức lương"
+            />
+          </Col>
+          <Col span={10}>
+          
+          </Col>
+        </Row>
+        {/* </Flex> */}
       </Layout.Content>
     </Layout>
   );

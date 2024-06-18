@@ -1,8 +1,9 @@
 import { Layout, Col, Row, Breadcrumb, theme } from "antd";
 import PieChart from "@/components/Charts/PieChart";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import AnalysisApi from "@/network/analysis";
+import { certificateMap, sexMap, typeMap } from "@/const";
 
 const PieAnalysis = () => {
   const { isLoading, data: dataQuery } = useQuery({
@@ -20,21 +21,21 @@ const PieAnalysis = () => {
 
   const ageData = useMemo(() => {
     return dataQuery?.sex.map((val: any) => ({
-      name: val.value,
+      name: sexMap.get(val.value),
       y: val.percentage,
     }));
   }, [dataQuery]);
 
   const typeData = useMemo(() => {
     return dataQuery?.type.map((val: any) => ({
-      name: val.value,
+      name: typeMap.get(val.value),
       y: val.percentage,
     }));
   }, [dataQuery]);
 
   const certificateData = useMemo(() => {
     return dataQuery?.certificate.map((val: any) => ({
-      name: val.value,
+      name: certificateMap.get(val.value),
       y: val.percentage,
     }));
   }, [dataQuery]);
@@ -83,14 +84,15 @@ const PieAnalysis = () => {
             />
           </Col>
           <Col span={1} />
-          <Col span={10}>
+        </Row>
+        <Row style={{ marginTop: "1em", marginBottom: "1em" }}>
+          <Col span={12} offset={6}>
             <PieChart
               title="Certificate data"
               data={certificateData}
               subtitle="ubtitle of pie chart 2"
             />
           </Col>
-          <Col span={1} />
         </Row>
       </Layout.Content>
     </Layout>
