@@ -85,7 +85,7 @@ export default function JobRecommend({ id }: Props) {
                             data-placement="top"
                             data-original-title="<p style='text-align: left'>Hà Nội: Nam Từ Liêm</p>"
                           >
-                            {job.location[0].province}
+                            {job?.location[0]?.province}
                           </label>
                         </div>
                         {/* <div className="icon">

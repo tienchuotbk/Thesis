@@ -5,6 +5,8 @@ import Routes from "./Router";
 import "./assets/styles/app.css";
 import Footer from "./layouts/Footer";
 import Header from "./layouts/Header";
+import { Provider } from "react-redux";
+// import store from "./redux/store.js";
 
 function App() {
   const queryClient = new QueryClient({
@@ -14,7 +16,10 @@ function App() {
       },
     },
   });
-  const pages = import.meta.glob("./pages/**/!(*.test.[jt]sx)*.([jt]sx)", { eager: true });
+  console.log("hehe")
+  const pages = import.meta.glob("./pages/**/!(*.test.[jt]sx)*.([jt]sx)", {
+    eager: true,
+  });
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>

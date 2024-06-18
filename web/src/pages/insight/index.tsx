@@ -2,7 +2,7 @@ import LineAnalysis from "@/components/Analytic/Line";
 import MapAnalysis from "@/components/Analytic/Map";
 import PieAnalysis from "@/components/Analytic/Pie";
 import TableAnalysis from "@/components/Analytic/Table";
-import AnalysisFilter from "@/components/Charts/Filter";
+import AnalysisFilter from "@/components/Analytic/Filter";
 import { Layout, Breadcrumb } from "antd";
 import { useState } from "react";
 
