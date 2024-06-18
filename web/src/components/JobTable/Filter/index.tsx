@@ -9,7 +9,7 @@ import {
   typeOptions,
 } from "@/const/options";
 import { useDispatch, useSelector } from "react-redux";
-import { clearFilter, defaultFilter, selectFilter, setFilter } from "@/redux/slice/filter.slice";
+import { clearFilter, selectFilter, setFilter } from "@/redux/slice/filter.slice";
 
 const Filter: React.FC = () => {
   const [salaryChecked, setSalaryChecked] = useState(false);

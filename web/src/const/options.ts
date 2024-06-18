@@ -78,8 +78,7 @@ export const expOptions = [
   { value: 2, label: "2 năm" },
   { value: 3, label: "3 năm" },
   { value: 4, label: "4 năm" },
-  { value: 5, label: "5 năm" },
-  { value: 6, label: "Trên 5 năm" },
+  { value: 5, label: "Từ 5 năm" }
 ];
 export const levelOptions = [
   { value: null, label: "Tất cả" },

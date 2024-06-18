@@ -5,7 +5,7 @@ import natural from 'natural'
 const TfIdf = natural.TfIdf
 
 function preprocessJob(job) {
-    return `${job.title} ${job.category.join(' ')} ${job.description.join(" ")} age: ${job.age.min} - ${job.age.max}`.toLowerCase();
+    return `${job.title} ${job.category.join(' ')}`.toLowerCase();
 }
 
 const selectFields = { _id: 1, title: 1, category: 1, age: 1, description: 1 }

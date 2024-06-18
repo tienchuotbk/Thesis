@@ -4,16 +4,21 @@ import { useQuery } from "@tanstack/react-query";
 import AnalysisApi from "@/network/analysis";
 import { useMemo } from "react";
 import { provinceAnalysisMap } from "@/const/province";
+import { useSelector } from "react-redux";
+import { selectFilter } from "@/redux/slice/analysisFilter.slice";
+import { removeNullishAttributes } from "@/helpers/job.helper";
 
 const MapAnalysis = () => {
+  const filter = useSelector(selectFilter);
   const {
     token: { colorBgLayout },
   } = theme.useToken();
 
   const { isLoading, data: dataQuery } = useQuery({
-    queryKey: ["fetchMapData"],
+    queryKey: ["fetchMapData", filter],
     queryFn: async () => {
-      const configParams = {};
+      let configParams = {};
+      configParams = removeNullishAttributes(filter) as any;
       const responseData = await AnalysisApi.getMap({ params: configParams });
       if (responseData?.data?.length) {
         return responseData.data;
@@ -25,19 +30,23 @@ const MapAnalysis = () => {
 
   const countJobData = useMemo(
     () =>
-      dataQuery?.map((val: any) => {
-        let title: string = provinceAnalysisMap.get(val.province) || "";
-        return [title, parseInt(val.count)];
-      }),
+      dataQuery
+        ? dataQuery.map((val: any) => {
+            let title: string = provinceAnalysisMap.get(val.province) || "";
+            return [title, parseInt(val.count)];
+          })
+        : [],
     [dataQuery]
   );
 
   const averageSalaryData = useMemo(
     () =>
-      dataQuery?.map((val: any) => {
-        let title: string = provinceAnalysisMap.get(val.province) || "";
-        return [title, parseFloat(val.average)];
-      }),
+      dataQuery
+        ? dataQuery.map((val: any) => {
+            let title: string = provinceAnalysisMap.get(val.province) || "";
+            return [title, parseFloat(val.average)];
+          })
+        : [],
     [dataQuery]
   );
 
@@ -47,7 +56,7 @@ const MapAnalysis = () => {
       style={{ backgroundColor: colorBgLayout, paddingBottom: "2em" }}
     >
       <Layout.Header style={{ backgroundColor: "white", borderTop: "2px" }}>
-      Các công việc được hiển thị theo bản đồ Việt Nam. 
+        Các công việc được hiển thị theo bản đồ Việt Nam.
       </Layout.Header>
       <Layout.Content>
         {/* <Flex
@@ -55,7 +64,10 @@ const MapAnalysis = () => {
           align="center"
           style={{ marginTop: "1em", marginBottom: "1em" }}
         > */}
-        <Row style={{ marginTop: "1em", marginBottom: "1em" }} justify="space-evenly">
+        <Row
+          style={{ marginTop: "1em", marginBottom: "1em" }}
+          justify="space-evenly"
+        >
           <Col span={11}>
             <HighcharMap
               title={"Thống kê Số lượng công việc theo địa điểm"}
@@ -82,9 +94,7 @@ const MapAnalysis = () => {
               yTitle="Mức lương"
             />
           </Col>
-          <Col span={10}>
-          
-          </Col>
+          <Col span={10}></Col>
         </Row>
         {/* </Flex> */}
       </Layout.Content>

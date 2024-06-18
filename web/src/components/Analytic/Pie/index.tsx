@@ -1,16 +1,21 @@
-import { Layout, Col, Row, Breadcrumb, theme } from "antd";
+import { Layout, Col, Row, Breadcrumb, theme, Spin } from "antd";
 import PieChart from "@/components/Charts/PieChart";
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import AnalysisApi from "@/network/analysis";
 import { certificateMap, sexMap, typeMap } from "@/const";
+import { useSelector } from "react-redux";
+import { selectFilter } from "@/redux/slice/analysisFilter.slice";
+import { removeNullishAttributes } from "@/helpers/job.helper";
 
 const PieAnalysis = () => {
+  const filter = useSelector(selectFilter);
   const { isLoading, data: dataQuery } = useQuery({
-    queryKey: ["fetchPieData"],
+    queryKey: ["fetchPieData", filter],
     queryFn: async () => {
-      const configParams = {};
-      const responseData = await AnalysisApi.getPie({ params: configParams });
+      let configParams = {};
+      configParams = removeNullishAttributes(filter) as any;
+      const responseData = await AnalysisApi.getPie({ params: filter });
       if (responseData?.data) {
         return responseData.data;
       } else {
@@ -66,32 +71,46 @@ const PieAnalysis = () => {
         <Row style={{ marginTop: "1em", marginBottom: "1em" }}>
           <Col span={1} />
           <Col span={10}>
-            <PieChart
-              title="Pie chart 1"
-              data={ageData}
-              subtitle="Subtitle of pie chart 1"
-            />
+            {!isLoading ? (
+              <PieChart
+                title="Pie chart 1"
+                data={ageData}
+                subtitle="Subtitle of pie chart 1"
+              />
+            ) : (
+              <Spin tip="Loading" size="large"></Spin>
+            )}
             <div className="text-center bg-current">
               Description of pie chart 1 with details
             </div>
           </Col>
           <Col span={2} />
           <Col span={10}>
-            <PieChart
-              title="Type data"
-              data={typeData}
-              subtitle="ubtitle of pie chart 2"
-            />
+            {!isLoading ? (
+              <PieChart
+                title="Type data"
+                data={typeData}
+                subtitle="ubtitle of pie chart 2"
+              />
+            ) : (
+              <Spin tip="Loading" size="large"></Spin>
+            )}
           </Col>
           <Col span={1} />
         </Row>
         <Row style={{ marginTop: "1em", marginBottom: "1em" }}>
           <Col span={12} offset={6}>
-            <PieChart
-              title="Certificate data"
-              data={certificateData}
-              subtitle="ubtitle of pie chart 2"
-            />
+            {!isLoading ? (
+              certificateData.length ? (
+                <PieChart
+                  title="Certificate data"
+                  data={certificateData}
+                  subtitle="ubtitle of pie chart 2"
+                />
+              ) : null
+            ) : (
+              <Spin tip="Loading" size="large"></Spin>
+            )}
           </Col>
         </Row>
       </Layout.Content>

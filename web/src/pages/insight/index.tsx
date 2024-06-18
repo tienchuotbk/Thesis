@@ -4,14 +4,13 @@ import PieAnalysis from "@/components/Analytic/Pie";
 import TableAnalysis from "@/components/Analytic/Table";
 import AnalysisFilter from "@/components/Analytic/Filter";
 import { Layout, Breadcrumb } from "antd";
-import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectFilter } from "@/redux/slice/analysisFilter.slice";
 
 export default function Insigh() {
-  const [filter, setFilter] = useState({
-    exp: null,
-    level: null,
-    career: "",
-  });
+  const filter = useSelector(selectFilter)
+
+  console.log(filter)
 
   return (
     <Layout.Content className="container" style={{ minWidth: "100vw" }}>
@@ -32,7 +31,7 @@ export default function Insigh() {
               backgroundColor: "#02054d"
             }}
           /> */}
-          <AnalysisFilter filter={filter} setData={setFilter} />
+          <AnalysisFilter />
         </Layout.Sider>
         <Layout>
           {/* <Layout.Header

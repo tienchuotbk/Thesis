@@ -1,4 +1,10 @@
 import { provinces } from "../../contants/analysis.js";
+import {
+  getMapWhereClause,
+  getPieWhereClause,
+  getTableExpWhereClause,
+  getTableWhereClause,
+} from "../../helper/filter.js";
 import client from "../../models/clickhouse.js";
 const clickHouseRepo = {
   getProprotionAge: async () => {
@@ -20,7 +26,8 @@ const clickHouseRepo = {
     let data = await res.json();
     return data;
   },
-  getLineAge: async () => {
+  getLineAge: async (filter) => {
+    const whereClause = getPieWhereClause(filter);
     let result = [];
     const res = await client.query({
       query: `
@@ -34,6 +41,7 @@ const clickHouseRepo = {
             FROM
                 thesis.jobs
             ARRAY JOIN values_array AS value
+            ${whereClause}
             GROUP BY
                 value
             ORDER BY
@@ -46,9 +54,9 @@ const clickHouseRepo = {
     }
     return result;
   },
-  getLineSalary: async () => {
+  getLineSalary: async (filter) => {
     let result = [];
-
+    const whereClause = getPieWhereClause(filter);
     const res = await client.query({
       query: `
         WITH array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50) AS values_array
@@ -61,6 +69,7 @@ const clickHouseRepo = {
         FROM
           thesis.jobs
         ARRAY JOIN values_array AS value
+        ${whereClause}
         GROUP BY
           value
         ORDER BY
@@ -73,7 +82,9 @@ const clickHouseRepo = {
     }
     return result;
   },
-  getProvincesData: async () => {
+  getProvincesData: async (filter) => {
+    const whereClause = getMapWhereClause(filter);
+    console.log(whereClause);
     const res = await client.query({
       query: `
       WITH 
@@ -101,9 +112,10 @@ const clickHouseRepo = {
               thesis.jobs 
           ARRAY JOIN 
               location AS loc 
-          WHERE 
-              loc.province != ''
+          ${whereClause}
+              
       )
+      
       GROUP BY 
           province
       ORDER BY
@@ -114,7 +126,8 @@ const clickHouseRepo = {
     return data;
   },
 
-  getProportionData: async () => {
+  getProportionData: async (filter) => {
+    const whereClause = getPieWhereClause(filter);
     const res = await client.query({
       query: `
         SELECT
@@ -124,10 +137,13 @@ const clickHouseRepo = {
             COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS percentage
         FROM
             thesis.jobs
+        ${whereClause}
         GROUP BY
             sex
 
-        UNION ALL
+        ${
+          filter.certificate === null
+            ? `UNION ALL
 
         SELECT
             'certificate' AS category,
@@ -136,8 +152,11 @@ const clickHouseRepo = {
             COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS percentage
         FROM
             thesis.jobs
+        ${whereClause}
         GROUP BY
-            certificate
+            certificate`
+            : ``
+        }
 
         UNION ALL
 
@@ -147,7 +166,7 @@ const clickHouseRepo = {
             COUNT(*) AS count,
             COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS percentage
         FROM
-            (SELECT arrayJoin(type) AS type_value FROM thesis.jobs)
+            (SELECT arrayJoin(type) AS type_value FROM thesis.jobs ${whereClause})
         GROUP BY
             type_value
         ORDER BY
@@ -157,12 +176,14 @@ const clickHouseRepo = {
     let data = await res.json();
     return data;
   },
-  getTableRoleData: async () => {
+  getTableRoleData: async (filter) => {
+    const whereClause = getPieWhereClause(filter);
     const res = await client.query({
       query: `
         SELECT 
             role, COUNT(role) as count
         FROM thesis.jobs
+        ${whereClause}
         GROUP BY role
       `,
       format: "JSONEachRow",
@@ -170,7 +191,8 @@ const clickHouseRepo = {
     let data = await res.json();
     return data;
   },
-  getTableExperienceData: async () => {
+  getTableExperienceData: async (filter) => {
+    const whereClause = getTableExpWhereClause(filter);
     const res = await client.query({
       query: `
         SELECT 
@@ -182,14 +204,16 @@ const clickHouseRepo = {
             SUM(CASE WHEN experience.fixed = 4 OR experience.min = 4 THEN 1 ELSE 0 END) AS four_years,
             SUM(CASE WHEN experience.fixed = 5 OR experience.min = 5 THEN 1 ELSE 0 END) AS from_five_years
         FROM 
-            thesis.jobs;
+            thesis.jobs
+        ${whereClause};
       `,
       format: "JSONEachRow",
     });
     let data = await res.json();
     return data;
   },
-  getNumAndSalaryByField: async () => {
+  getNumAndSalaryByField: async (filter) => {
+    const whereClause = getTableWhereClause(filter);
     const res = await client.query({
       query: `
         SELECT
@@ -208,6 +232,7 @@ const clickHouseRepo = {
         (
             SELECT arrayJoin(field) AS field_name, salary
             FROM thesis.jobs
+            ${whereClause}
         )
         GROUP BY field_name;
         `,

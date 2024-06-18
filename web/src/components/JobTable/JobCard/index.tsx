@@ -39,7 +39,7 @@ export default function JobCard({ jobInfo }: IProps) {
   }
 
   return (
-    <Card className="min-h-48" bordered={true}>
+    <Card className="min-h-48 shadow-md" bordered={true}>
       <Flex justify="space-start" gap={"middle"}>
         <Image width={"4.5em"} src={getLogoSrc(jobInfo.logo)} preview={false} />
         <Flex justify="space-start" gap="small" vertical>
