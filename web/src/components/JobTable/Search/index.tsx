@@ -1,29 +1,42 @@
-import { careerOptions, filterInterface } from "@/const/options";
+import { careerOptions } from "@/const/options";
 import provinces from "@/const/province";
+import { selectFilter, setFilter } from "@/redux/slice/filter.slice";
 import { Button, Col, Input, Row, Select } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 interface ChildComponentProps {
-  setFilter: React.Dispatch<React.SetStateAction<any>>;
-  filter: filterInterface;
+  // setFilter: React.Dispatch<React.SetStateAction<any>>;
+  // filter: filterInterface;
   getJobData: Function;
   loading: boolean;
 }
 
 const Search: React.FC<ChildComponentProps> = ({
-  filter,
-  setFilter,
+  // filter,
+  // setFilter,
   getJobData,
   loading,
 }) => {
+  const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
   const handleChangeLocation = (value: string) => {
-    setFilter((preVal: any) => ({ ...preVal, province: value }));
+    // setFilter((preVal: any) => ({ ...preVal, province: value }));
+    dispatch(setFilter({
+      province: value
+    }))
   };
 
   const handleChangeTextInput = (event: any) => {
-    setFilter((preVal: any) => ({ ...preVal, text: event.target.value }));
+    dispatch(setFilter({
+      text: event.target.value
+    }))
+    // setFilter((preVal: any) => ({ ...preVal, text: event.target.value }));
   };
 
   const handleChangeCareer = (value: any) => {
-    setFilter((preData: any) => ({ ...preData, career: value }));
+    dispatch(setFilter({
+      career: value
+    }))
+    // setFilter((preData: any) => ({ ...preData, career: value }));
   };
 
   const src = "location.svg";

@@ -2,23 +2,22 @@ import { Button, Checkbox, Divider, Flex, Select, Slider } from "antd";
 import React, { useCallback, useState } from "react";
 import type { SliderSingleProps } from "antd";
 import {
-  defaultFilter,
   expOptions,
   levelOptions,
   roleOptions,
   sexOptions,
   typeOptions,
 } from "@/const/options";
-interface ChildComponentProps {
-  setData: React.Dispatch<React.SetStateAction<any>>;
-  filter: any;
-}
+import { useDispatch, useSelector } from "react-redux";
+import { clearFilter, defaultFilter, selectFilter, setFilter } from "@/redux/slice/filter.slice";
 
-const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
+const Filter: React.FC = () => {
   const [salaryChecked, setSalaryChecked] = useState(false);
   const [ageChecked, setAgeChecked] = useState(false);
+  const filter = useSelector(selectFilter);
+  const dispatch = useDispatch();
   const handleClearAll = () => {
-    setData(defaultFilter);
+    dispatch(clearFilter())
   };
 
   const marks: SliderSingleProps["marks"] = {
@@ -37,44 +36,29 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
     40: "40",
     50: "Trên 50",
   };
-  const handleChangeType = (value: any) => {
-    setData((preData: any) => ({ ...preData, type: value }));
-  };
 
-  const handleChangeRole = useCallback((value: any) => {
-    setData((preData: any) => ({ ...preData, role: value }));
-  }, []);
-
-  const handleChangeSex = useCallback((value: any) => {
-    setData((preData: any) => ({ ...preData, sex: value }));
-  }, []);
-
-  const handleChangeExp = useCallback((value: any) => {
-    setData((preData: any) => ({ ...preData, exp: value }));
-  }, []);
-
-  const handleChangeAge = useCallback((value: any) => {
-    setData((preData: any) => ({ ...preData, age: value }));
-  }, []);
-
-  const handleChangeSalary = useCallback((value: any) => {
-    setData((preData: any) => ({ ...preData, salary: value }));
-  }, []);
-
-  const handleChangeLevel = useCallback((value: any) => {
-    setData((preData: any) => ({ ...preData, level: value }));
-  }, []);
+  const handleChangeFilter = (value: any, type: any) => {
+    dispatch(setFilter({
+      [type]: value,
+    }))
+  }
 
   const onChangeDisplaySalary = useCallback(() => {
     if (salaryChecked) {
-      setData((preData: any) => ({ ...preData, salary: undefined }));
+      dispatch(setFilter({
+        salary: undefined,
+      }))
+      // setData((preData: any) => ({ ...preData, salary: undefined }));
     }
     setSalaryChecked(!salaryChecked);
   }, [salaryChecked]);
 
   const onChangeDisplayAge = useCallback(() => {
     if (ageChecked) {
-      setData((preData: any) => ({ ...preData, age: undefined }));
+      dispatch(setFilter({
+        age: undefined,
+      }))
+      // setData((preData: any) => ({ ...preData, age: undefined }));
     }
     setAgeChecked(!ageChecked);
   }, [ageChecked]);
@@ -106,7 +90,8 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
         <p>Loại việc làm</p>
         <Select
           style={{ width: "90%" }}
-          onChange={handleChangeType}
+          id="type"
+          onChange={(value) => handleChangeFilter(value, "type")}
           options={typeOptions}
           value={filter.type}
           defaultValue={null}
@@ -117,7 +102,8 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
         <p>Chức vụ</p>
         <Select
           style={{ width: "90%" }}
-          onChange={handleChangeRole}
+          id="role"
+          onChange={(value) => handleChangeFilter(value, "role")}
           options={roleOptions}
           value={filter.role}
           defaultValue={null}
@@ -128,7 +114,8 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
         <p>Giới tính</p>
         <Select
           style={{ width: "90%" }}
-          onChange={handleChangeSex}
+          id="sex"
+          onChange={(value) => handleChangeFilter(value, "sex")}
           options={sexOptions}
           value={filter.sex}
           defaultValue={null}
@@ -139,7 +126,8 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
         <p>Kinh nghiệm</p>
         <Select
           style={{ width: "90%" }}
-          onChange={handleChangeExp}
+          id="exp"
+          onChange={(value) => handleChangeFilter(value, "exp")}
           options={expOptions}
           value={filter.exp}
           defaultValue={null}
@@ -157,7 +145,8 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
             min={16}
             max={60}
             value={filter.age}
-            onChange={handleChangeAge}
+            id="age"
+            onChange={(value) => handleChangeFilter(value, "age")}
           />
         ) : null}
       </Flex>
@@ -166,7 +155,8 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
         <p>Trình độ</p>
         <Select
           style={{ width: "90%" }}
-          onChange={handleChangeLevel}
+          id="level"
+          onChange={(value) => handleChangeFilter(value, "level")}
           options={levelOptions}
           value={filter.level}
           defaultValue={null}
@@ -184,7 +174,8 @@ const Filter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
             min={0}
             max={50}
             value={filter.salary}
-            onChange={handleChangeSalary}
+            id="salary"
+            onChange={(value) => handleChangeFilter(value, "salary")}
           />
         ) : null}
       </Flex>

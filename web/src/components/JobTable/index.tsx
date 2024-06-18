@@ -1,4 +1,3 @@
-import { defaultFilter } from "@/const/options";
 import JobApi from "@/network/job";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -14,10 +13,13 @@ import {
   Spin,
   theme,
 } from "antd";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Filter from "./Filter";
 import JobCard from "./JobCard";
 import Search from "./Search";
+import { useDispatch, useSelector } from "react-redux";
+import { selectPagination, setPagination } from "@/redux/slice/pagination.slice";
+import { selectFilter } from "@/redux/slice/filter.slice";
 
 const typedKeys = <T extends object>(obj: T): (keyof T)[] => {
   return Object.keys(obj) as (keyof T)[];
@@ -28,15 +30,12 @@ export default function JobTable() {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const [pagination, setPagination] = useState({
-    currentPage: 1,
-    totalPage: 1,
-    pageSize: 10,
-    totalCount: 0,
-  });
+  const dispatch = useDispatch();
 
-  const [filter, setFilter] = useState(defaultFilter);
   const [order, setOrder] = useState("lastest");
+
+  const pagination = useSelector(selectPagination);
+  const filter = useSelector(selectFilter);
 
   const { isPending, data: dataQuery } = useQuery({
     queryKey: ["fetchListJob", pagination, filter, order],
@@ -64,38 +63,44 @@ export default function JobTable() {
       };
       const responseData = await JobApi.getAll({ params: configParams });
 
-      if (responseData?.data?.jobs?.length) {
-        setPagination((pagination) => ({
-          ...pagination,
-          currentPage: responseData.data.currentPage,
-          totalPage: responseData.data.totalPage,
-          totalCount: responseData.data.totalCount,
-        }));
-        return responseData.data.jobs;
-      } else {
-        return null;
+      if (responseData.data) {
+        return responseData.data
       }
     },
   });
 
-  const handleChangePage = useCallback((val: number) => {
-    setPagination((pagination) => ({ ...pagination, currentPage: val }));
-  }, []);
+  useEffect(() => {
+    if(dataQuery) {
+      dispatch(setPagination({
+          currentPage: dataQuery.currentPage,
+          totalPage: dataQuery.totalPage,
+          totalCount: dataQuery.totalCount,
+      }))
+    }
+  }, [dataQuery])
+
+  const handleChangePage = useCallback(
+    (val: number) => {
+      dispatch(setPagination({
+        currentPage: val
+      }))
+    },
+    []
+  );
 
   const handleChangeOrder = useCallback((val: string) => {
     setOrder(val);
   }, []);
 
   function handleSearch() {
-    setPagination({ ...pagination, currentPage: 1 });
+    dispatch(setPagination({ currentPage: 1 }));
   }
 
-  const handlePageSizeChange = useCallback(
-    (_page: number, pageSize: number) => {
-      setPagination((pagination) => ({ ...pagination, pageSize: pageSize }));
-    },
-    []
-  );
+  const handlePageSizeChange = useCallback((_page: number, pageSize: number) => {
+    dispatch(setPagination({
+      pageSize: pageSize
+    }))
+  }, [])
 
   return (
     <Layout
@@ -116,7 +121,7 @@ export default function JobTable() {
             backgroundColor: "#02054d"
           }}
         />
-        <Filter filter={filter} setData={setFilter} />
+        <Filter />
       </Layout.Sider>
       <Layout>
         <Layout.Header
@@ -129,8 +134,6 @@ export default function JobTable() {
           }}
         >
           <Search
-            filter={filter}
-            setFilter={setFilter}
             getJobData={handleSearch}
             loading={isPending}
           />
@@ -163,24 +166,24 @@ export default function JobTable() {
               />
             </Flex>
           </Flex>
-          <div
-            style={{
-              padding: 24,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            {isPending ? (
-              <Spin tip="Loading...">
-                <Alert
-                  message="Fetching data"
-                  description="This may takes several second. Calm down!"
-                  type="info"
-                />
-              </Spin>
-            ) : dataQuery?.length ? (
+          {isPending ? (
+            <Spin tip="Loading...">
+              <Alert
+                message="Fetching data"
+                description="This may takes several second. Calm down!"
+                type="info"
+              />
+            </Spin>
+          ) : dataQuery?.jobs.length ? (
+            <div
+              style={{
+                padding: 24,
+                background: colorBgContainer,
+                borderRadius: borderRadiusLG,
+              }}
+            >
               <Row gutter={16}>
-                {dataQuery?.map((job: any) => {
+                {dataQuery?.jobs.map((job: any) => {
                   return (
                     <Col
                       key={job._id}
@@ -195,10 +198,6 @@ export default function JobTable() {
                   );
                 })}
               </Row>
-            ) : (
-              <Empty className="mt-[4rem]" />
-            )}
-            {pagination.totalCount ? (
               <div style={{ justifyContent: "center", display: "flex" }}>
                 <Pagination
                   defaultCurrent={1}
@@ -206,12 +205,13 @@ export default function JobTable() {
                   onChange={handleChangePage}
                   onShowSizeChange={handlePageSizeChange}
                   total={pagination.totalPage * 10}
+                  pageSize={pagination.pageSize}
                 />
               </div>
-            ) : (
-              ""
-            )}
-          </div>
+            </div>
+          ) : (
+            <Empty className="mt-[4rem]" />
+          )}
         </Layout.Content>
       </Layout>
     </Layout>
