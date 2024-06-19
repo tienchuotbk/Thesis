@@ -20,21 +20,21 @@ const PieAnalysis = () => {
   });
 
   const ageData = useMemo(() => {
-    return dataQuery?.sex.map((val: any) => ({
+    return dataQuery?.sex?.map((val: any) => ({
       name: sexMap.get(val.value),
       y: val.percentage,
     }));
   }, [dataQuery]);
 
   const typeData = useMemo(() => {
-    return dataQuery?.type.map((val: any) => ({
+    return dataQuery?.type?.map((val: any) => ({
       name: typeMap.get(val.value),
       y: val.percentage,
     }));
   }, [dataQuery]);
 
   const certificateData = useMemo(() => {
-    return dataQuery?.certificate.map((val: any) => ({
+    return dataQuery?.certificate?.map((val: any) => ({
       name: certificateMap.get(val.value),
       y: val.percentage,
     }));

@@ -1,2 +1,5 @@
 /crawl/output.json
 gateway/.env
+.env
+gateway/**/clickhouse
+gateway/**/mongodbdata
