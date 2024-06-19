@@ -21,7 +21,6 @@ export default async (req, res) => {
             province: province
         }
         const options = { limit, skip: (parseInt(page) - 1) * limit }
-        console.log({ options })
         const project = { title: 1, url: 1, update_time: 1, category: 1, salary: 1 }
         const jobs = await jobRepo.findAll(filter, order, project, options);
         const jobData = {
@@ -33,7 +32,6 @@ export default async (req, res) => {
         res.status(200).json({ message: "OK", data: jobData });
     }
     catch (e) {
-        console.log(e)
         res.status(404).json({ message: "ERROR" + e, data: [] });
     }
 }

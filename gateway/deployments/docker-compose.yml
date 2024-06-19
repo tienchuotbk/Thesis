@@ -1,9 +1,0 @@
-version: '3.8'
-
-services:
-  clickhouse-server:
-    image: clickhouse/clickhouse-server
-    ports:
-      - "262144:262144"
-    volumes:
-      - ./clickhouse:/var/lib/clickhouse/
