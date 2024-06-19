@@ -3,6 +3,7 @@ import provinces from "@/const/province";
 import { selectFilter, setFilter } from "@/redux/slice/filter.slice";
 import { Button, Col, Input, Row, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { debounce } from "@/helpers";
 interface ChildComponentProps {
   // setFilter: React.Dispatch<React.SetStateAction<any>>;
   // filter: filterInterface;

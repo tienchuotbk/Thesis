@@ -153,9 +153,7 @@ export function getPieWhereClause(filter) {
     (experience.type = 4 AND experience.min < ${filter.experiece})
     )`);
   }
-  return result.length
-    ? " WHERE " + result.join(" AND ")
-    : "";
+  return result.length ? " WHERE " + result.join(" AND ") : "";
 }
 
 export function getTableExpWhereClause(filter) {
@@ -166,9 +164,7 @@ export function getTableExpWhereClause(filter) {
   if (filter.field && filter.field.length) {
     result.push(`arrayExists(x -> x = '${filter.field}', field)`);
   }
-  return result.length
-    ? " WHERE " + result.join(" AND ")
-    : "";
+  return result.length ? " WHERE " + result.join(" AND ") : "";
 }
 
 export function getTableWhereClause(filter) {
@@ -184,8 +180,6 @@ export function getTableWhereClause(filter) {
     (experience.type = 4 AND experience.min < ${filter.experiece})
     )`);
   }
-  
-  return result.length
-    ? " WHERE " + result.join(" AND ")
-    : "";
+
+  return result.length ? " WHERE " + result.join(" AND ") : "";
 }

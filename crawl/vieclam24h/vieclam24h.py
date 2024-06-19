@@ -161,10 +161,10 @@ try:
                 if any(data.values()):
                     temp_data.append(data)
             try:
-                with open('vieclam24hnew.json', 'r', encoding='utf-8') as f:
+                with open('vieclam24h.json', 'r', encoding='utf-8') as f:
                     existing_data = json.load(f)
                     existing_data.extend(temp_data)
-                with open('vieclam24hnew.json', 'w', encoding='utf-8') as file:
+                with open('vieclam24h.json', 'w', encoding='utf-8') as file:
                     json.dump(existing_data, file, indent=4, ensure_ascii=False)
                     temp_data = []
             except Exception as e:

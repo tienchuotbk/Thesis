@@ -7,6 +7,7 @@ import Footer from "./layouts/Footer";
 import Header from "./layouts/Header";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import UserProvider from "./layouts/Provider";
 
 function App() {
   const queryClient = new QueryClient({
@@ -16,22 +17,24 @@ function App() {
       },
     },
   });
-  console.log("hehe")
   const pages = import.meta.glob("./pages/**/!(*.test.[jt]sx)*.([jt]sx)", {
     eager: true,
   });
+
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Header />
-          <Layout.Content
-          // className="min-h-[calc(100vh-130px)] bg-[#f5f5f5]"
-          >
-            <Routes pages={pages} />
-          </Layout.Content>
-          <Footer />
-        </BrowserRouter>
+        <UserProvider>
+          <BrowserRouter>
+            <Header />
+            <Layout.Content
+            // className="min-h-[calc(100vh-130px)] bg-[#f5f5f5]"
+            >
+              <Routes pages={pages} />
+            </Layout.Content>
+            <Footer />
+          </BrowserRouter>
+        </UserProvider>
       </QueryClientProvider>
     </Provider>
   );

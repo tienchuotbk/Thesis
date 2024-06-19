@@ -20,6 +20,8 @@ import Search from "./Search";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPagination, setPagination } from "@/redux/slice/pagination.slice";
 import { selectFilter } from "@/redux/slice/filter.slice";
+import { selectUser } from "@/redux/slice/user.slice";
+
 
 const typedKeys = <T extends object>(obj: T): (keyof T)[] => {
   return Object.keys(obj) as (keyof T)[];
@@ -36,9 +38,10 @@ export default function JobTable() {
 
   const pagination = useSelector(selectPagination);
   const filter = useSelector(selectFilter);
+  const uid = useSelector(selectUser)
 
   const { isPending, data: dataQuery } = useQuery({
-    queryKey: ["fetchListJob", pagination, filter, order],
+    queryKey: ["fetchListJob", pagination, filter, order, uid],
     queryFn: async () => {
       let filtered: any = {};
       typedKeys(filter).map((val) => {

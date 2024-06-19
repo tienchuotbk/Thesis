@@ -196,7 +196,7 @@ def getPageContent(id):
 try: 
     count = 0
     final_data = []
-    for i in range(120, 150):
+    for i in range(1, 100):
         body["page"] = i
         print("Page "+ str(i))
         response = requests.post('https://ms.vietnamworks.com/job-search/v1.0/search', json=body)

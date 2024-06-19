@@ -1,0 +1,20 @@
+// useCustomQuery.ts
+import { useQuery, UseQueryOptions, QueryFunction, UseQueryResult } from '@tanstack/react-query';
+
+type CustomQueryKey = [string, ...any[]];
+
+interface CustomQueryOptions<TData, TError>
+  extends Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'> {}
+
+const useCustomQuery = <TData, TError = unknown>(
+  uid: string,
+  queryKey: CustomQueryKey,
+  queryFn: QueryFunction<TData>,
+  options?: CustomQueryOptions<TData, TError>
+): UseQueryResult<TData, TError> => {
+  const fullQueryKey = ['uid', uid, ...queryKey];
+
+  return useQuery<TData, TError>(fullQueryKey, queryFn, options);
+};
+
+export default useCustomQuery;
