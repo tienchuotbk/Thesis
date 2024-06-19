@@ -25,21 +25,21 @@ const PieAnalysis = () => {
   });
 
   const ageData = useMemo(() => {
-    return dataQuery?.sex.map((val: any) => ({
+    return dataQuery?.sex?.map((val: any) => ({
       name: sexMap.get(val.value),
       y: val.percentage,
     }));
   }, [dataQuery]);
 
   const typeData = useMemo(() => {
-    return dataQuery?.type.map((val: any) => ({
+    return dataQuery?.type?.map((val: any) => ({
       name: typeMap.get(val.value),
       y: val.percentage,
     }));
   }, [dataQuery]);
 
   const certificateData = useMemo(() => {
-    return dataQuery?.certificate.map((val: any) => ({
+    return dataQuery?.certificate?.map((val: any) => ({
       name: certificateMap.get(val.value),
       y: val.percentage,
     }));
@@ -72,26 +72,16 @@ const PieAnalysis = () => {
           <Col span={1} />
           <Col span={10}>
             {!isLoading ? (
-              <PieChart
-                title="Pie chart 1"
-                data={ageData}
-                subtitle="Subtitle of pie chart 1"
-              />
+              <PieChart title="Pie chart 1" data={ageData} subtitle="Subtitle of pie chart 1" />
             ) : (
               <Spin tip="Loading" size="large"></Spin>
             )}
-            <div className="text-center bg-current">
-              Description of pie chart 1 with details
-            </div>
+            <div className="text-center bg-current"></div>
           </Col>
           <Col span={2} />
           <Col span={10}>
             {!isLoading ? (
-              <PieChart
-                title="Type data"
-                data={typeData}
-                subtitle="ubtitle of pie chart 2"
-              />
+              <PieChart title="Type data" data={typeData} subtitle="ubtitle of pie chart 2" />
             ) : (
               <Spin tip="Loading" size="large"></Spin>
             )}

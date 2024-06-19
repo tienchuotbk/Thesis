@@ -67,29 +67,30 @@ export default function JobTable() {
       const responseData = await JobApi.getAll({ params: configParams });
 
       if (responseData.data) {
-        return responseData.data
+        return responseData.data;
       }
     },
   });
 
   useEffect(() => {
-    if(dataQuery) {
-      dispatch(setPagination({
+    if (dataQuery) {
+      dispatch(
+        setPagination({
           currentPage: dataQuery.currentPage,
           totalPage: dataQuery.totalPage,
           totalCount: dataQuery.totalCount,
-      }))
+        })
+      );
     }
-  }, [dataQuery])
+  }, [dataQuery]);
 
-  const handleChangePage = useCallback(
-    (val: number) => {
-      dispatch(setPagination({
-        currentPage: val
-      }))
-    },
-    []
-  );
+  const handleChangePage = useCallback((val: number) => {
+    dispatch(
+      setPagination({
+        currentPage: val,
+      })
+    );
+  }, []);
 
   const handleChangeOrder = useCallback((val: string) => {
     setOrder(val);
@@ -100,10 +101,12 @@ export default function JobTable() {
   }
 
   const handlePageSizeChange = useCallback((_page: number, pageSize: number) => {
-    dispatch(setPagination({
-      pageSize: pageSize
-    }))
-  }, [])
+    dispatch(
+      setPagination({
+        pageSize: pageSize,
+      })
+    );
+  }, []);
 
   return (
     <Layout
@@ -111,17 +114,14 @@ export default function JobTable() {
         minHeight: "100vh",
       }}
     >
-      <Layout.Sider
-        width={"15vw"}
-        style={{ background: "white", position: "sticky", zIndex: 100 }}
-      >
+      <Layout.Sider width={"15vw"} style={{ background: "white", position: "sticky", zIndex: 1 }}>
         <Layout.Header
           style={{
             position: "sticky",
             top: 0,
-            zIndex: 100,
+            zIndex: 1,
             width: "100%",
-            backgroundColor: "#02054d"
+            backgroundColor: "#02054d",
           }}
         />
         <Filter />
@@ -131,22 +131,19 @@ export default function JobTable() {
           style={{
             position: "sticky",
             top: 0,
-            zIndex: 100,
+            zIndex: 1,
             width: "100%",
-            backgroundColor: "#02054d"
+            backgroundColor: "#02054d",
           }}
         >
-          <Search
-            getJobData={handleSearch}
-            loading={isPending}
-          />
+          <Search getJobData={handleSearch} loading={isPending} />
         </Layout.Header>
-        <Layout.Content style={{ margin: "0 16px" }}>
+        <Layout.Content className="mx-4">
           <Flex align="flex-start" justify="space-between">
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Tất cả việc làm</Breadcrumb.Item>
               <Breadcrumb.Item>
-                Hiển thị <strong>{dataQuery?.length}</strong>/
+                Hiển thị <strong>{dataQuery?.jobs?.length}</strong>/
                 <strong>{pagination.totalCount}</strong> việc làm
               </Breadcrumb.Item>
             </Breadcrumb>
@@ -170,10 +167,10 @@ export default function JobTable() {
             </Flex>
           </Flex>
           {isPending ? (
-            <Spin tip="Loading...">
+            <Spin tip="Đang tải...">
               <Alert
-                message="Fetching data"
-                description="This may takes several second. Calm down!"
+                message="Đang tải dữ liệu"
+                description="Việc này có thể mất vài giây. Bình tĩnh!"
                 type="info"
               />
             </Spin>
@@ -188,14 +185,7 @@ export default function JobTable() {
               <Row gutter={16}>
                 {dataQuery?.jobs.map((job: any) => {
                   return (
-                    <Col
-                      key={job._id}
-                      xs={24}
-                      sm={12}
-                      md={8}
-                      lg={6}
-                      className="mb-4"
-                    >
+                    <Col key={job._id} xs={24} sm={12} md={8} lg={6} className="mb-4">
                       <JobCard jobInfo={job} />
                     </Col>
                   );

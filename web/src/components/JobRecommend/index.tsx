@@ -29,13 +29,15 @@ export default function JobRecommend({ id }: Props) {
       </Typography.Text>
 
       {isPending && (
-        <Spin tip="Loading...">
-          <Alert
-            message="Fetching data"
-            description="This may takes several second. Calm down!"
-            type="info"
-          />
-        </Spin>
+        <div className="mt-4">
+          <Spin tip="Đang tải...">
+            <Alert
+              message="Đang tải dữ liệu"
+              description="Việc này có thể mất vài giây. Bình tĩnh!"
+              type="info"
+            />
+          </Spin>
+        </div>
       )}
       {!isPending && (
         <div className="mt-4 max-w-[1096px]">

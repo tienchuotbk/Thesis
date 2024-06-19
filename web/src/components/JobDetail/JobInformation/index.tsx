@@ -4,7 +4,8 @@ type Props = {
   job: JobType;
 };
 import salarySvg from "@/assets/svg/salary.svg";
-import { ClockCircleOutlined } from "@ant-design/icons";
+import { ClockCircleOutlined, WarningOutlined } from "@ant-design/icons";
+
 export default function JobInfomation({ job }: Props) {
   return (
     <>
@@ -35,12 +36,24 @@ export default function JobInfomation({ job }: Props) {
           </div>
         </div>
         <div className="flex">
-          <div className="mt-6 bg-[#f2f4f5] text-[#263a4d] flex py-[2px] px-2 rounded">
-            <ClockCircleOutlined />
-            <span className="ml-2">
-              Hạn nộp hồ sơ: {new Date(job.expiration).toLocaleDateString()}
-            </span>
-          </div>
+          {new Date(job.expiration) > new Date() ? (
+            <div className="mt-6 bg-[#f2f4f5] text-[#263a4d] flex py-[2px] px-2 rounded">
+              <ClockCircleOutlined />
+              <span className="ml-2">
+                Hạn nộp hồ sơ:{" "}
+                {new Date(job.expiration).toLocaleDateString("vi-VN", {
+                  timeZone: "Asia/Ho_Chi_Minh",
+                })}
+              </span>
+            </div>
+          ) : (
+            <div className="job-detail__expired mt-6">
+              <WarningOutlined />
+              Hết hạn ứng tuyển:  {new Date(job.expiration).toLocaleDateString("vi-VN", {
+                  timeZone: "Asia/Ho_Chi_Minh",
+                })}
+            </div>
+          )}
         </div>
       </Card>
       <Card className="mt-4">
@@ -51,8 +64,8 @@ export default function JobInfomation({ job }: Props) {
         <div className="font-[500] text-[18px] mt-4">Mô tả công việc</div>
         {job.description.length && (
           <ul className="list-disc ml-8">
-            {job.description.map((description) => {
-              return <li>{description}</li>;
+            {job.description.map((description, index) => {
+              return <li key={index}>{description}</li>;
             })}
           </ul>
         )}
@@ -60,8 +73,8 @@ export default function JobInfomation({ job }: Props) {
         <div className="font-[500] text-[18px] mt-4"> Yêu cầu ứng viên</div>
         {job.requirement.length && (
           <ul className="list-disc ml-8">
-            {job.requirement.map((requirement) => {
-              return <li>{requirement}</li>;
+            {job.requirement.map((requirement, index) => {
+              return <li key={index}>{requirement}</li>;
             })}
           </ul>
         )}
@@ -69,8 +82,8 @@ export default function JobInfomation({ job }: Props) {
         <div className="font-[500] text-[18px] mt-4"> Quyền lợi</div>
         {job.benefit.length && (
           <ul className="list-disc ml-8">
-            {job.benefit.map((benefit) => {
-              return <li>{benefit}</li>;
+            {job.benefit.map((benefit, index) => {
+              return <li key={index}>{benefit}</li>;
             })}
           </ul>
         )}

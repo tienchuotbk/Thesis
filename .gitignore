@@ -1,2 +1,6 @@
 /crawl/output.json
 gateway/.env
+.env
+gateway/**/clickhouse
+gateway/**/mongodbdata
+package-lock.json

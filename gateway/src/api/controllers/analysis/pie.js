@@ -1,3 +1,4 @@
+import _ from "lodash";
 import clickHouseRepo from "../../../models/repository/clickhouse.js";
 
 export default async (req, res) => {
@@ -11,18 +12,23 @@ export default async (req, res) => {
     };
     const data = await clickHouseRepo.getProportionData(filter);
     if (data && data.length) {
-      const typeProportion = data.filter((item) => item.category === "type");
-      const certificateProportion = data.filter(
+      let typeProportion = data.filter((item) => item.category === "type");
+      typeProportion = typeProportion.map(item => ({ ...item, percentage: _.round(item.percentage, 2) }))
+
+      let certificateProportion = data.filter(
         (item) => item.category === "certificate"
       );
-      const sexProportion = data.filter((item) => item.category === "sex");
+      certificateProportion = certificateProportion.map(item => ({ ...item, percentage: _.round(item.percentage, 2) }))
+
+      let sexProportion = data.filter((item) => item.category === "sex");
+      sexProportion = sexProportion.map(item => ({ ...item, percentage: _.round(item.percentage, 2) }))
+
       result.type = typeProportion;
       result.certificate = certificateProportion;
       result.sex = sexProportion;
     }
     res.status(200).json({ message: "OK", data: result });
   } catch (e) {
-    console.log(e);
     res.status(500).json({ message: "ERROR: " + e, data: null });
   }
 };

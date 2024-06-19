@@ -1,11 +1,11 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Layout } from "antd";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import Routes from "./Router";
 import "./assets/styles/app.css";
 import Footer from "./layouts/Footer";
 import Header from "./layouts/Header";
-import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import UserProvider from "./layouts/Provider";
 
