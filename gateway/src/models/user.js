@@ -2,21 +2,38 @@ import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
 
-const userHistorySchema = new Schema({
+const userSchema = new Schema({
   uId: String,
   filters: [
-    {
-      type: Number,
-      role: Number,
-      sex: Number,
-      exp: Number,
-      age: Number,
-      salary: Number,
-      level: Number,
-      career: String,
-      text: String,
-      province: String,
-    },
+    Schema({
+      type: {
+        type: Number
+      },
+      role: {
+        type: Number
+      },
+      sex: {
+        type: Number
+      },
+      exp: {
+        type: Number
+      },
+      salary: {
+        type: Number
+      },
+      level: {
+        type: Number
+      },
+      career: {
+        type: String
+      },
+      province: {
+        type: Number
+      },
+      text: {
+        type: Number
+      },
+    }, { _id: false } ),
   ],
   recentJobs: [
     {
@@ -35,5 +52,5 @@ const userHistorySchema = new Schema({
 });
 
 // jobSchema.index({ title: "text" })
-const userHistory = model("UserHistory", userHistorySchema);
-export default userHistory;
+const Users = model("users", userSchema);
+export default Users;
