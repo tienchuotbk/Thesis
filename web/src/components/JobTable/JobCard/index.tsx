@@ -5,7 +5,6 @@ interface IProps {
   jobInfo: any;
 }
 export default function JobCard({ jobInfo }: IProps) {
-  console.log(jobInfo)
   const navigate = useNavigate();
   function getSalaryText(salary: any) {
     let text: any;
@@ -57,15 +56,9 @@ export default function JobCard({ jobInfo }: IProps) {
         {getSalaryText(jobInfo.salary)}
       </Flex>
       <Divider />
-      <Flex gap={4} wrap align="center">
-        {/* <span>Categories:</span> */}
+      <Flex wrap align="center">
         {jobInfo.category?.map((tag: string) => (
-          <Tag
-            key={tag}
-            // onChange={(checked) => handleChange(tag, checked)}
-          >
-            {tag}
-          </Tag>
+          <Tag key={tag} className="mt-[8px]">{tag}</Tag>
         ))}
       </Flex>
     </Card>

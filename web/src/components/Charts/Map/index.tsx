@@ -1,9 +1,10 @@
-import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
-import HighchartsMap from "highcharts/modules/map";
 import topology from "@/const/topology";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import HighchartsMap from "highcharts/modules/map";
+
 HighchartsMap(Highcharts);
 
 export default function HighcharMap({

@@ -42,9 +42,9 @@ export default function Header() {
       style={{
         position: "sticky",
         top: 0,
-        zIndex: 1,
+        zIndex: 2,
         width: "100%",
-        backgroundColor: "#020433"
+        backgroundColor: "#020433",
       }}
     >
       <div className="container mx-auto">

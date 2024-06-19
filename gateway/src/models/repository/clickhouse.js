@@ -84,7 +84,6 @@ const clickHouseRepo = {
   },
   getProvincesData: async (filter) => {
     const whereClause = getMapWhereClause(filter);
-    console.log(whereClause);
     const res = await client.query({
       query: `
       WITH 
@@ -141,9 +140,8 @@ const clickHouseRepo = {
         GROUP BY
             sex
 
-        ${
-          filter.certificate === null
-            ? `UNION ALL
+        ${filter.certificate === null
+          ? `UNION ALL
 
         SELECT
             'certificate' AS category,
@@ -155,7 +153,7 @@ const clickHouseRepo = {
         ${whereClause}
         GROUP BY
             certificate`
-            : ``
+          : ``
         }
 
         UNION ALL

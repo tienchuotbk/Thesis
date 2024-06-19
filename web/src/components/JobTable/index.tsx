@@ -111,12 +111,12 @@ export default function JobTable() {
         minHeight: "100vh",
       }}
     >
-      <Layout.Sider width={"15vw"} style={{ background: "white", position: "sticky", zIndex: 100 }}>
+      <Layout.Sider width={"15vw"} style={{ background: "white", position: "sticky", zIndex: 1 }}>
         <Layout.Header
           style={{
             position: "sticky",
             top: 0,
-            zIndex: 100,
+            zIndex: 1,
             width: "100%",
             backgroundColor: "#02054d",
           }}
@@ -128,7 +128,7 @@ export default function JobTable() {
           style={{
             position: "sticky",
             top: 0,
-            zIndex: 100,
+            zIndex: 1,
             width: "100%",
             backgroundColor: "#02054d",
           }}
@@ -140,7 +140,7 @@ export default function JobTable() {
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Tất cả việc làm</Breadcrumb.Item>
               <Breadcrumb.Item>
-                Hiển thị <strong>{dataQuery?.length}</strong>/
+                Hiển thị <strong>{dataQuery?.jobs?.length}</strong>/
                 <strong>{pagination.totalCount}</strong> việc làm
               </Breadcrumb.Item>
             </Breadcrumb>
@@ -164,10 +164,10 @@ export default function JobTable() {
             </Flex>
           </Flex>
           {isPending ? (
-            <Spin tip="Loading...">
+            <Spin tip="Đang tải...">
               <Alert
-                message="Fetching data"
-                description="This may takes several second. Calm down!"
+                message="Đang tải dữ liệu"
+                description="Việc này có thể mất vài giây. Bình tĩnh!"
                 type="info"
               />
             </Spin>

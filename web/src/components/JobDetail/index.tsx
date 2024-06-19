@@ -21,7 +21,7 @@ export default function JobDetail() {
       }
     },
   });
-
+  console.log(data)
   return (
     <Layout.Content className="container mx-auto pt-8">
       {isPending && <Skeleton />}
