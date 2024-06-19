@@ -23,7 +23,7 @@ export default function JobInfomation({ job }: Props) {
             <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
             <div className="pl-4">
               <div>Địa điểm</div>
-              <div className="font-bold">{job.location[0].province}</div>
+              <div className="font-bold">{job.location[0]?.province}</div>
             </div>
           </div>
           <div className="flex flex-1">

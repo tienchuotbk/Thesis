@@ -13,14 +13,14 @@ export default async () => {
     await mongoose.connect(dbUri, {})
         .then(async () => {
             logger.info(import.meta.url, "APP", 'MongoDB Connected')
-            try {
-                const jobs = await Job.find().lean()
-                const jsonData = JSON.stringify(jobs, null, 2);
-                const filePath = path.resolve(__dirname, '../../data/jobs.json');
-                fs.writeFileSync(filePath, jsonData);
-            } catch (e) {
-                logger.error(import.meta.url, "APP", "MongoDB Update Data Error: " + e, e.message)
-            }
+            // try {
+            //     const jobs = await Job.find().lean()
+            //     const jsonData = JSON.stringify(jobs, null, 2);
+            //     const filePath = path.resolve(__dirname, '../../data/jobs.json');
+            //     fs.writeFileSync(filePath, jsonData);
+            // } catch (e) {
+            //     logger.error(import.meta.url, "APP", "MongoDB Update Data Error: " + e, e.message)
+            // }
         })
         .catch(e => {
             logger.error(import.meta.url, "APP", "MongoDB Connect Error: ", e.message)

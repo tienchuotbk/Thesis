@@ -1,31 +1,35 @@
 import { Button, Divider, Flex, Select } from "antd";
 import React, { useCallback } from "react";
+import { careerOptions, expOptions, levelOptions } from "@/const/options";
 import {
-  careerOptions,
-  defaultFilter,
-  expOptions,
-  levelOptions,
-} from "@/const/options";
-interface ChildComponentProps {
-  setData: React.Dispatch<React.SetStateAction<any>>;
-  filter: any;
-}
+  clearAnalysisFilter,
+  selectFilter,
+  setAnalysisFilter
+} from "@/redux/slice/analysisFilter.slice";
+import { useSelector, useDispatch } from "react-redux";
+interface ChildComponentProps {}
 
-const AnalysisFilter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
+const AnalysisFilter: React.FC<ChildComponentProps> = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
   const handleClearAll = () => {
-    setData(defaultFilter);
+    dispatch(clearAnalysisFilter());
   };
 
+  const handleApplyFilter = () => {
+    
+  }
+
   const handleChangeCareer = (value: any) => {
-    setData((preData: any) => ({ ...preData, career: value }));
+    dispatch(setAnalysisFilter({ career: value }));
   };
 
   const handleChangeExp = useCallback((value: any) => {
-    setData((preData: any) => ({ ...preData, exp: value }));
+    dispatch(setAnalysisFilter({ exp: value }));
   }, []);
 
   const handleChangeLevel = useCallback((value: any) => {
-    setData((preData: any) => ({ ...preData, level: value }));
+    dispatch(setAnalysisFilter({ level: value }));
   }, []);
 
   return (
@@ -80,7 +84,15 @@ const AnalysisFilter: React.FC<ChildComponentProps> = ({ filter, setData }) => {
           defaultValue={null}
         />
       </Flex>
-      <Button type="default" loading={true} style={{ marginTop: "2em" }} iconPosition="end">Áp dụng bộ lọc</Button>
+      <Button
+        type="default"
+        // loading={true}
+        style={{ marginTop: "2em" }}
+        iconPosition="end"
+        onClick={handleApplyFilter}
+      >
+        Áp dụng bộ lọc
+      </Button>
     </div>
   );
 };

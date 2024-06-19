@@ -21,7 +21,7 @@ export default function CompanyInformation({ job }: Props) {
         <div className="mt-2 flex sm:flex-col md:flex-col lg:flex-col xl:flex-row">
           <div className="text-[#7f878f] min-w-24 font-[400]">Địa điểm: </div>
           <div className="font-[500] text-[#212f3f]">
-            {job.location[0].address}, {job.location[0].district}, {job.location[0].province}
+            {job.location[0]?.address}, {job.location[0]?.district}, {job.location[0]?.province}
           </div>
         </div>
       </div>

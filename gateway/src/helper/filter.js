@@ -30,7 +30,7 @@ export function filterAggregate(filter) {
       $match: { type: { $elemMatch: { $eq: parseInt(filter.type) } } },
     });
   }
-  if(filter.career) {
+  if (filter.career) {
     result.push({
       $match: { field: { $elemMatch: { $eq: filter.career } } },
     });
@@ -83,7 +83,7 @@ export function filterAggregate(filter) {
           "experience.type": 0,
         },
       });
-    } else if (experience === 6) {
+    } else if (experience === 5) {
       result.push({
         $match: {
           $or: [
@@ -115,4 +115,77 @@ export function filterAggregate(filter) {
   }
 
   return result;
+}
+
+export function getMapWhereClause(filter) {
+  let result = [];
+  if (filter.certificate !== null) {
+    result.push(`certificate = ${filter.certificate}`);
+  }
+  if (filter.field && filter.field.length) {
+    result.push(`arrayExists(x -> x = '${filter.field}', field)`);
+  }
+  if (filter.experiece) {
+    result.push(`(
+    (experience.type = 1 AND experience.min < ${filter.experiece} AND experience.max >= ${filter.experiece}) OR
+    (experience.type = 2 AND experience.fixed = ${filter.experiece}) OR
+    (experience.type = 3 AND experience.max > ${filter.experiece}) OR
+    (experience.type = 4 AND experience.min < ${filter.experiece})
+    )`);
+  }
+  return result.length
+    ? " WHERE loc.province != '' AND " + result.join(" AND ")
+    : " WHERE loc.province != ''";
+}
+export function getPieWhereClause(filter) {
+  let result = [];
+  if (filter.certificate !== null) {
+    result.push(`certificate = ${filter.certificate}`);
+  }
+  if (filter.field && filter.field.length) {
+    result.push(`arrayExists(x -> x = '${filter.field}', field)`);
+  }
+  if (filter.experiece) {
+    result.push(`(
+    (experience.type = 1 AND experience.min < ${filter.experiece} AND experience.max >= ${filter.experiece}) OR
+    (experience.type = 2 AND experience.fixed = ${filter.experiece}) OR
+    (experience.type = 3 AND experience.max > ${filter.experiece}) OR
+    (experience.type = 4 AND experience.min < ${filter.experiece})
+    )`);
+  }
+  return result.length
+    ? " WHERE " + result.join(" AND ")
+    : "";
+}
+
+export function getTableExpWhereClause(filter) {
+  let result = [];
+  if (filter.certificate !== null) {
+    result.push(`certificate = ${filter.certificate}`);
+  }
+  if (filter.field && filter.field.length) {
+    result.push(`arrayExists(x -> x = '${filter.field}', field)`);
+  }
+  return result.length
+    ? " WHERE " + result.join(" AND ")
+    : "";
+}
+
+export function getTableWhereClause(filter) {
+  let result = [];
+  if (filter.certificate !== null) {
+    result.push(`certificate = ${filter.certificate}`);
+  }
+  if (filter.experiece) {
+    result.push(`(
+    (experience.type = 1 AND experience.min < ${filter.experiece} AND experience.max >= ${filter.experiece}) OR
+    (experience.type = 2 AND experience.fixed = ${filter.experiece}) OR
+    (experience.type = 3 AND experience.max > ${filter.experiece}) OR
+    (experience.type = 4 AND experience.min < ${filter.experiece})
+    )`);
+  }
+  
+  return result.length
+    ? " WHERE " + result.join(" AND ")
+    : "";
 }

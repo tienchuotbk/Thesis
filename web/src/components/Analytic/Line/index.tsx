@@ -3,16 +3,22 @@ import { useEffect, useMemo, useState } from "react";
 import LineChart from "@/components/Charts/LineChart";
 import { useQuery } from "@tanstack/react-query";
 import AnalysisApi from "@/network/analysis";
+import { useSelector } from "react-redux";
+import { selectFilter } from "@/redux/slice/analysisFilter.slice";
+import { removeNullishAttributes } from "@/helpers/job.helper";
+
 
 const LineAnalysis = () => {
+  const filter = useSelector(selectFilter);
   const {
     token: { colorBgBase },
   } = theme.useToken();
 
   const { isLoading, data: dataQuery } = useQuery({
-    queryKey: ["fetchLineData"],
+    queryKey: ["fetchLineData", filter],
     queryFn: async () => {
-      const configParams = {};
+      let configParams = {};
+      configParams = removeNullishAttributes(filter) as any;
       const responseData = await AnalysisApi.getLine({ params: configParams });
       if (responseData?.data) {
         return responseData.data;

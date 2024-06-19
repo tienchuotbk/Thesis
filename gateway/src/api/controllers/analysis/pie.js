@@ -3,7 +3,13 @@ import clickHouseRepo from "../../../models/repository/clickhouse.js";
 export default async (req, res) => {
   try {
     let result = {};
-    const data = await clickHouseRepo.getProportionData();
+    const { exp, career, level } = req.query
+    const filter = {
+      experiece: exp ? parseInt(exp) : null,
+      certificate: level ? parseInt(level) : null,
+      field: career
+    }
+    const data = await clickHouseRepo.getProportionData(filter);
     if (data && data.length) {
       const typeProportion = data.filter((item) => item.category === "type");
       const certificateProportion = data.filter(

@@ -1,19 +1,24 @@
 import { Layout, Breadcrumb, theme } from "antd";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import TableChart from "@/components/Charts/Table";
 import { useQuery } from "@tanstack/react-query";
 import AnalysisApi from "@/network/analysis";
 import { experienceMap, fieldsMap, rolesMap } from "@/const";
+import { useSelector } from "react-redux";
+import { selectFilter } from "@/redux/slice/analysisFilter.slice";
+import { removeNullishAttributes } from "@/helpers/job.helper";
 
 const TableAnalysis = () => {
+  const filter = useSelector(selectFilter);
   const {
     token: { colorBgBase },
   } = theme.useToken();
 
   const { isLoading, data: dataQuery } = useQuery({
-    queryKey: ["fetchTableData"],
+    queryKey: ["fetchTableData", filter],
     queryFn: async () => {
-      const configParams = {};
+      let configParams = {};
+      configParams = removeNullishAttributes(filter) as any;
       const responseData = await AnalysisApi.getTable({ params: configParams });
       if (responseData?.data) {
         return responseData.data;
@@ -28,7 +33,7 @@ const TableAnalysis = () => {
     let arrValue: number[] = [];
     dataQuery?.field_count_salary?.map((val: any) => {
       arrTitle.push(fieldsMap.get(val.field_name) || "");
-      arrValue.push(parseFloat(val.average_salary.toFixed(2)));
+      arrValue.push(parseFloat(val.average_salary?.toFixed(2)));
     });
     return {
       x_title: arrTitle,
@@ -74,6 +79,8 @@ const TableAnalysis = () => {
       value: arrValue,
     };
   }, [dataQuery]);
+
+  console.log(expCountData);
 
   return (
     <Layout
