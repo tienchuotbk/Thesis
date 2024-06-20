@@ -1,4 +1,6 @@
 import JobApi from "@/network/job";
+import { selectFilter } from "@/redux/slice/filter.slice";
+import { selectPagination, setPagination } from "@/redux/slice/pagination.slice";
 import { useQuery } from "@tanstack/react-query";
 import {
   Alert,
@@ -13,13 +15,12 @@ import {
   Spin,
   theme,
 } from "antd";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CarouselJob from "../CarouselJob";
 import Filter from "./Filter";
 import JobCard from "./JobCard";
 import Search from "./Search";
-import { useDispatch, useSelector } from "react-redux";
-import { selectPagination, setPagination } from "@/redux/slice/pagination.slice";
-import { selectFilter } from "@/redux/slice/filter.slice";
 
 const typedKeys = <T extends object>(obj: T): (keyof T)[] => {
   return Object.keys(obj) as (keyof T)[];
@@ -111,6 +112,7 @@ export default function JobTable() {
         minHeight: "100vh",
       }}
     >
+      <CarouselJob />
       <Layout.Sider width={"15vw"} style={{ background: "white", position: "sticky", zIndex: 1 }}>
         <Layout.Header
           style={{
