@@ -28,7 +28,7 @@ const userSchema = new Schema({
         type: String
       },
       province: {
-        type: Number
+        type: String
       },
       text: {
         type: Number

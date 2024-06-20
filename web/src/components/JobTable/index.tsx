@@ -38,10 +38,10 @@ export default function JobTable() {
 
   const pagination = useSelector(selectPagination);
   const filter = useSelector(selectFilter);
-  const uid = useSelector(selectUser)
+  const uid = useSelector(selectUser);
 
   const { isPending, data: dataQuery } = useQuery({
-    queryKey: ["fetchListJob", pagination, filter, order, uid],
+    queryKey: ["fetchListJob", pagination, filter, order],
     queryFn: async () => {
       let filtered: any = {};
       typedKeys(filter).map((val) => {
@@ -62,6 +62,7 @@ export default function JobTable() {
         page: pagination.currentPage,
         order: order,
         limit: pagination.pageSize,
+        uid: uid,
         ...filtered,
       };
       const responseData = await JobApi.getAll({ params: configParams });
@@ -96,9 +97,9 @@ export default function JobTable() {
     setOrder(val);
   }, []);
 
-  function handleSearch() {
+  const handleSearch = useCallback(()=>{
     dispatch(setPagination({ currentPage: 1 }));
-  }
+  }, []);
 
   const handlePageSizeChange = useCallback((_page: number, pageSize: number) => {
     dispatch(

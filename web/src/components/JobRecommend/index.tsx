@@ -1,26 +1,37 @@
 import { getLogoSrc } from "@/helpers/job.helper";
 import JobApi from "@/network/job";
+import { selectUser } from "@/redux/slice/user.slice";
 import { useQuery } from "@tanstack/react-query";
 import { Alert, Card, Col, Image, Row, Spin, Typography } from "antd";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
   id: string;
 }
 export default function JobRecommend({ id }: Props) {
+  const uid  = useSelector(selectUser);
   const navigate = useNavigate();
-  const { isPending, data } = useQuery({
-    queryKey: ["job-recommend", id],
+  const { isLoading, data } = useQuery({
+    queryKey: ["job-recommend", uid],
     queryFn: async () => {
-      const res = await JobApi.getListRecommendById(id);
-      if (res && res?.payload) {
-        return res.payload;
+      const res = await JobApi.getListRecommendById(uid);
+      if (res && res.payload) {
+        console.log(res.payload)
+        return JSON.parse(res.payload);
       } else {
-        return null;
+        return [];
       }
     },
-    enabled: !!id,
+    // enabled: !!uid.length,
   });
+
+  console.log(isLoading)
+
+  useEffect(()=> {
+    console.log("UId change")
+  }, [uid])
 
   return (
     <Card className="mt-4">
@@ -28,7 +39,7 @@ export default function JobRecommend({ id }: Props) {
         Việc làm liên quan
       </Typography.Text>
 
-      {isPending && (
+      {isLoading && (
         <div className="mt-4">
           <Spin tip="Đang tải...">
             <Alert
@@ -39,7 +50,7 @@ export default function JobRecommend({ id }: Props) {
           </Spin>
         </div>
       )}
-      {!isPending && (
+      {!isLoading && (
         <div className="mt-4 max-w-[1096px]">
           {data &&
             data.map((job: JobType) => {
@@ -69,11 +80,11 @@ export default function JobRecommend({ id }: Props) {
                             <span className="uppercase mt-2">{job.company}</span>
                           </div>
 
-                          <div className="box-right">
+                          {/* <div className="box-right">
                             <label className="text-[#00b14f] font-[600]">
                               {job.salary.min} - {job.salary.max} triệu
                             </label>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
 
