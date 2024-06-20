@@ -3,14 +3,18 @@ from lxml import html
 import time
 import re
 import json
+from datetime import datetime
 
+today = datetime.now().strftime("%d/%m/%Y")
 user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'
-def getSpecificPage(url):
+def getSpecificPage(url, create_time):
     data = {}
     try:
         response = requests.get(url, headers={'User-agent': user_agent }, timeout= 5)
         if response.status_code == 200:
             data["url"] = url
+            data["create_time"] = create_time
+            data["crawl_time"] = today
             tree = html.fromstring(response.content)
             title_element = tree.xpath('//*[@id="header-job-info"]/h1')
             if len(title_element):
@@ -97,7 +101,7 @@ def getSpecificPage(url):
             print(response.status_code)
             print("Not 200")
             time.sleep(5)
-        time.sleep(0.5)
+        time.sleep(1.5)
     except Exception as e:
         print(e)
     finally:
@@ -118,22 +122,37 @@ try:
 
             # Parsing the HTML content
             page_tree = html.fromstring(response.content)
-
-            # Extracting the title element using XPath
-            list_a = page_tree.xpath("//div[@class='body-content']//a[not(@class)]")
-            for a in list_a:
-                job_url = a.get("href")
-                
+            
+            job_url = ''
+            job_create_time = ''
+            
+            list_job = page_tree.xpath("//div[@class='job-list-search-result']/div")
+            for job in list_job:
+                href = job.xpath(".//div[@class='body-content']//a[not(@class)]")
+                if len(href):
+                    job_url = href[0].get("href")
+                create_time_ele = job.xpath(".//div[@class='info']//div[@class='label-content']//label[@class='address mobile-hidden']/text()")
+                if len(create_time_ele):
+                    job_create_time = create_time_ele[0]
                 count += 1
                 print(count)
-                data = getSpecificPage(job_url)
+                data = getSpecificPage(job_url, job_create_time)
                 if any(data.values()):
                     temp_data.append(data)
+                    
+                
+
+            # Extracting the title element using XPath
+            # list_a = page_tree.xpath("//div[@class='body-content']//a[not(@class)]")
+            # for a in list_a:
+            #     job_url = a.get("href")
+                
+                
             try:
-                with open('topcv.json', 'r', encoding='utf-8') as f:
+                with open('topcvnew.json', 'r', encoding='utf-8') as f:
                     existing_data = json.load(f)
                     existing_data.extend(temp_data)
-                with open('topcv.json', 'w', encoding='utf-8') as file:
+                with open('topcvnew.json', 'w', encoding='utf-8') as file:
                     json.dump(existing_data, file, indent=4, ensure_ascii=False)
                     temp_data = []
             except Exception as e:
