@@ -7,24 +7,21 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-interface Props {
-  id: string;
-}
-export default function JobRecommend({ id }: Props) {
+export default function JobRecommend() {
   const uid  = useSelector(selectUser);
   const navigate = useNavigate();
   const { isLoading, data } = useQuery({
-    queryKey: ["job-recommend", uid],
+    queryKey: ["job-recommend"],
     queryFn: async () => {
       const res = await JobApi.getListRecommendById(uid);
       if (res && res.payload) {
-        console.log(res.payload)
+        // console.log(res.payload)
         return JSON.parse(res.payload);
       } else {
         return [];
       }
     },
-    // enabled: !!uid.length,
+    enabled: !!uid.length,
   });
 
   console.log(isLoading)
@@ -39,7 +36,7 @@ export default function JobRecommend({ id }: Props) {
         Việc làm liên quan
       </Typography.Text>
 
-      {isLoading && (
+      {/* {isLoading && (
         <div className="mt-4">
           <Spin tip="Đang tải...">
             <Alert
@@ -49,8 +46,8 @@ export default function JobRecommend({ id }: Props) {
             />
           </Spin>
         </div>
-      )}
-      {!isLoading && (
+      )} */}
+      {/* {!isLoading && ( */}
         <div className="mt-4 max-w-[1096px]">
           {data &&
             data.map((job: JobType) => {
@@ -159,7 +156,7 @@ export default function JobRecommend({ id }: Props) {
               );
             })}
         </div>
-      )}
+      {/* )} */}
     </Card>
   );
 }

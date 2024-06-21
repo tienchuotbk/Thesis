@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from bson import ObjectId
 
 import pandas as pd
@@ -10,6 +10,21 @@ from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
 from flask_pymongo import PyMongo
+
+import findspark
+findspark.init('/opt/spark')  # Adjust the path if Spark is installed elsewhere
+
+from pyspark.sql.functions import col, sum as _sum, when
+
+from pyspark.sql import SparkSession
+mongo_uri = "mongodb://admin:20194856@localhost:27017/thesis.jobs"
+
+spark = SparkSession.builder \
+        .appName("Microvervice") \
+        .config("spark.mongodb.input.uri", mongo_uri) \
+        .config("spark.mongodb.output.uri", mongo_uri) \
+        .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector_2.12:3.0.1') \
+        .getOrCreate()
 
 app.config["MONGO_URI"] = "mongodb://admin:20194856@localhost:27017/thesis"
 
@@ -116,6 +131,37 @@ def getJobId(id):
     except Exception as e:
         print(str(e))
         return jsonify({"error": str(e)}), 500
+
+@app.route('/analytic', methods=['POST'])
+def getAnalyticData():
+    content = request.json
+    # print(content)
+    df = spark.read.format("mongo").load()
+    # df.printSchema()
+    
+    age_range = list(range(16, 61))
+
+    result = df.select(
+    *[_sum(when(\
+    (col('age.type') == 1) & (col('age.min') <= age) & (col('age.max') >= age), 1\
+    # )
+    # .when(\
+    # (col('age.type') == 2) & (col('age.fixed') == age), 1\
+    ).when(\
+    (col('age.type') == 3) & (col('age.max') > age), 1\
+    ).when(\
+    (col('age.type') == 4) & (col('age.min') < age), 1\
+    ).otherwise(0)\
+    ).alias(f'{age}')
+    for age in age_range
+    ]
+    ).collect()
+
+    result_list = [row[f'{age}'] for row in result for age in age_range]
+
+    # json_data = json.dumps(result_list)
+    
+    return jsonify({"data":str(result_list)})
 
 if __name__ == "__main__":
     app.run(debug=True)
