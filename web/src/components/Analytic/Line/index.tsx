@@ -1,12 +1,11 @@
-import { Layout, Breadcrumb, theme } from "antd";
-import { useEffect, useMemo, useState } from "react";
 import LineChart from "@/components/Charts/LineChart";
-import { useQuery } from "@tanstack/react-query";
-import AnalysisApi from "@/network/analysis";
-import { useSelector } from "react-redux";
-import { selectFilter } from "@/redux/slice/analysisFilter.slice";
 import { removeNullishAttributes } from "@/helpers/job.helper";
-
+import AnalysisApi from "@/network/analysis";
+import { selectFilter } from "@/redux/slice/analysisFilter.slice";
+import { useQuery } from "@tanstack/react-query";
+import { Breadcrumb, Layout, theme } from "antd";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
 
 const LineAnalysis = () => {
   const filter = useSelector(selectFilter);
@@ -39,10 +38,7 @@ const LineAnalysis = () => {
   }, [dataQuery]);
 
   return (
-    <Layout
-      title="Table Chart"
-      // style={{ backgroundColor: colorBgLayout, paddingBottom: "2em" }}
-    >
+    <Layout title="Table Chart">
       <Layout.Header
         style={{
           backgroundColor: colorBgBase,
@@ -67,6 +63,7 @@ const LineAnalysis = () => {
           interval={1}
           xTitle={"Độ tuổi"}
         />
+        <div className="mb-2"></div>
         <LineChart
           title="Số lượng công việc phân bổ theo mức lương"
           align="center"

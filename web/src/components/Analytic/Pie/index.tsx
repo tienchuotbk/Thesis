@@ -13,7 +13,7 @@ const PieAnalysis = () => {
   const { isLoading, data: dataQuery } = useQuery({
     queryKey: ["fetchPieData", filter],
     queryFn: async () => {
-      let configParams = {};
+      let configParams: any = {};
       configParams = removeNullishAttributes(filter) as any;
       const responseData = await AnalysisApi.getPie({ params: filter });
       if (responseData?.data) {
@@ -50,58 +50,43 @@ const PieAnalysis = () => {
   } = theme.useToken();
 
   return (
-    <Layout
-      title="Abcsd"
-      // style={{ backgroundColor: colorBgLayout, paddingBottom: "2em" }}
-    >
-      <Layout.Header
-        style={{
-          backgroundColor: colorBgBase,
-          borderTop: "2px",
-          padding: "0.5em",
-        }}
-      >
-        <Breadcrumb>
-          <Breadcrumb.Item>Job Visualization</Breadcrumb.Item>
-          <Breadcrumb.Item>Pie chart</Breadcrumb.Item>
-          <h2>Heaher ne</h2>
-        </Breadcrumb>
+    <Layout title="">
+      <Layout.Header className="bg-[#fff]">
+        <span className="text-base font-bold">Biểu đồ tròn</span>
       </Layout.Header>
       <Layout.Content>
-        <Row style={{ marginTop: "1em", marginBottom: "1em" }}>
-          <Col span={1} />
-          <Col span={10}>
-            {!isLoading ? (
-              <PieChart title="Pie chart 1" data={ageData} subtitle="Subtitle of pie chart 1" />
-            ) : (
+        <Row className="mt-4" gutter={24}>
+          <Col span={12}>
+            {isLoading ? (
               <Spin tip="Loading" size="large"></Spin>
+            ) : (
+              <PieChart title="Phần trăm công việc theo yêu cầu giới tính." data={ageData} subtitle="" />
             )}
             <div className="text-center bg-current"></div>
           </Col>
-          <Col span={2} />
-          <Col span={10}>
-            {!isLoading ? (
-              <PieChart title="Type data" data={typeData} subtitle="ubtitle of pie chart 2" />
-            ) : (
+          <Col span={12}>
+            {isLoading ? (
               <Spin tip="Loading" size="large"></Spin>
+            ) : (
+              <PieChart title="Phần trăm công việc theo yêu cầu thời gian." data={typeData} subtitle="" />
             )}
           </Col>
-          <Col span={1} />
         </Row>
-        <Row style={{ marginTop: "1em", marginBottom: "1em" }}>
+        <Row className="mt-4" gutter={24} justify={"start"}>
           <Col span={12} offset={6}>
             {!isLoading ? (
               certificateData.length ? (
                 <PieChart
-                  title="Certificate data"
+                  title="Phần trăm công việc theo yêu cầu loại chứng chỉ."
                   data={certificateData}
-                  subtitle="ubtitle of pie chart 2"
+                  subtitle=""
                 />
               ) : null
             ) : (
               <Spin tip="Loading" size="large"></Spin>
             )}
           </Col>
+          <Col span={12}></Col>
         </Row>
       </Layout.Content>
     </Layout>

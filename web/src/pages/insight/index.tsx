@@ -1,16 +1,16 @@
+import AnalysisFilter from "@/components/Analytic/Filter";
 import LineAnalysis from "@/components/Analytic/Line";
 import MapAnalysis from "@/components/Analytic/Map";
 import PieAnalysis from "@/components/Analytic/Pie";
 import TableAnalysis from "@/components/Analytic/Table";
-import AnalysisFilter from "@/components/Analytic/Filter";
-import { Layout, Breadcrumb } from "antd";
-import { useSelector } from "react-redux";
 import { selectFilter } from "@/redux/slice/analysisFilter.slice";
+import { Breadcrumb, Divider, Layout, Space } from "antd";
+import { useSelector } from "react-redux";
 
 export default function Insigh() {
-  const filter = useSelector(selectFilter)
+  const filter = useSelector(selectFilter);
 
-  console.log(filter)
+  console.log(filter);
 
   return (
     <Layout.Content className="container" style={{ minWidth: "100vw" }}>
@@ -19,37 +19,21 @@ export default function Insigh() {
           minHeight: "100vh",
         }}
       >
-        <Layout.Sider
-          width={"15vw"}
-          style={{ background: "white", position: "sticky" }}
-        >
-          {/* <Layout.Header
-            style={{
-              top: 0,
-              zIndex: 100,
-              width: "100%",
-              backgroundColor: "#02054d"
-            }}
-          /> */}
+        <Layout.Sider width={"15vw"} style={{ background: "white", position: "sticky" }}>
           <AnalysisFilter />
         </Layout.Sider>
         <Layout>
-          {/* <Layout.Header
-            style={{
-              // top: 0,
-              zIndex: 100,
-              width: "100%",
-              backgroundColor: "#02054d"
-            }}
-          ></Layout.Header> */}
           <Layout.Content style={{ margin: "0 16px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Tất cả việc làm</Breadcrumb.Item>
               <Breadcrumb.Item>Visualization</Breadcrumb.Item>
             </Breadcrumb>
             <MapAnalysis />
+            <Divider />
             <PieAnalysis />
+            <Divider />
             <TableAnalysis />
+            <Divider />
             <LineAnalysis />
           </Layout.Content>
         </Layout>

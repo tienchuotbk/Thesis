@@ -41,8 +41,9 @@ export default function JobTable() {
   const uid = useSelector(selectUser);
 
   const { isPending, data: dataQuery } = useQuery({
-    queryKey: ["fetchListJob", pagination, filter, order],
+    queryKey: ["fetchListJob", pagination.currentPage, pagination.pageSize, filter, order],
     queryFn: async () => {
+      console.log(46);
       let filtered: any = {};
       typedKeys(filter).map((val) => {
         if (val === "text" || val === "career") {
@@ -68,22 +69,18 @@ export default function JobTable() {
       const responseData = await JobApi.getAll({ params: configParams });
 
       if (responseData.data) {
+        const { currentPage, totalPage, totalCount } = responseData.data;
+        dispatch(
+          setPagination({
+            currentPage: currentPage,
+            totalPage: totalPage,
+            totalCount: totalCount,
+          })
+        );
         return responseData.data;
       }
     },
   });
-
-  useEffect(() => {
-    if (dataQuery) {
-      dispatch(
-        setPagination({
-          currentPage: dataQuery.currentPage,
-          totalPage: dataQuery.totalPage,
-          totalCount: dataQuery.totalCount,
-        })
-      );
-    }
-  }, [dataQuery]);
 
   const handleChangePage = useCallback((val: number) => {
     dispatch(
@@ -97,7 +94,7 @@ export default function JobTable() {
     setOrder(val);
   }, []);
 
-  const handleSearch = useCallback(()=>{
+  const handleSearch = useCallback(() => {
     dispatch(setPagination({ currentPage: 1 }));
   }, []);
 

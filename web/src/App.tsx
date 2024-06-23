@@ -27,9 +27,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <Header />
-            <Layout.Content
-            // className="min-h-[calc(100vh-130px)] bg-[#f5f5f5]"
-            >
+            <Layout.Content className="overflow-hidden">
               <Routes pages={pages} />
             </Layout.Content>
             <Footer />

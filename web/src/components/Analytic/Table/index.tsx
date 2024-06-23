@@ -1,4 +1,4 @@
-import { Layout, Breadcrumb, theme } from "antd";
+import { Layout, Breadcrumb, theme, Divider } from "antd";
 import { useMemo } from "react";
 import TableChart from "@/components/Charts/Table";
 import { useQuery } from "@tanstack/react-query";
@@ -80,13 +80,8 @@ const TableAnalysis = () => {
     };
   }, [dataQuery]);
 
-  console.log(expCountData);
-
   return (
-    <Layout
-      title="Table Chart"
-      // style={{ backgroundColor: colorBgLayout, paddingBottom: "2em" }}
-    >
+    <Layout title="Table Chart">
       <Layout.Header
         style={{
           backgroundColor: colorBgBase,
@@ -102,43 +97,46 @@ const TableAnalysis = () => {
       </Layout.Header>
       <Layout.Content>
         <TableChart
-          title="Average salary by field"
+          title="Trung bình lương theo ngành nghề"
           data={salaryByFieldData}
-          subtitle="Hihi"
-          description="Heloo nha"
+          subtitle=""
+          description=""
           align="center"
-          yText="Luong"
-          valueSuffix=" Trieu"
+          yText="Lương"
+          valueSuffix=" Triệu"
           color={"#1af057"}
         />
+        <div className="mb-2"></div>
         <TableChart
-          title="Total jobs by role"
+          title="Số lượng công việc theo vị trí"
           data={roleCountData}
-          subtitle="Hihi"
-          description="Heloo nha"
+          subtitle=""
+          description=""
           align="center"
-          yText="So luong cong viec"
-          valueSuffix=" viec lam"
+          yText="Số lượng công việc"
+          valueSuffix=" việc làm"
           color={"#14e34f"}
         />
+        <div className="mb-2"></div>
         <TableChart
-          title="So luong cong viec theo kinh nghiem"
+          title="Số lượng công việc theo năm kinh nghiệm"
           data={expCountData}
-          subtitle="Hihi"
-          description="Heloo nha"
+          subtitle=""
+          description=""
           align="center"
-          yText="So luong cong viec"
-          valueSuffix=" viec lam"
+          yText="Số lượng công việc"
+          valueSuffix=" việc làm"
           color={"#14e34f"}
         />
+        <div className="mb-2"></div>
         <TableChart
-          title="Total jobs by field"
+          title="Tổng số công việc theo ngành nghề"
           data={fieldCountData}
-          subtitle="Hihi"
-          description="Heloo nha"
+          subtitle=""
+          description=""
           align="center"
-          yText="So luong cong viec"
-          valueSuffix=" viec lam"
+          yText="Số lượng công việc"
+          valueSuffix=" việc làm"
           color={"#14e34f"}
         />
       </Layout.Content>

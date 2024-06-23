@@ -1,12 +1,12 @@
-import { Layout, theme, Row, Col } from "antd";
 import HighcharMap from "@/components/Charts/Map";
-import { useQuery } from "@tanstack/react-query";
-import AnalysisApi from "@/network/analysis";
-import { useMemo } from "react";
 import { provinceAnalysisMap } from "@/const/province";
-import { useSelector } from "react-redux";
-import { selectFilter } from "@/redux/slice/analysisFilter.slice";
 import { removeNullishAttributes } from "@/helpers/job.helper";
+import AnalysisApi from "@/network/analysis";
+import { selectFilter } from "@/redux/slice/analysisFilter.slice";
+import { useQuery } from "@tanstack/react-query";
+import { Col, Layout, Row, theme } from "antd";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
 
 const MapAnalysis = () => {
   const filter = useSelector(selectFilter);
@@ -51,24 +51,16 @@ const MapAnalysis = () => {
   );
 
   return (
-    <Layout
-      title=""
-      style={{ backgroundColor: colorBgLayout, paddingBottom: "2em" }}
-    >
-      <Layout.Header style={{ backgroundColor: "white", borderTop: "2px" }}>
-        Các công việc được hiển thị theo bản đồ Việt Nam.
+    <Layout title="" style={{ backgroundColor: colorBgLayout, paddingBottom: "2em" }}>
+      <Layout.Header className="bg-[#ffffff]">
+        <span className="text-base font-bold">
+          {" "}
+          Các công việc được hiển thị theo bản đồ Việt Nam.
+        </span>
       </Layout.Header>
       <Layout.Content>
-        {/* <Flex
-          justify="space-around"
-          align="center"
-          style={{ marginTop: "1em", marginBottom: "1em" }}
-        > */}
-        <Row
-          style={{ marginTop: "1em", marginBottom: "1em" }}
-          justify="space-evenly"
-        >
-          <Col span={11}>
+        <Row justify="space-evenly" className="my-[1rem]" gutter={24}>
+          <Col span={12}>
             <HighcharMap
               title={"Thống kê Số lượng công việc theo địa điểm"}
               subtitle={""}
@@ -81,7 +73,7 @@ const MapAnalysis = () => {
               yTitle="Số lượng công việc"
             />
           </Col>
-          <Col span={11}>
+          <Col span={12}>
             <HighcharMap
               title={"Phân phối mức lương trung bình công việc theo địa điểm"}
               subtitle={""}
@@ -96,7 +88,6 @@ const MapAnalysis = () => {
           </Col>
           <Col span={10}></Col>
         </Row>
-        {/* </Flex> */}
       </Layout.Content>
     </Layout>
   );
