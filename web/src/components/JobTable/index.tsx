@@ -23,7 +23,6 @@ import Filter from "./Filter";
 import JobCard from "./JobCard";
 import Search from "./Search";
 
-
 const typedKeys = <T extends object>(obj: T): (keyof T)[] => {
   return Object.keys(obj) as (keyof T)[];
 };
@@ -39,7 +38,7 @@ export default function JobTable() {
 
   const pagination = useSelector(selectPagination);
   const filter = useSelector(selectFilter);
-  const uid = useSelector(selectUser)
+  const uid = useSelector(selectUser);
 
   const { isPending, data: dataQuery } = useQuery({
     queryKey: ["fetchListJob", pagination, filter, order, uid],
@@ -126,6 +125,7 @@ export default function JobTable() {
             backgroundColor: "#02054d",
           }}
         />
+
         <Filter />
       </Layout.Sider>
       <Layout>
