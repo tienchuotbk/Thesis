@@ -8,8 +8,8 @@ const JobApi = {
   getById: (id: string) => {
     return axiosClient.get(`/jobs/${id}`);
   },
-  getListRecommendById: (id: string): Promise<{ payload: any }> => {
-    return axiosClient.get(`/jobs/${id}/recommend`);
+  getListRecommendById: (uid: string): Promise<{ payload: any }> => {
+    return axiosClient.get(`/jobs/${uid}/recommend`);
   },
 };
 

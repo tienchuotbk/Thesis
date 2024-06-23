@@ -23,8 +23,8 @@ function App() {
 
   return (
     <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <UserProvider>
+      <UserProvider>
+        <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <Header />
             <Layout.Content
@@ -34,8 +34,8 @@ function App() {
             </Layout.Content>
             <Footer />
           </BrowserRouter>
-        </UserProvider>
-      </QueryClientProvider>
+        </QueryClientProvider>
+      </UserProvider>
     </Provider>
   );
 }
