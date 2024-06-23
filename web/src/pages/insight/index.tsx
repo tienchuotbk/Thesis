@@ -25,8 +25,7 @@ export default function Insigh() {
         <Layout>
           <Layout.Content style={{ margin: "0 16px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>Tất cả việc làm</Breadcrumb.Item>
-              <Breadcrumb.Item>Visualization</Breadcrumb.Item>
+              <Breadcrumb.Item>Biều đồ thống kê</Breadcrumb.Item>
             </Breadcrumb>
             <MapAnalysis />
             <Divider />

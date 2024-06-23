@@ -20,6 +20,9 @@ axiosClient.interceptors.response.use(
     let res = error.response;
     if (res.status == 401) {
     }
+    if (res?.data?.message === "INTERNAL_SERVER_ERROR") {
+      return res.data;
+    }
     console.error(`Looks like there was a problem. Status Code: “ + res.status`);
     return Promise.reject(error);
   }

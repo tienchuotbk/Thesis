@@ -16,9 +16,8 @@ import {
   Spin,
   theme,
 } from "antd";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CarouselJob from "../CarouselJob";
 import Filter from "./Filter";
 import JobCard from "./JobCard";
 import Search from "./Search";
@@ -112,7 +111,6 @@ export default function JobTable() {
         minHeight: "100vh",
       }}
     >
-      <CarouselJob />
       <Layout.Sider width={"15vw"} style={{ background: "white", position: "sticky", zIndex: 1 }}>
         <Layout.Header
           style={{

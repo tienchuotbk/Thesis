@@ -1,5 +1,5 @@
+import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import Highcharts, { color } from "highcharts";
 
 export default function TableChart({
   title,

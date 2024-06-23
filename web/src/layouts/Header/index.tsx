@@ -27,6 +27,10 @@ export default function Header() {
       href: "/",
     },
     {
+      title: "Công ty",
+      href: "/company",
+    },
+    {
       title: "Phân tích",
       href: "/insight",
     },

@@ -1,12 +1,12 @@
-import { Layout, Breadcrumb, theme, Divider } from "antd";
-import { useMemo } from "react";
 import TableChart from "@/components/Charts/Table";
-import { useQuery } from "@tanstack/react-query";
-import AnalysisApi from "@/network/analysis";
 import { experienceMap, fieldsMap, rolesMap } from "@/const";
-import { useSelector } from "react-redux";
-import { selectFilter } from "@/redux/slice/analysisFilter.slice";
 import { removeNullishAttributes } from "@/helpers/job.helper";
+import AnalysisApi from "@/network/analysis";
+import { selectFilter } from "@/redux/slice/analysisFilter.slice";
+import { useQuery } from "@tanstack/react-query";
+import { Breadcrumb, Layout, theme } from "antd";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
 
 const TableAnalysis = () => {
   const filter = useSelector(selectFilter);
@@ -82,20 +82,10 @@ const TableAnalysis = () => {
 
   return (
     <Layout title="Table Chart">
-      <Layout.Header
-        style={{
-          backgroundColor: colorBgBase,
-          borderTop: "2px",
-          padding: "0.5em",
-        }}
-      >
-        <Breadcrumb>
-          <Breadcrumb.Item>Job Visualization</Breadcrumb.Item>
-          <Breadcrumb.Item>table chart</Breadcrumb.Item>
-          <h2>Heaher ne</h2>
-        </Breadcrumb>
+      <Layout.Header className="bg-[#ffffff]">
+        <span className="text-base font-bold">Biểu đồ cột</span>
       </Layout.Header>
-      <Layout.Content>
+      <Layout.Content className="my-[1rem]">
         <TableChart
           title="Trung bình lương theo ngành nghề"
           data={salaryByFieldData}

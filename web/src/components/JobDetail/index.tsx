@@ -21,7 +21,7 @@ export default function JobDetail() {
       }
     },
   });
-  console.log(data)
+
   return (
     <Layout.Content className="container mx-auto pt-8">
       {isPending && <Skeleton />}
@@ -58,7 +58,7 @@ export default function JobDetail() {
       )}
 
       <div className="mt-4"></div>
-      {data && <JobRecommend id={data._id} />}
+      {data && <JobRecommend />}
     </Layout.Content>
   );
 }

@@ -27,8 +27,6 @@ const LineAnalysis = () => {
     },
   });
 
-  console.log(dataQuery);
-
   const ageData = useMemo(() => {
     return dataQuery ? dataQuery.age : [];
   }, [dataQuery]);
@@ -39,20 +37,10 @@ const LineAnalysis = () => {
 
   return (
     <Layout title="Table Chart">
-      <Layout.Header
-        style={{
-          backgroundColor: colorBgBase,
-          borderTop: "2px",
-          padding: "0.5em",
-        }}
-      >
-        <Breadcrumb>
-          <Breadcrumb.Item>Job Visualization</Breadcrumb.Item>
-          <Breadcrumb.Item>Line chart</Breadcrumb.Item>
-          <h2>Heaher ne</h2>
-        </Breadcrumb>
+      <Layout.Header className="bg-[#ffffff]">
+        <span className="text-base font-bold">Biểu đồ đường</span>
       </Layout.Header>
-      <Layout.Content>
+      <Layout.Content className="my-[1rem]">
         <LineChart
           title="Số lượng công việc phân bố theo độ tuổi"
           align="center"

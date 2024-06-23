@@ -54,7 +54,6 @@ const MapAnalysis = () => {
     <Layout title="" style={{ backgroundColor: colorBgLayout, paddingBottom: "2em" }}>
       <Layout.Header className="bg-[#ffffff]">
         <span className="text-base font-bold">
-          {" "}
           Các công việc được hiển thị theo bản đồ Việt Nam.
         </span>
       </Layout.Header>

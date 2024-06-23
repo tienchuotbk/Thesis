@@ -16,10 +16,10 @@ const jobRepo = {
     } else if (order == "title") {
       orderOption = [{ $sort: { title: 1 } }];
     } else {
-      if(filter.text)
+      if (filter.text)
         orderOption = [{ $sort: { ...filter_score } }];
       else {
-        orderOption =[]
+        orderOption = []
       }
     }
 
@@ -141,7 +141,7 @@ const jobRepo = {
         },
       },
     ]);
-  },
+  }
 };
 
 export default jobRepo;
