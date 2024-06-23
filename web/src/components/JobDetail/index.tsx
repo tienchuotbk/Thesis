@@ -5,14 +5,17 @@ import { useParams } from "react-router-dom";
 import CompanyInformation from "./CompanyInformation";
 import JobInfomation from "./JobInformation";
 import JobRecommend from "../JobRecommend";
+import { useSelector } from "react-redux";
+import { selectUser } from "@/redux/slice/user.slice";
 
 export default function JobDetail() {
   const { id = "" } = useParams();
+  const uid = useSelector(selectUser);
 
   const { isPending, data } = useQuery({
     queryKey: ["job-detail", id],
     queryFn: async () => {
-      const jobData = await JobApi.getById(id);
+      const jobData = await JobApi.getById(id, uid);
       if (jobData && jobData.data) {
         return jobData.data;
       }

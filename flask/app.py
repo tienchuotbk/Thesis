@@ -91,7 +91,7 @@ def getJobId(id):
         user_filters = user.get('filters', [])
         if not user_filters:
             return jsonify({"error": "No filters found for the user"}), 404
-        print(user_filters)
+        # print(user_filters)
 
         combined_text = ' '.join([f"{f.get('career', '')} {f.get('text', '')} {f.get('province', '')}" for f in user_filters])
         user_vector_text = tfidf_vectorizer.transform([combined_text]).toarray()
@@ -104,7 +104,6 @@ def getJobId(id):
                 f.get('sex', 0),
                 f.get('level', 0)
             ]
-        print("64")
         # user_numeric_features = scaler.transform(user_numeric_features)
         user_numeric_features = scaler.transform([numeric_values.mean(axis=0)])
         
@@ -114,7 +113,7 @@ def getJobId(id):
         
         # print(cosine_similarities)
         
-        similar_jobs_indices = cosine_similarities.argsort()[-2:][::-1]
+        similar_jobs_indices = cosine_similarities.argsort()[-5:][::-1]
         recommended_jobs = [
             {
                 "_id": str(jobs[i]["_id"]),

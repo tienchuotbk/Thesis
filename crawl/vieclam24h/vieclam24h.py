@@ -35,7 +35,7 @@ def getSpecificPage(url):
                 group_element = title_group_element[0].xpath("//p[@class='']")
                 if(len(group_element) == 2):
                     data["expiration"] = group_element[0].text_content()
-                    data["location"] = group_element[1].text_content()
+                    # data["location"] = group_element[1].text_content()
             else:
                 print("Cannot get expiration and location")
             group_element = tree.xpath("//*[@class='jsx-d84db6a84feb175e px-4 md:px-10 py-4 bg-white shadow-sd-12 rounded-sm']")
