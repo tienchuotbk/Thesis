@@ -16,7 +16,8 @@ export default async (req, res) => {
     message: "INTERNAL_SERVER_ERROR",
   };
   try {
-    const uid = req.params.id;
+    const id = req.params.id;
+    const uid = req.query.uid;
     let resultJobs = [];
 
     const recommend = await axios({
@@ -24,13 +25,13 @@ export default async (req, res) => {
       url: `http://127.0.0.1:5000/recommendation/${uid}`,
     });
     if(recommend.data){
-        resultJobs = res.data
+        resultJobs = recommend.data
     }
 
     result.statusCode = 200;
     result.message = "OK";
     result.payload = resultJobs;
-    res.status(200).json({ message: "OK", data: result });
+    res.status(200).json({ message: "OK", payload: resultJobs });
   } catch (e) {
 
     logger.error(import.meta.url, "APP", e.message);

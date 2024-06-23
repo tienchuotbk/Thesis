@@ -5,11 +5,11 @@ const JobApi = {
   getAll: (config: AxiosRequestConfig) => {
     return axiosClient.get(`/jobs/`, config);
   },
-  getById: (id: string) => {
-    return axiosClient.get(`/jobs/${id}`);
+  getById: (id: string, uid: string) => {
+    return axiosClient.get(`/jobs/${id}?uid=${uid}`);
   },
-  getListRecommendById: (uid: string): Promise<{ payload: any }> => {
-    return axiosClient.get(`/jobs/${uid}/recommend`);
+  getListRecommendById: (id: string, uid: string): Promise<{ payload: any }> => {
+    return axiosClient.get(`/jobs/${id}/recommend?uid=${uid}`);
   },
 };
 

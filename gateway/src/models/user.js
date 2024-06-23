@@ -35,7 +35,7 @@ const userSchema = new Schema({
       },
     }, { _id: false } ),
   ],
-  recentJobs: [
+  recentJobs: Schema([
     {
       jobId: {
         type: Schema.Types.ObjectId,
@@ -48,7 +48,7 @@ const userSchema = new Schema({
         default: Date.now,
       },
     },
-  ],
+  ], {  _id: false }),
 });
 
 // jobSchema.index({ title: "text" })

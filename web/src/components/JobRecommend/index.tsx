@@ -7,16 +7,19 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-export default function JobRecommend() {
+type Props = {
+  id: string;
+};
+
+export default function JobRecommend({ id }: Props) {
   const uid  = useSelector(selectUser);
   const navigate = useNavigate();
   const { isLoading, data } = useQuery({
-    queryKey: ["job-recommend"],
+    queryKey: ["job-recommend", id],
     queryFn: async () => {
-      const res = await JobApi.getListRecommendById(uid);
+      const res = await JobApi.getListRecommendById(id, uid);
       if (res && res.payload) {
-        // console.log(res.payload)
-        return JSON.parse(res.payload);
+        return res.payload;
       } else {
         return [];
       }
@@ -24,7 +27,7 @@ export default function JobRecommend() {
     enabled: !!uid.length,
   });
 
-  console.log(isLoading)
+  console.log(data)
 
   useEffect(()=> {
     console.log("UId change")
@@ -50,7 +53,7 @@ export default function JobRecommend() {
       {/* {!isLoading && ( */}
         <div className="mt-4 max-w-[1096px]">
           {data &&
-            data.map((job: JobType) => {
+            data?.map((job: JobType) => {
               return (
                 <div
                   key={job._id}
@@ -86,7 +89,7 @@ export default function JobRecommend() {
                       </div>
 
                       <div className="flex justify-between mt-8">
-                        <div className="label-content">
+                        {/* <div className="label-content">
                           <label
                             className="address"
                             data-toggle="tooltip"
@@ -97,7 +100,7 @@ export default function JobRecommend() {
                           >
                             {job?.location[0]?.province}
                           </label>
-                        </div>
+                        </div> */}
                         {/* <div className="icon">
                         <button
                           data-job-id="1352601"

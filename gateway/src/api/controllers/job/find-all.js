@@ -53,19 +53,24 @@ export default async (req, res) => {
       currentPage: parseInt(page),
       totalCount: jobs[0].totalData.length ? jobs[0].totalCount[0].total : 0,
     };
-    let newObjt = removeNullAndEmpty(filter)
-    console.log(newObjt)
-    await Users.updateOne(
-      {
-        uId: uid,
-      },
-      {
-        $push: {
-          filters: newObjt,
-        },
-      },
-      { upsert: true }
-    );
+    try {
+      let newObjt = removeNullAndEmpty(filter);
+      if (Object.keys(newObjt).length !== 0) {
+        await Users.updateOne(
+          {
+            uId: uid,
+          },
+          {
+            $push: {
+              filters: newObjt,
+            },
+          },
+          { upsert: true }
+        );
+      }
+    } catch (e) {
+      console.log(e);
+    }
     res.status(200).json({ message: "OK", data: jobData });
   } catch (e) {
     console.log(e);
