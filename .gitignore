@@ -5,3 +5,5 @@ web/.env
 gateway/**/clickhouse
 gateway/**/mongodbdata
 package-lock.json
+crawl/nodejs/node_modules
+crawl/nodejs/package-lock.json
