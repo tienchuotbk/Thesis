@@ -2,8 +2,7 @@ import { getLogoSrc } from "@/helpers/job.helper";
 import JobApi from "@/network/job";
 import { selectUser } from "@/redux/slice/user.slice";
 import { useQuery } from "@tanstack/react-query";
-import { Alert, Card, Col, Image, Row, Spin, Typography } from "antd";
-import { useEffect } from "react";
+import { Card, Col, Image, Row, Typography } from "antd";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +11,7 @@ type Props = {
 };
 
 export default function JobRecommend({ id }: Props) {
-  const uid  = useSelector(selectUser);
+  const uid = useSelector(selectUser);
   const navigate = useNavigate();
   const { isLoading, data } = useQuery({
     queryKey: ["job-recommend", id],
@@ -26,12 +25,6 @@ export default function JobRecommend({ id }: Props) {
     },
     enabled: !!uid.length,
   });
-
-  console.log(data)
-
-  useEffect(()=> {
-    console.log("UId change")
-  }, [uid])
 
   return (
     <Card className="mt-4">
@@ -51,45 +44,45 @@ export default function JobRecommend({ id }: Props) {
         </div>
       )} */}
       {/* {!isLoading && ( */}
-        <div className="mt-4 max-w-[1096px]">
-          {data &&
-            data?.map((job: JobType) => {
-              return (
-                <div
-                  key={job._id}
-                  className="mt-4 rounded border-[1px] border-[#ccc] border-solid overflow-hidden p-4"
-                >
-                  <Row gutter={24}>
-                    <Col span={4}>
-                      <Image
-                        src={getLogoSrc(job.logo)}
-                        preview={false}
-                        className="!h-[100px] !w-[100px] object-contain"
-                      />
-                    </Col>
-                    <Col span={20} className="">
-                      <div className="">
-                        <div className="flex justify-between">
-                          <div>
-                            <h3
-                              className="font-bold text-[18px] cursor-pointer hover:text-[#69b1ff]"
-                              onClick={() => navigate("/job/" + job._id)}
-                            >
-                              {job.title}
-                            </h3>
-                            <span className="uppercase mt-2">{job.company}</span>
-                          </div>
+      <div className="mt-4 max-w-[1096px]">
+        {data &&
+          data?.map((job: JobType) => {
+            return (
+              <div
+                key={job._id}
+                className="mt-4 rounded border-[1px] border-[#ccc] border-solid overflow-hidden p-4"
+              >
+                <Row gutter={24}>
+                  <Col span={4}>
+                    <Image
+                      src={getLogoSrc(job.logo)}
+                      preview={false}
+                      className="!h-[100px] !w-[100px] object-contain"
+                    />
+                  </Col>
+                  <Col span={20} className="">
+                    <div className="">
+                      <div className="flex justify-between">
+                        <div>
+                          <h3
+                            className="font-bold text-[18px] cursor-pointer hover:text-[#69b1ff]"
+                            onClick={() => navigate("/job/" + job._id)}
+                          >
+                            {job.title}
+                          </h3>
+                          <span className="uppercase mt-2">{job.company}</span>
+                        </div>
 
-                          {/* <div className="box-right">
+                        {/* <div className="box-right">
                             <label className="text-[#00b14f] font-[600]">
                               {job.salary.min} - {job.salary.max} triệu
                             </label>
                           </div> */}
-                        </div>
                       </div>
+                    </div>
 
-                      <div className="flex justify-between mt-8">
-                        {/* <div className="label-content">
+                    <div className="flex justify-between mt-8">
+                      {/* <div className="label-content">
                           <label
                             className="address"
                             data-toggle="tooltip"
@@ -101,7 +94,7 @@ export default function JobRecommend({ id }: Props) {
                             {job?.location[0]?.province}
                           </label>
                         </div> */}
-                        {/* <div className="icon">
+                      {/* <div className="icon">
                         <button
                           data-job-id="1352601"
                           data-apply-url=""
@@ -152,13 +145,13 @@ export default function JobRecommend({ id }: Props) {
                           </a>
                         </div>
                       </div> */}
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              );
-            })}
-        </div>
+                    </div>
+                  </Col>
+                </Row>
+              </div>
+            );
+          })}
+      </div>
       {/* )} */}
     </Card>
   );

@@ -1,6 +1,6 @@
 import { createClient } from "@clickhouse/client";
 const clickHouseClient = createClient({
-  host: "http://localhost:8123",
+  url: "http://localhost:8123",
   database: "thesis",
   username: "admin",
   password: '20194856'

@@ -30,6 +30,7 @@ const jobSchema = new Schema({
             address: { type: String }
         }
     ],
+    province: { type: [String] },
     logo: { type: String },
     requirement: [String],
     role: { type: Number },
@@ -42,7 +43,10 @@ const jobSchema = new Schema({
     title: { type: String },
     type: [Number],
     update_time: { type: Date },
-    url: { type: String }
+    url: { type: String },
+
+    // belong to
+    companyId: { type: Schema.Types.ObjectId, ref: 'Company' },
 }, {
     timestamps: true
 })

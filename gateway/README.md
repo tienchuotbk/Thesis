@@ -19,3 +19,14 @@ AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY_HERE
 ```
 
 <br />
+
+## [Run job](#run-job)
+1. 
+```
+npm run job create-company-db
+```
+
+2. 
+```
+npm run job update-number-job-of-company
+```
