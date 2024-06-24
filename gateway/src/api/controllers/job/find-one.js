@@ -9,24 +9,29 @@ export default async (req, res) => {
     const job = await jobRepo.getById(id);
     if (job && job._id) {
       try {
-        let newObj = {
-            jobId: job._id,
-            time: new Date().getDate()
-          }
         await Users.updateOne(
           {
             uId: uid,
           },
           {
             $push: {
-              recentJobs: newObj
+              recentJobs: {
+                $each: [
+                  {
+                    jobId: job._id,
+                    time: Date.now(),
+                  },
+                ],
+                $sort: { time: -1 },
+                $slice: 10,
+              },
             },
           },
           { upsert: true }
         );
       } catch (e) {
-        console.log(e)
-        console.log("Error when push view job: "+ e);
+        console.log(e);
+        console.log("Error when push view job: " + e);
       }
     }
     res.status(200).json({ message: "OK", data: job });

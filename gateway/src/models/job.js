@@ -48,5 +48,5 @@ const jobSchema = new Schema({
 })
 
 jobSchema.index({ title: "text" })
-const Job = model("Jobs", jobSchema)
+const Job = model("jobs", jobSchema)
 export default Job

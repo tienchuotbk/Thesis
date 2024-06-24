@@ -1,6 +1,18 @@
 import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
+const jobSchema = new Schema({
+  jobId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'jobs' 
+  },
+  time: {
+    type: Date,
+    required: true,
+    default: Date.now
+  }
+}, { _id: false });
 
 const userSchema = new Schema({
   uId: String,
@@ -35,20 +47,10 @@ const userSchema = new Schema({
       },
     }, { _id: false } ),
   ],
-  recentJobs: Schema([
-    {
-      jobId: {
-        type: Schema.Types.ObjectId,
-        ref: "Job",
-        required: true,
-      },
-      time: {
-        type: Date,
-        required: true,
-        default: Date.now,
-      },
-    },
-  ], {  _id: false }),
+  recentJobs: {
+    type: [jobSchema],
+    default: []
+  }
 });
 
 // jobSchema.index({ title: "text" })

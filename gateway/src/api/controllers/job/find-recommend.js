@@ -33,7 +33,6 @@ export default async (req, res) => {
     result.payload = resultJobs;
     res.status(200).json({ message: "OK", payload: resultJobs });
   } catch (e) {
-
     logger.error(import.meta.url, "APP", e.message);
     res.status(404).json({ message: "Failed", data: result });
   }
