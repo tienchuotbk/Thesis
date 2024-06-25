@@ -1,88 +1,75 @@
+// LollipopChart.js
+import Highcharts, { Series } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
 
-export default function LollipopChart({
-  title,
-  subtitle,
-  yTitle,
-  data,
-}: {
-  title: string;
-  subtitle: string;
-  yTitle: String;
-  data: any[];
-}) {
+const LollipopChart = () => {
   const options = {
     chart: {
-        type: 'lollipop',
+      type: "lollipop",
+      inverted: true,
+    },
+    accessibility: {
+      point: {
+        valueDescriptionFormat: "{index}. {xDescription}, {point.y}.",
       },
-    
-      accessibility: {
-        point: {
-          valueDescriptionFormat: '{index}. {xDescription}, {point.y}.'
-        }
-      },
-    
-      legend: {
-        enabled: false
-      },
-    
-      subtitle: {
-        text: subtitle
-      },
-    
+    },
+    title: {
+      text: "Lollipop Chart Example",
+    },
+    tooltip: {
+      shared: true,
+    },
+    legend: {
+      enabled: false,
+    },
+    xAxis: {
+      type: "category",
+    },
+
+    yAxis: {
       title: {
-        text: title
+        text: "Population",
       },
-    
-      tooltip: {
-        shared: true
+    },
+    series: [
+      {
+        name: "Lollipops",
+        type: "line",
+        data: [
+          {
+            name: "China",
+            y: 174634632,
+          },
+          {
+            name: "India",
+            y: 167463243,
+          },
+          {
+            name: "CPC",
+            y: 197372263,
+          },
+          {
+            name: "Malaysis",
+            y: 127432553,
+          },
+          {
+            name: "Philip",
+            y: 137837662,
+          },
+        ],
+        // marker: {
+        //   symbol: "circle",
+        //   radius: 6,
+        // },
       },
-    
-      xAxis: {
-        type: 'category'
-      },
-    
-      yAxis: {
-        title: {
-          text: yTitle
-        }
-      },
-    
-      series: [{
-        name: 'Population',
-        data: [{
-          name: 'China',
-          y: 1444216107
-        }, {
-          name: 'India',
-          y: 1393409038
-        }, {
-          name: 'United States',
-          y: 332915073
-        }, {
-          name: 'Indonesia',
-          y: 276361783
-        }, {
-          name: 'Pakistan',
-          y: 225199937
-        }, {
-          name: 'Brazil',
-          y: 213993437
-        }, {
-          name: 'Nigeria',
-          y: 211400708
-        }, {
-          name: 'Bangladesh',
-          y: 166303498
-        }, {
-          name: 'Russia',
-          y: 145912025
-        }, {
-          name: 'Mexico',
-          y: 130262216
-        }]
-      }]
+    ],
   };
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
-}
+
+  return (
+    <div>
+      <HighchartsReact highcharts={Highcharts} options={ options } />
+    </div>
+  );
+};
+
+export default LollipopChart;
