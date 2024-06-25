@@ -1,8 +1,10 @@
+import { provinceMap } from "@/const/province";
 import { getLogoSrc } from "@/helpers/job.helper";
 import JobApi from "@/network/job";
 import { selectUser } from "@/redux/slice/user.slice";
 import { useQuery } from "@tanstack/react-query";
-import { Card, Col, Image, Row, Typography } from "antd";
+import { Card, Col, Image, Row, Tag, Typography } from "antd";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -26,10 +28,16 @@ export default function JobRecommend({ id }: Props) {
     enabled: !!uid.length,
   });
 
+  const getProvinces = (locations: any[]) => {
+    if (!locations) return [];
+    const allProvinces = locations.map((location) => location.province);
+    return [...new Set(allProvinces)];
+  };
+
   return (
     <Card className="mt-4">
       <Typography.Text className="text-[20px] font-[600] border-l-[6px] border-[#00b14f] pl-3">
-        Việc làm liên quan
+        Bạn có thể quan tâm
       </Typography.Text>
 
       {/* {isLoading && (
@@ -70,14 +78,27 @@ export default function JobRecommend({ id }: Props) {
                           >
                             {job.title}
                           </h3>
-                          <span className="uppercase mt-2">{job.company}</span>
+                          <span className="uppercase mt-2">
+                            {job.category?.length
+                              ? job.category.map((val: string) => (
+                                  <Tag>{val}</Tag>
+                                ))
+                              : null}
+                          </span>
+                          <div className="mt-2 pd-2">
+                            <ul>
+                              {getProvinces(job.location).map((val: string) => (
+                                <li>{provinceMap.get(val)}</li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
 
-                        {/* <div className="box-right">
-                            <label className="text-[#00b14f] font-[600]">
-                              {job.salary.min} - {job.salary.max} triệu
-                            </label>
-                          </div> */}
+                        <div className="box-right">
+                          <label className="text-[#00b14f] font-[600]">
+                            {job.company}
+                          </label>
+                        </div>
                       </div>
                     </div>
 

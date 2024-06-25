@@ -7,6 +7,7 @@ import JobInfomation from "./JobInformation";
 import JobRecommend from "../JobRecommend";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/slice/user.slice";
+import { provinceMap } from "@/const/province";
 
 export default function JobDetail() {
   const { id = "" } = useParams();
@@ -50,7 +51,7 @@ export default function JobDetail() {
                 <div className="box-category-tags mt-2">
                   {data?.location?.map((location: LocationType, index: number) => (
                     <div key={index} className="box-category-tag">
-                      {location.province}
+                      <p><b>{ provinceMap.get(location.province)}</b> : {location.address}</p>
                     </div>
                   ))}
                 </div>
@@ -61,7 +62,7 @@ export default function JobDetail() {
       )}
 
       <div className="mt-4"></div>
-      {data && <JobRecommend />}
+      {data && <JobRecommend id={id} />}
     </Layout.Content>
   );
 }

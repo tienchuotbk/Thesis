@@ -10,7 +10,11 @@ export default function JobCard({ jobInfo }: IProps) {
     let text: any;
     switch (salary.type) {
       case 0:
-        text = <p className="text-sky-500 font-semibold text-base">Không có dữ liệu</p>;
+        text = (
+          <p className="text-sky-500 font-semibold text-base">
+            Không có dữ liệu
+          </p>
+        );
         break;
       case 1:
         text = (
@@ -20,16 +24,30 @@ export default function JobCard({ jobInfo }: IProps) {
         );
         break;
       case 2:
-        text = <p className="text-sky-500 font-semibold text-base">{salary.fixed} Triệu</p>;
+        text = (
+          <p className="text-sky-500 font-semibold text-base">
+            {salary.fixed} Triệu
+          </p>
+        );
         break;
       case 3:
-        text = <p className="text-sky-500 font-semibold text-base">Thảo thuận</p>;
+        text = (
+          <p className="text-sky-500 font-semibold text-base">Thảo thuận</p>
+        );
         break;
       case 4:
-        text = <p className="text-sky-500 font-semibold text-base">Lên đến {salary.max} Triệu</p>;
+        text = (
+          <p className="text-sky-500 font-semibold text-base">
+            Lên đến {salary.max} Triệu
+          </p>
+        );
         break;
       case 5:
-        text = <p className="text-sky-500 font-semibold text-base">Trên {salary.min} Triệu</p>;
+        text = (
+          <p className="text-sky-500 font-semibold text-base">
+            Trên {salary.min} Triệu
+          </p>
+        );
         break;
       default:
         text = <p>None</p>;
@@ -53,12 +71,14 @@ export default function JobCard({ jobInfo }: IProps) {
       </Flex>
       <Flex gap="small" align="center" justify="flex-end">
         <p className="text-blue-500">Lương:</p>
-        {getSalaryText(jobInfo.salary)}
+        <p>{getSalaryText(jobInfo.salary)}</p>
       </Flex>
       <Divider />
       <Flex wrap align="center">
         {jobInfo.category?.map((tag: string) => (
-          <Tag key={tag} className="mt-[8px]">{tag}</Tag>
+          <Tag key={tag} className="mt-[8px]">
+            {tag}
+          </Tag>
         ))}
       </Flex>
     </Card>

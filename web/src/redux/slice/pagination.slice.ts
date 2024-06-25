@@ -8,12 +8,10 @@ export interface IPagination {
     totalCount: number,
 }
 
-
-
 export const defaultPagination: IPagination = {
     currentPage: 1,
     totalPage: 1,
-    pageSize: 10,
+    pageSize: 12,
     totalCount: 0,
 }
 export type typeActionPagination = keyof IPagination

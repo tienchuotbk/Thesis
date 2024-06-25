@@ -183,7 +183,7 @@ export default function JobTable() {
               <Row gutter={16}>
                 {dataQuery?.jobs.map((job: any) => {
                   return (
-                    <Col key={job._id} xs={24} sm={12} md={8} lg={6} className="mb-4">
+                    <Col key={job._id} xs={24} sm={12} md={8} lg={6} className="mb-3 flex">
                       <JobCard jobInfo={job} />
                     </Col>
                   );
@@ -197,6 +197,7 @@ export default function JobTable() {
                   onShowSizeChange={handlePageSizeChange}
                   total={pagination.totalPage * 10}
                   pageSize={pagination.pageSize}
+                  pageSizeOptions={[12, 24, 36]}
                 />
               </div>
             </div>

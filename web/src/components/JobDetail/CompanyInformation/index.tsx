@@ -13,7 +13,7 @@ export default function CompanyInformation({ job }: Props) {
         </div>
         <div className="font-[500] text-[20px] pl-4">{job.company}</div>
       </div>
-      <div className="mt-4">
+      {/* <div className="mt-4">
         <div className="mt-2 flex sm:flex-col md:flex-col lg:flex-col xl:flex-row">
           <div className="text-[#7f878f] min-w-24 font-[400]">Quy mô: </div>
           <div className="font-[500] text-[#212f3f]">100 - 499 nhân viên</div>
@@ -24,7 +24,7 @@ export default function CompanyInformation({ job }: Props) {
             {job.location[0]?.address}, {job.location[0]?.district}, {job.location[0]?.province}
           </div>
         </div>
-      </div>
+      </div> */}
     </Card>
   );
 }
