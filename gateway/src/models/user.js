@@ -1,56 +1,67 @@
 import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
-const jobSchema = new Schema({
-  jobId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'jobs' 
+const jobSchema = new Schema(
+  {
+    jobId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "jobs",
+    },
+    time: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
   },
-  time: {
-    type: Date,
-    required: true,
-    default: Date.now
-  }
-}, { _id: false });
+  { _id: false }
+);
 
 const userSchema = new Schema({
   uId: String,
   filters: [
-    Schema({
-      type: {
-        type: Number
+    Schema(
+      {
+        type: {
+          type: Number,
+        },
+        role: {
+          type: Number,
+        },
+        sex: {
+          type: Number,
+        },
+        exp: {
+          type: Number,
+        },
+        salary: {
+          type: Number,
+        },
+        level: {
+          type: Number,
+        },
+        career: {
+          type: String,
+        },
+        province: {
+          type: String,
+        },
+        text: {
+          type: String,
+        },
+        time: {
+          type: Date,
+          required: true,
+          default: Date.now,
+        },
       },
-      role: {
-        type: Number
-      },
-      sex: {
-        type: Number
-      },
-      exp: {
-        type: Number
-      },
-      salary: {
-        type: Number
-      },
-      level: {
-        type: Number
-      },
-      career: {
-        type: String
-      },
-      province: {
-        type: String
-      },
-      text: {
-        type: Number
-      },
-    }, { _id: false } ),
+      { _id: false }
+    ),
   ],
   recentJobs: {
     type: [jobSchema],
-    default: []
-  }
+    default: [],
+  },
 });
 
 // jobSchema.index({ title: "text" })

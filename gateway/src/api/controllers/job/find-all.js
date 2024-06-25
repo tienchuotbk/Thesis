@@ -62,7 +62,13 @@ export default async (req, res) => {
           },
           {
             $push: {
-              filters: newObjt,
+              filters: {
+                $each: [
+                  newObjt
+                ],
+                $sort: { time: -1 },
+                $slice: 10,
+              }
             },
           },
           { upsert: true }

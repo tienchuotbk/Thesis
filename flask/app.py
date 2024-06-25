@@ -19,12 +19,13 @@ from pyspark.sql.functions import col, sum as _sum, when
 from pyspark.sql import SparkSession
 mongo_uri = "mongodb://admin:20194856@localhost:27017/thesis.jobs"
 
-spark = SparkSession.builder \
-        .appName("Microvervice") \
-        .config("spark.mongodb.input.uri", mongo_uri) \
-        .config("spark.mongodb.output.uri", mongo_uri) \
-        .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector_2.12:3.0.1') \
-        .getOrCreate()
+# spark = SparkSession.builder \
+#         .appName("Microvervice") \
+#         .config("spark.mongodb.input.uri", mongo_uri) \
+#         .config("spark.mongodb.output.uri", mongo_uri) \
+#         .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector_2.12:3.0.1') \
+#         .getOrCreate()
+spark = None
 
 app.config["MONGO_URI"] = "mongodb://admin:20194856@localhost:27017/thesis"
 
@@ -59,8 +60,8 @@ def preprocess_job(job):
     }
     return job_data
 
-def get_job_features():
-    jobs = list(jobs_collection.find({}))
+def get_job_features(recent_job_ids):
+    jobs = list(jobs_collection.find({"_id": {"$nin": recent_job_ids}}))
     # job_df = pd.DataFrame(jobs)
     job_data_list = [preprocess_job(job) for job in jobs]
     job_df = pd.DataFrame(job_data_list)
@@ -86,12 +87,15 @@ def getJobId(id):
             return jsonify({"error": "User not found"}), 404
         
         
-        jobs, job_features = get_job_features()
-        
         user_filters = user.get('filters', [])
-        if not user_filters:
-            return jsonify({"error": "No filters found for the user"}), 404
+        user_recents_jobs = user.get('recentJobs', [])
+        recent_job_ids = [job['jobId'] for job in user_recents_jobs]
+        
+        jobs, job_features = get_job_features(recent_job_ids)
+        # if not user_filters:
+        #     return jsonify({"error": "No filters found for the user"}), 404
         # print(user_filters)
+        
 
         combined_text = ' '.join([f"{f.get('career', '')} {f.get('text', '')} {f.get('province', '')}" for f in user_filters])
         user_vector_text = tfidf_vectorizer.transform([combined_text]).toarray()
@@ -121,6 +125,9 @@ def getJobId(id):
                 "url": jobs[i]["url"],
                 "logo": jobs[i]["logo"],
                 "update_time": jobs[i]["update_time"],
+                "category": jobs[i]["category"],
+                "company": jobs[i]["company"],
+                "location": jobs[i]["location"]
             }
             for i in similar_jobs_indices
         ]
