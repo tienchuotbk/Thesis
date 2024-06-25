@@ -52,7 +52,7 @@ const PieAnalysis = () => {
   return (
     <Layout title="">
       <Layout.Header className="bg-[#fff]">
-        <span className="text-base font-bold">Biểu đồ tròn</span>
+        <span className="text-base font-bold">Tỷ lệ việc làm của các yếu tố giới tính,  hình thức làm việc và yêu cầu bằng cấp chứng chỉ</span>
       </Layout.Header>
       <Layout.Content>
         <Row className="mt-4" gutter={24}>
@@ -60,7 +60,7 @@ const PieAnalysis = () => {
             {isLoading ? (
               <Spin tip="Loading" size="large"></Spin>
             ) : (
-              <PieChart title="Phần trăm công việc theo yêu cầu giới tính." data={ageData} subtitle="" />
+              <PieChart title="Tỷ lệ công việc theo giới tính" data={ageData} subtitle="" />
             )}
             <div className="text-center bg-current"></div>
           </Col>
@@ -68,7 +68,7 @@ const PieAnalysis = () => {
             {isLoading ? (
               <Spin tip="Loading" size="large"></Spin>
             ) : (
-              <PieChart title="Phần trăm công việc theo yêu cầu thời gian." data={typeData} subtitle="" />
+              <PieChart title="Tỷ lệ công việc theo loại hình làm việc" data={typeData} subtitle="" />
             )}
           </Col>
         </Row>
@@ -77,7 +77,7 @@ const PieAnalysis = () => {
             {!isLoading ? (
               certificateData.length ? (
                 <PieChart
-                  title="Phần trăm công việc theo yêu cầu loại chứng chỉ."
+                  title="Tỷ lệ công việc theo yêu cầu loại chứng chỉ"
                   data={certificateData}
                   subtitle=""
                 />

@@ -38,7 +38,7 @@ const AnalysisFilter: React.FC<ChildComponentProps> = () => {
       style={{
         position: "sticky",
         top: 1,
-        zIndex: 100,
+        zIndex: 1,
         width: "100%",
         alignItems: "center",
         height: "fit-content",

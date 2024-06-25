@@ -51,10 +51,13 @@ const MapAnalysis = () => {
   );
 
   return (
-    <Layout title="" style={{ backgroundColor: colorBgLayout, paddingBottom: "2em" }}>
+    <Layout
+      title=""
+      style={{ backgroundColor: colorBgLayout, paddingBottom: "2em" }}
+    >
       <Layout.Header className="bg-[#ffffff]">
         <span className="text-base font-bold">
-          Các công việc được hiển thị theo bản đồ Việt Nam.
+          Phân bố việc làm theo vị trí địa lý.
         </span>
       </Layout.Header>
       <Layout.Content>

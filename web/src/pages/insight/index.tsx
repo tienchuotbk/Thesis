@@ -19,7 +19,7 @@ export default function Insigh() {
           minHeight: "100vh",
         }}
       >
-        <Layout.Sider width={"15vw"} style={{ background: "white", position: "sticky" }}>
+        <Layout.Sider width={"15vw"} style={{ background: "white", position: "sticky", zIndex: 1 }}>
           <AnalysisFilter />
         </Layout.Sider>
         <Layout>

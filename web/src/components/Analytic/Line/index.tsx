@@ -38,7 +38,7 @@ const LineAnalysis = () => {
   return (
     <Layout title="Table Chart">
       <Layout.Header className="bg-[#ffffff]">
-        <span className="text-base font-bold">Biểu đồ đường</span>
+        <span className="text-base font-bold">Phân bố số lượng công việc dựa theo độ tuổi và mức lương</span>
       </Layout.Header>
       <Layout.Content className="my-[1rem]">
         <LineChart

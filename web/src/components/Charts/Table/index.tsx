@@ -60,7 +60,7 @@ export default function TableChart({
     // colors: "#ebac1a",
     series: [
       {
-        name: title,
+        name: description,
         data: data.value
       }
     ]
