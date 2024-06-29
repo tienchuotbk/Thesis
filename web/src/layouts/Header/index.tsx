@@ -26,10 +26,10 @@ export default function Header() {
       title: "Trang chủ",
       href: "/",
     },
-    {
-      title: "Công ty",
-      href: "/company",
-    },
+    // {
+    //   title: "Công ty",
+    //   href: "/company",
+    // },
     {
       title: "Phân tích",
       href: "/insight",

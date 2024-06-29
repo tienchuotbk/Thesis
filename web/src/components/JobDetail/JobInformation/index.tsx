@@ -5,6 +5,8 @@ type Props = {
 };
 import salarySvg from "@/assets/svg/salary.svg";
 import { ClockCircleOutlined, WarningOutlined } from "@ant-design/icons";
+import { getExpString, getSalaryText } from "@/helpers/job.helper";
+import { levelOptions } from "@/const/options";
 
 export default function JobInfomation({ job }: Props) {
   return (
@@ -16,7 +18,7 @@ export default function JobInfomation({ job }: Props) {
             <div className="pl-4">
               <div>Mức lương</div>
               <div className="font-bold">
-                {job.salary.min} - {job.salary.max} triệu
+                {getSalaryText(job.salary)}
               </div>
             </div>
           </div>
@@ -24,14 +26,21 @@ export default function JobInfomation({ job }: Props) {
             <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
             <div className="pl-4">
               <div>Địa điểm</div>
-              <div className="font-bold">{job.location[0]?.province}</div>
+              <div className="font-bold">{job.location?.map((val)=> val.province).join(',')}</div>
             </div>
           </div>
           <div className="flex flex-1">
             <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
             <div className="pl-4">
               <div>Kinh nghiệm</div>
-              <div className="font-bold">{job.experience.max} năm</div>
+              <div className="font-bold">{getExpString(job.experience)}</div>
+            </div>
+          </div>
+          <div className="flex flex-1">
+            <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
+            <div className="pl-4">
+              <div>Yêu cầu trình độ</div>
+              <div className="font-bold">{levelOptions.find((val)=> val.value === parseInt(job.certificate ? job.certificate : '0'))?.label}</div>
             </div>
           </div>
         </div>

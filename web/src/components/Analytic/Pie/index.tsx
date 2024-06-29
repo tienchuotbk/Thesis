@@ -15,7 +15,7 @@ const PieAnalysis = () => {
     queryFn: async () => {
       let configParams: any = {};
       configParams = removeNullishAttributes(filter) as any;
-      const responseData = await AnalysisApi.getPie({ params: filter });
+      const responseData = await AnalysisApi.getPie({ params: configParams });
       if (responseData?.data) {
         return responseData.data;
       } else {
@@ -75,7 +75,7 @@ const PieAnalysis = () => {
         <Row className="mt-4" gutter={24} justify={"start"}>
           <Col span={12} offset={6}>
             {!isLoading ? (
-              certificateData.length ? (
+              certificateData?.length ? (
                 <PieChart
                   title="Tỷ lệ công việc theo yêu cầu loại chứng chỉ"
                   data={certificateData}

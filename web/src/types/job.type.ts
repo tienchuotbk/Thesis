@@ -21,7 +21,7 @@ type JobType = {
   };
   benefit: string[];
   category: string[];
-  certificate: string;
+  certificate: string | null;
   company: string;
   description: string[];
   expiration: string;
