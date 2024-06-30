@@ -62,6 +62,26 @@ def get_job_features(recent_job_ids):
     job_features = np.hstack((tfidf_matrix.toarray(), job_df[numeric_features].values))
     
     return jobs, job_features
+def evaluate_recommendations(recommended_jobs, user_viewed_jobs):
+    true_positives = 0
+    false_positives = 0
+    false_negatives = 0
+    
+    for recommended, viewed in zip(recommended_jobs, user_viewed_jobs):
+        recommended_set = set(recommended)
+        viewed_set = set(viewed)
+        
+        true_positives += len(recommended_set & viewed_set)
+        false_positives += len(recommended_set - viewed_set)
+        false_negatives += len(viewed_set - recommended_set)
+    
+    precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0
+    recall = true_positives / (true_positives + false_negatives) if (true_positives + false_negatives) > 0 else 0
+    
+    return {
+        "precision": precision,
+        "recall": recall
+    }
 
 @app.route('/recommendation/<id>', methods=['GET'])
 def getJobId(id):
@@ -116,6 +136,16 @@ def getJobId(id):
             }
             for i in similar_jobs_indices
         ]
+        
+        user_viewed_jobs = [str(job['jobId']) for job in user_recents_jobs]
+
+        # Tạo danh sách ID của công việc được gợi ý
+        recommended_job_ids = [job['_id'] for job in recommended_jobs]
+
+        # Đánh giá Precision và Recall
+        evaluation_result = evaluate_recommendations([recommended_job_ids], [user_viewed_jobs])
+        
+        print(evaluation_result)
         
         # print(recommended_jobs)
         return jsonify(recommended_jobs)
