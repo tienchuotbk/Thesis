@@ -53,31 +53,31 @@ ORDER BY _id;`;
 
 export default async () => {
   try {
-    // await client.command({
-    //   query: createString,
-    //   clickhouse_settings: {
-    //     wait_end_of_query: 1,
-    //   },
-    // });
-    // const filePath = path.resolve(__dirname, "../../data/jobs.json");
-    // let rawdata = fs.readFileSync(filePath, "utf8");
-    // let parseData = JSON.parse(rawdata);
+    await client.command({
+      query: createString,
+      clickhouse_settings: {
+        wait_end_of_query: 1,
+      },
+    });
+    const filePath = path.resolve(__dirname, "../../data/jobs.json");
+    let rawdata = fs.readFileSync(filePath, "utf8");
+    let parseData = JSON.parse(rawdata);
 
-    // if (parseData.length) {
-    //   await client.command({
-    //     query: "TRUNCATE TABLE thesis.jobs",
-    //   });
-    // }
-    // try {
-    //   await client.insert({
-    //     table: "jobs",
-    //     values: parseData,
-    //     format: "JSON",
-    //   });
-    //   console.log("Insert " + parseData.length + " jobs sucess");
-    // } catch (e) {
-    //   console.log("Error when insert data to clickhouse", e);
-    // }
+    if (parseData.length) {
+      await client.command({
+        query: "TRUNCATE TABLE thesis.jobs",
+      });
+    }
+    try {
+      await client.insert({
+        table: "jobs",
+        values: parseData,
+        format: "JSON",
+      });
+      console.log("Insert " + parseData.length + " jobs sucess");
+    } catch (e) {
+      console.log("Error when insert data to clickhouse", e);
+    }
 
     // const example = await client.query({
     //     query: `SELECT * from thesis.jobs WHERE _id = '666b0a9fabdeafc3478125cf'`,
