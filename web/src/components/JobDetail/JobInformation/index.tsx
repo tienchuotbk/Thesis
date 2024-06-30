@@ -7,6 +7,7 @@ import salarySvg from "@/assets/svg/salary.svg";
 import { ClockCircleOutlined, WarningOutlined } from "@ant-design/icons";
 import { getExpString, getSalaryText } from "@/helpers/job.helper";
 import { levelOptions } from "@/const/options";
+import { provinceMap } from "@/const/province";
 
 export default function JobInfomation({ job }: Props) {
   return (
@@ -26,7 +27,7 @@ export default function JobInfomation({ job }: Props) {
             <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
             <div className="pl-4">
               <div>Địa điểm</div>
-              <div className="font-bold">{job.location?.map((val)=> val.province).join(',')}</div>
+              <div className="font-bold">{job.location?.map((val)=> provinceMap.get(val.province)).join(',')}</div>
             </div>
           </div>
           <div className="flex flex-1">
