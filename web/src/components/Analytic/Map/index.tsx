@@ -67,9 +67,9 @@ const MapAnalysis = () => {
               title={"Thống kê Số lượng công việc theo địa điểm"}
               subtitle={""}
               data={countJobData}
-              colorMin={"#21ed4d"}
-              colorMax={"#0a4012"}
-              maxValue={100}
+              colorMin={"#dece1b"}
+              colorMax={"#cc0808"}
+              maxValue={150}
               minValue={0}
               loading={isLoading}
               yTitle="Số lượng công việc"
@@ -80,8 +80,8 @@ const MapAnalysis = () => {
               title={"Phân phối mức lương trung bình công việc theo địa điểm"}
               subtitle={""}
               data={averageSalaryData}
-              colorMin={"#dece1b"}
-              colorMax={"#cc0808"}
+              colorMin={"#21ed4d"}
+              colorMax={"#0a4012"}
               maxValue={30}
               minValue={5}
               loading={isLoading}

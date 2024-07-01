@@ -63,5 +63,6 @@ export const fieldsMap = new Map([
   ["xb", "Xuất bản - In ấn"],
   ["pt_tk", "Phân tích - Thống kê"],
   ["tp", "Thực phẩm"],
-  ["bds", "Bất động sản"]
+  ["bds", "Bất động sản"],
+  ["other", "Khác"]
 ]);

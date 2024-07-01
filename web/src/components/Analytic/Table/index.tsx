@@ -14,6 +14,36 @@ const TableAnalysis = () => {
     token: { colorBgBase },
   } = theme.useToken();
 
+  const colors = [
+    "#FF7F0E", 
+    "#1F77B4",
+    "#2CA02C", 
+    "#D62728",
+    "#9467BD", 
+    "#8C564B",
+    "#E377C2",
+    "#7F7F7F",
+    "#BCBD22", 
+    "#17BECF",
+    "#AEC7E8", 
+    "#FFBB78" 
+  ];
+
+  const colors2 = [
+    "#FF5733",  
+    "#33FF57",
+    "#3357FF", 
+    "#FF33A6", 
+    "#33FFF3", 
+    "#FFA533", 
+    "#8033FF", 
+    "#FF3333", 
+    "#33FF33", 
+    "#3333FF", 
+    "#FF5733",
+    "#FFFF33"
+  ]
+
   const { isLoading, data: dataQuery } = useQuery({
     queryKey: ["fetchTableData", filter],
     queryFn: async () => {
@@ -41,24 +71,27 @@ const TableAnalysis = () => {
     };
   }, [dataQuery]);
 
-  function splitArray(arr: { x_title: string[], value: number[] }) {
+  function splitArray(arr: { x_title: string[]; value: number[] }) {
     // Tính toán điểm chia
     const mid = Math.ceil(arr.x_title.length / 2);
-  
+
     // Chia array thành hai subarray
     const firstHalf = {
-      x_title: arr.x_title.slice(0, mid), 
-      value:  arr.value.slice(0, mid)
-    }
+      x_title: arr.x_title.slice(0, mid),
+      value: arr.value.slice(0, mid).map((val, index)=> ({ y: val, color: colors[index % colors.length] })),
+    };
     const secondHalf = {
-      x_title: arr.x_title.slice(mid), 
-      value:  arr.value.slice(mid)
-    }
-  
-    return [firstHalf, secondHalf];
-  } 
+      x_title: arr.x_title.slice(mid),
+      value: arr.value.slice(mid).map((val, index)=> ({ y: val, color: colors2[index % colors2.length] })),
+    };
 
-  const [salaryByFieldData1, salaryByFieldData2] = useMemo(()=> splitArray(salaryByFieldData) , [salaryByFieldData])
+    return [firstHalf, secondHalf];
+  }
+
+  const [salaryByFieldData1, salaryByFieldData2] = useMemo(
+    () => splitArray(salaryByFieldData),
+    [salaryByFieldData]
+  );
 
   const roleCountData = useMemo(() => {
     let arrTitle: string[] = [];
@@ -82,7 +115,7 @@ const TableAnalysis = () => {
     });
     return {
       x_title: arrTitle,
-      value: arrValue,
+      value: arrValue.map((val)=> ({ y: val, color: '#03a835' })),
     };
   }, [dataQuery]);
 
@@ -99,12 +132,18 @@ const TableAnalysis = () => {
     };
   }, [dataQuery]);
 
-  const [fieldCountData1, fieldCountData2] = useMemo(()=> splitArray(fieldCountData) , [fieldCountData])
+  const [fieldCountData1, fieldCountData2] = useMemo(
+    () => splitArray(fieldCountData),
+    [fieldCountData]
+  );
 
   return (
     <Layout title="Table Chart">
       <Layout.Header className="bg-[#ffffff]">
-        <span className="text-base font-bold">Thống kê các mức lương và phân bố công việc theo từng ngành nghề, kinh nghiệm và vị trí</span>
+        <span className="text-base font-bold">
+          Thống kê các mức lương và phân bố công việc theo từng ngành nghề, kinh
+          nghiệm và vị trí
+        </span>
       </Layout.Header>
       <Layout.Content className="my-[1rem]">
         <TableChart

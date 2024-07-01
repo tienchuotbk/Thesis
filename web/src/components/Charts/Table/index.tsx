@@ -8,15 +8,14 @@ export default function TableChart({
   data,
   description,
   yText,
-  valueSuffix,
-  color
+  valueSuffix
 }: {
   title: string;
   subtitle: string;
   align: string;
   data: {
     x_title: string[],
-    value: number[]
+    value: number[] | { y: number, color: string }[]
   };
   yText: string;
   description: string,
@@ -57,7 +56,6 @@ export default function TableChart({
         borderWidth: 0
       }
     },
-    // colors: "#ebac1a",
     series: [
       {
         name: description,
