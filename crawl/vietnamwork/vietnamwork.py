@@ -1,7 +1,5 @@
 import requests
-from lxml import html
 import json
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -18,13 +16,19 @@ options.add_experimental_option(
         "profile.managed_default_content_settings.images": 2,
     }
 )
+options.add_argument("--headless")
 driver = webdriver.Chrome(service=service, options=options)
 body = {
     "userId": 0,
     "query": "",
     "filter": [],
     "ranges": [],
-    "order": [],
+    "order": [
+        {
+            "field": "approvedOn",
+            "value": "desc"
+        }
+    ],
     "hitsPerPage": 50,
     "page": 0,
     "retrieveFields": [
@@ -69,30 +73,14 @@ body = {
     ]
 }
 today = datetime.now().strftime("%d/%m/%Y")
-def getRequiremnet(string):
-    paragraphs = []
-    soup = BeautifulSoup(string, 'lxml')
-
-    # Iterate over the <p> tags
-    for p in soup.find_all('p'):
-        strong_tag = p.find('strong')
-        if not strong_tag:
-            # Only add content that does not contain a <strong> tag
-            content = p.get_text(strip=True)
-            if content:  # Only add non-empty content
-                paragraphs.append(content)
-    return paragraphs
 
 def getPageContent(id):
     data = {}
     url = 'https://www.vietnamworks.com/job--'+  str(id) + "-jv?source=searchResults&searchType=2&placement="+ str(id) + "&sortBy=date"
     try:
         driver.get(url)
-        time.sleep(2)
-        # WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "sc-4dcd9b5d-0 fIdBXj")))
+        time.sleep(1.5)
         job_title_element = driver.find_elements(By.CSS_SELECTOR, "#vnwLayout__col > h1")
-        # for job in jobs:
-        #     print(job.text)
         data["id"] = id
         data["url"] = url
         if len(job_title_element):
@@ -178,20 +166,20 @@ def getPageContent(id):
                 text_benefits = []
                 for benefit in group_benefit:
                     text_benefit = ''
-                    title = benefit.find_element(By.XPATH, ".//p[@class='sc-28f2b301-64 fDnMuU']")
-                    if title: 
+                    title = benefit.find_element(By.XPATH, ".//p[@name='title']")
+                    if title is not None: 
                         text_benefit += title.text
                     sub_title = benefit.find_element(By.XPATH, ".//div[@class='sc-c683181c-2 fGxLZh']")
-                    if sub_title: 
+                    if sub_title is not None: 
                         text_benefit += ": " + sub_title.text
                     text_benefits.append(text_benefit)
                 data["benefit"] = text_benefits
+
         data["crawl_time"] = today
         
     except Exception as e:
         print(e)
         return data
-    # print(data)
     return data
 try: 
     count = 0
