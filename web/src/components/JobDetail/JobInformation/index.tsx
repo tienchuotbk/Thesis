@@ -5,7 +5,7 @@ type Props = {
 };
 import salarySvg from "@/assets/svg/salary.svg";
 import { ClockCircleOutlined, WarningOutlined } from "@ant-design/icons";
-import { getExpString, getSalaryText } from "@/helpers/job.helper";
+import { getAgeString, getExpString, getSalaryText, getSex } from "@/helpers/job.helper";
 import { levelOptions } from "@/const/options";
 import { provinceMap } from "@/const/province";
 
@@ -37,6 +37,8 @@ export default function JobInfomation({ job }: Props) {
               <div className="font-bold">{getExpString(job.experience)}</div>
             </div>
           </div>
+        </div>
+        <div className="mt-6 flex">
           <div className="flex flex-1">
             <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
             <div className="pl-4">
@@ -44,7 +46,22 @@ export default function JobInfomation({ job }: Props) {
               <div className="font-bold">{levelOptions.find((val)=> val.value === parseInt(job.certificate ? job.certificate : '0'))?.label}</div>
             </div>
           </div>
+          <div className="flex flex-1">
+            <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
+            <div className="pl-4">
+              <div>Yêu cầu giới tính</div>
+              <div className="font-bold">{getSex(job.sex)}</div>
+            </div>
+          </div>
+          <div className="flex flex-1">
+            <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
+            <div className="pl-4">
+              <div>Yêu cầu độ tuổi</div>
+              <div className="font-bold">{getAgeString(job.age)}</div>
+            </div>
+          </div>
         </div>
+          
         <div className="flex">
           {new Date(job.expiration) > new Date() ? (
             <div className="mt-6 bg-[#f2f4f5] text-[#263a4d] flex py-[2px] px-2 rounded">

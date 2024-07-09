@@ -49,7 +49,35 @@ export const getExpString = (expObj: any) => {
   } else if(expObj.type === 0){
     return `Không yêu cầu`
   }
+}
 
+export const getAgeString = (ageObj: any) => {
+  if(!ageObj || !Object.keys(ageObj).length) return 'Không yêu cầu';
+  if(ageObj.type === 1){
+    return `${ageObj.min} - ${ageObj.max}`
+  } else if(ageObj.type === 2){
+    return `${ageObj.fixed}`
+  } else if(ageObj.type === 3){
+    return `Dưới ${ageObj.max}`
+  } else if(ageObj.type === 4){
+    return `Trên ${ageObj.min}`
+  } else if(ageObj.type === 0){
+    return `Không yêu cầu`
+  }
+}
+
+export function getSex(sex: string){
+  if(!sex){
+    return "Không yêu cầu"
+  };
+  let sexInt = parseInt(sex);
+  if(sexInt === 0){
+    return "Không yêu cầu"
+  } else if(sexInt === 1){
+    return "Nam"
+  } else {
+    return "Nữ"
+  }
 }
 
 export function removeNullishAttributes(obj: any) {

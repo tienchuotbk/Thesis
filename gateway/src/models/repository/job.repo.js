@@ -12,9 +12,9 @@ const jobRepo = {
     }
 
     if (order == "lastest") {
-      orderOption = [{ $sort: { update_time: 1 } }];
+      orderOption = [{ $sort: { update_time: -1 } }];
     } else if (order == "title") {
-      orderOption = [{ $sort: { title: 1 } }];
+      orderOption = [{ $sort: { title: -1 } }];
     } else {
       if (filter.text)
         orderOption = [{ $sort: { ...filter_score } }];

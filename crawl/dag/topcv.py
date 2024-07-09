@@ -152,11 +152,11 @@ def run_crawler():
                     create_time = data.get("create_time")
                     if create_time is None:
                         print("Not create_time")
-                    elif("giờ" in create_time):
+                    elif("giờ" in create_time or "Đăng 1 ngày" in create_time):
                         count += 1
                         temp_data.append(data)
                     else:
-                        print("Warning create_time (wrong "+ totalWrongData +" times)="+ create_time)
+                        print("Warning create_time (wrong "+ str(totalWrongData) +" times)="+ create_time)
                         totalWrongData += 1
                         if totalWrongData > 5:
                             print("Stop because update_time wrong > 5")
@@ -713,14 +713,14 @@ def run_spark_job():
 
     # Insert dữ liệu vào collection "jobs"
     rdd.foreachPartition(insert_into_mongodb)
-    print("Add sucess "+ str(count) + " to DB.")
+    print("Add sucess "+ str(count) + " jobs to DB.")
     spark.stop()
 
 
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2024, 7, 2),
+    'start_date': datetime(2024, 7, 7),
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,

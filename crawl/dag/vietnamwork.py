@@ -200,7 +200,8 @@ def run_crawler():
     count = 0
     final_data = []
     stop = False
-    for i in range(1, 10):
+    totalWrongData = 0
+    for i in range(1, 50):
         if stop:
             break
         body["page"] = i
@@ -215,19 +216,22 @@ def run_crawler():
                 data = getPageContent(id)
                 if any(data.values()):
                     job_time = data.get("update_time")
+                    print(job_time)
                     if job_time is None:
                         print("Not update_time")
                         # continue
-                    elif(job_time != current_date):
-                        print("Warning update_time (wrong "+ totalWrongData +" times)="+ job_time)
-                        totalWrongData += 1
-                        if totalWrongData > 10:
-                            print("Stop because update_time wrong > 10")
-                            stop = True
-                            break
-                    else:
+                    elif(job_time == current_date or job_time == '08/07/2024' or job_time == '07/07/2024'):
                         final_data.append(data)
                         count += 1
+                    else:
+                        print("Warning update_time (wrong "+ str(totalWrongData) +" times)="+ job_time)
+                        # print("url"+ data.get("url"))
+                        totalWrongData += 1
+                        if totalWrongData > 100:
+                            print("Stop because update_time wrong > 5")
+                            stop = True
+                            break
+                        
                     
         else:
             print("Error")
@@ -255,25 +259,34 @@ def run_spark_job():
         elif salary == "Thương lượng":
             return {"type": 3}
         elif "$" in salary:
+            salary = salary.replace("/tháng", "")
             # salary = salary.replace("$", "").replace(",", ".").strip()
             if "-" in salary:
                 min_salary, max_salary = salary.split("-")
                 min_salary = min_salary.replace("$", "").strip()
                 max_salary = max_salary.replace("$", "").strip()
+                min_salary = float(min_salary.replace(",", ""))
+                max_salary = float(max_salary.replace(",", ""))
+                if (min_salary > 10000 or max_salary > 10000):
+                    return {
+                    "type": 1,
+                    "min": min_salary / 1000,
+                    "max": max_salary / 1000,
+                    }
                 return {
                     "type": 1,
-                    "min": float(min_salary) * vnd_per_usd / 1000,
-                    "max": float(max_salary) * vnd_per_usd / 1000,
+                    "min": min_salary * vnd_per_usd / 1000,
+                    "max": max_salary * vnd_per_usd / 1000,
                 }
             elif "Tới" in salary:
                 max_salary = salary.replace("Tới", "").replace("$", "").strip()
-                return {"type": 4, "max": float(max_salary) * vnd_per_usd / 1000}
+                return {"type": 4, "max": float(max_salary.replace(",", "")) * vnd_per_usd / 1000}
             elif "Từ" in salary:
                 min_salary = salary.replace("Từ", "").replace("$", "").strip()
-                return {"type": 3, "max": float(min_salary) * vnd_per_usd / 1000}
+                return {"type": 3, "max": float(min_salary.replace(",", "")) * vnd_per_usd / 1000}
             else:
                 fixed_value = salary.replace("$", "").strip()
-                return {"type": 2, "fixed": float(fixed_value) * vnd_per_usd / 1000}
+                return {"type": 2, "fixed": float(fixed_value.replace(",", "")) * vnd_per_usd / 1000}
 
 
     # Age
@@ -730,12 +743,13 @@ def run_spark_job():
 
     # # Insert dữ liệu vào collection "jobs"
     rdd.foreachPartition(insert_into_mongodb)
+    print("Add sucess "+ str(rdd.count()) + "jobs to DB.")
     spark.stop()
 
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2024, 7, 2),
+    'start_date': datetime(2024, 7, 7),
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,

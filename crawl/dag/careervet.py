@@ -167,15 +167,16 @@ def run_crawler():
                     if job_time is None:
                         print("Not update_time")
                         continue
-                    elif(job_time != current_date):
-                        print("Warning update_time["+ totalWrongData +"]="+ job_time)
+                    elif(job_time == current_date or job_time == "08/07/2024" or job_time == "07/07/2024"):
+                        temp_data.append(data)
+                    else:
+                        print("Warning update_time["+ str(totalWrongData) +"]="+ job_time)
                         totalWrongData += 1
                         if totalWrongData > 10:
                             print("Stop because update_time wrong > 20")
                             stop = True
                             break
-                    else:
-                        temp_data.append(data)
+                        
             try:
                 with open('/home/chuot/data/careerviet.json', 'r', encoding='utf-8') as f:
                     existing_data = json.load(f)
@@ -615,12 +616,12 @@ def run_spark_job():
 
     # Insert dữ liệu vào collection "jobs"
     rdd.foreachPartition(insert_into_mongodb)
-    print("Done")
+    print("Add sucess "+ str(rdd.count()) + " jobs to DB.")
 
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2024, 7, 2),
+    'start_date': datetime(2024, 7, 7),
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
