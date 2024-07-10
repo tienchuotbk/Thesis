@@ -1,5 +1,5 @@
 import HighcharMap from "@/components/Charts/Map";
-import { provinceAnalysisMap } from "@/const/province";
+import { provinceAnalysisMap, provinceMap } from "@/const/province";
 import { removeNullishAttributes } from "@/helpers/job.helper";
 import AnalysisApi from "@/network/analysis";
 import { selectFilter } from "@/redux/slice/analysisFilter.slice";
@@ -24,7 +24,7 @@ const MapAnalysis = () => {
       if (responseData?.data?.length) {
         return responseData.data;
       } else {
-        return null;
+        return [];
       }
     },
   });
@@ -50,6 +50,31 @@ const MapAnalysis = () => {
         : [],
     [dataQuery]
   );
+
+  const top5CountJob = useMemo(() => {
+    let data = dataQuery?.sort(function (a: any, b: any) {
+        return parseInt(b.count) - parseInt(a.count);
+      })
+      .map((val: any, index: number) => [
+        index+ 1,
+        provinceMap.get(val.province),
+        parseInt(val.count),
+      ]);
+    return data?.slice(0, 5);
+  }, [dataQuery]);
+
+  const top5SalaryJob = useMemo(() => {
+    let data = dataQuery?.sort(function (a: any, b: any) {
+        return b.average - a.average;
+      })
+      .filter((val: any)=> val.province != 'other')
+      .map((val: any, index: number) => [
+        index +1,
+        provinceMap.get(val.province),
+        val.average,
+      ]);
+    return data?.slice(0, 5);
+  }, [dataQuery]);
 
   return (
     <Layout
@@ -91,7 +116,28 @@ const MapAnalysis = () => {
           </Col>
           <Col span={10}></Col>
         </Row>
-        <HtmlTable headers={["STT", "Tinh thanh", "Gia tri cong viec"]} values={[[1, "Ha Noi", 100]]}/>
+        <Row justify="space-evenly" className="my-[1rem]" gutter={24}>
+          <Col 
+          // style={{ backgroundColor: "white", padding: "1em 3em" }}
+          >
+            <h2 style={{ textAlign: "center" }}>
+              Top {top5CountJob?.length} tỉnh thành có số lượng tuyển dụng việc làm cao nhất
+            </h2>
+            <HtmlTable
+              headers={["STT", "Tinh thanh", "Số lượng việc làm"]}
+              values={top5CountJob}
+            />
+          </Col>
+          <Col>
+          <h2 style={{ textAlign: "center" }}>
+              Top {top5SalaryJob?.length} tỉnh thành tuyển dụng với mức lương trung bình cao nhất
+            </h2>
+            <HtmlTable
+              headers={["STT", "Tinh thanh", "Luong"]}
+              values={top5SalaryJob}
+            />
+          </Col>
+        </Row>
       </Layout.Content>
     </Layout>
   );

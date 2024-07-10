@@ -15,34 +15,34 @@ const TableAnalysis = () => {
   } = theme.useToken();
 
   const colors = [
-    "#FF7F0E", 
+    "#FF7F0E",
     "#1F77B4",
-    "#2CA02C", 
+    "#2CA02C",
     "#D62728",
-    "#9467BD", 
+    "#9467BD",
     "#8C564B",
     "#E377C2",
     "#7F7F7F",
-    "#BCBD22", 
+    "#BCBD22",
     "#17BECF",
-    "#AEC7E8", 
-    "#FFBB78" 
+    "#AEC7E8",
+    "#FFBB78",
   ];
 
   const colors2 = [
-    "#FF5733",  
-    "#33FF57",
-    "#3357FF", 
-    "#FF33A6", 
-    "#33FFF3", 
-    "#FFA533", 
-    "#8033FF", 
-    "#FF3333", 
-    "#33FF33", 
-    "#3333FF", 
     "#FF5733",
-    "#FFFF33"
-  ]
+    "#33FF57",
+    "#3357FF",
+    "#FF33A6",
+    "#33FFF3",
+    "#FFA533",
+    "#8033FF",
+    "#FF3333",
+    "#33FF33",
+    "#3333FF",
+    "#FF5733",
+    "#FFFF33",
+  ];
 
   const { isLoading, data: dataQuery } = useQuery({
     queryKey: ["fetchTableData", filter],
@@ -53,7 +53,7 @@ const TableAnalysis = () => {
       if (responseData?.data) {
         return responseData.data;
       } else {
-        return null;
+        return [];
       }
     },
   });
@@ -78,11 +78,17 @@ const TableAnalysis = () => {
     // Chia array thành hai subarray
     const firstHalf = {
       x_title: arr.x_title.slice(0, mid),
-      value: arr.value.slice(0, mid).map((val, index)=> ({ y: val, color: colors[index % colors.length] })),
+      value: arr.value.slice(0, mid).map((val, index) => ({
+        y: val,
+        color: colors[index % colors.length],
+      })),
     };
     const secondHalf = {
       x_title: arr.x_title.slice(mid),
-      value: arr.value.slice(mid).map((val, index)=> ({ y: val, color: colors2[index % colors2.length] })),
+      value: arr.value.slice(mid).map((val, index) => ({
+        y: val,
+        color: colors2[index % colors2.length],
+      })),
     };
 
     return [firstHalf, secondHalf];
@@ -92,6 +98,40 @@ const TableAnalysis = () => {
     () => splitArray(salaryByFieldData),
     [salaryByFieldData]
   );
+
+  const maxSalary = useMemo(() => {
+    let maxValue = Math.max(...salaryByFieldData.value);
+    return Math.ceil(maxValue / 5) * 5;
+  }, [salaryByFieldData]);
+  console.log(dataQuery);
+
+  const maxCountByPosition = useMemo(() => {
+    let list = dataQuery
+      ? dataQuery.role_count.map((val: any) => parseInt(val.count))
+      : [];
+    let maxValue = Math.max(...list);
+    return Math.ceil(maxValue / 1000) * 1000;
+  }, [dataQuery]);
+
+  const maxFiledCount = useMemo(() => {
+    let list = dataQuery
+      ? dataQuery.field_count_salary.map((val: any) => parseInt(val.count))
+      : [];
+    let maxValue = Math.max(...list);
+    return Math.ceil(maxValue / 100) * 100;
+  }, [dataQuery]);
+
+  const maxExpCount = useMemo(() => {
+    let list = dataQuery
+      ? Object.keys(dataQuery.exp_count).map((key: string) =>
+          parseInt(dataQuery.exp_count[key])
+        )
+      : [];
+    let maxValue = Math.max(...list);
+    return Math.ceil(maxValue / 1000) * 1000;
+  }, [dataQuery]);
+
+  console.log(maxCountByPosition);
 
   const roleCountData = useMemo(() => {
     let arrTitle: string[] = [];
@@ -115,7 +155,7 @@ const TableAnalysis = () => {
     });
     return {
       x_title: arrTitle,
-      value: arrValue.map((val)=> ({ y: val, color: '#03a835' })),
+      value: arrValue.map((val) => ({ y: val, color: "#03a835" })),
     };
   }, [dataQuery]);
 
@@ -155,6 +195,7 @@ const TableAnalysis = () => {
           yText="Lương"
           valueSuffix=" Triệu"
           color={"#1af057"}
+          max={maxSalary}
         />
         <TableChart
           title="Trung bình lương theo ngành nghề (2)"
@@ -165,6 +206,7 @@ const TableAnalysis = () => {
           yText="Lương"
           valueSuffix=" Triệu"
           color={"#1af057"}
+          max={maxSalary}
         />
         <div className="mb-2"></div>
         <TableChart
@@ -176,6 +218,7 @@ const TableAnalysis = () => {
           yText="Số lượng công việc"
           valueSuffix=" việc làm"
           color={"#14e34f"}
+          max={maxCountByPosition}
         />
         <div className="mb-2"></div>
         <TableChart
@@ -187,6 +230,7 @@ const TableAnalysis = () => {
           yText="Số lượng công việc"
           valueSuffix=" việc làm"
           color={"#14e34f"}
+          max={maxExpCount}
         />
         <div className="mb-2"></div>
         <TableChart
@@ -198,6 +242,7 @@ const TableAnalysis = () => {
           yText="Số lượng công việc"
           valueSuffix=" việc làm"
           color={"#14e34f"}
+          max={maxFiledCount}
         />
         <TableChart
           title="Tổng số công việc theo ngành nghề (2)"
@@ -208,6 +253,7 @@ const TableAnalysis = () => {
           yText="Số lượng công việc"
           valueSuffix=" việc làm"
           color={"#14e34f"}
+          max={maxFiledCount}
         />
       </Layout.Content>
     </Layout>

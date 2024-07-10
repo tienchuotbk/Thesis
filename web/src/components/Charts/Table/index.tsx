@@ -8,7 +8,8 @@ export default function TableChart({
   data,
   description,
   yText,
-  valueSuffix
+  valueSuffix,
+  max
 }: {
   title: string;
   subtitle: string;
@@ -20,7 +21,8 @@ export default function TableChart({
   yText: string;
   description: string,
   valueSuffix: string,
-  color: string
+  color: string,
+  max: number | null
 }) {
   const options = {
     chart: {
@@ -43,6 +45,7 @@ export default function TableChart({
     },
     yAxis: {
       min: 0,
+      max: max,
       title: {
         text: yText,
       }
