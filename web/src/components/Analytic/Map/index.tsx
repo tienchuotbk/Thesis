@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Col, Layout, Row, theme } from "antd";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
+import HtmlTable from "../HtmlTable";
 
 const MapAnalysis = () => {
   const filter = useSelector(selectFilter);
@@ -90,6 +91,7 @@ const MapAnalysis = () => {
           </Col>
           <Col span={10}></Col>
         </Row>
+        <HtmlTable headers={["STT", "Tinh thanh", "Gia tri cong viec"]} values={[[1, "Ha Noi", 100]]}/>
       </Layout.Content>
     </Layout>
   );
