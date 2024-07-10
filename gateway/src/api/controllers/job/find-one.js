@@ -23,7 +23,7 @@ export default async (req, res) => {
                   },
                 ],
                 $sort: { time: -1 },
-                $slice: 10,
+                $slice: 25,
               },
             },
           },

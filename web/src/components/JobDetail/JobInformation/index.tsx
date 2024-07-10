@@ -10,6 +10,15 @@ import { levelOptions } from "@/const/options";
 import { provinceMap } from "@/const/province";
 
 export default function JobInfomation({ job }: Props) {
+  const expirationDate = new Date(job.expiration);
+
+  // Lùi trước 1 ngày
+  expirationDate.setDate(expirationDate.getDate() - 1);
+
+  // Chuyển đổi lại thành chuỗi ngày tháng theo định dạng và múi giờ mong muốn
+  const formattedDate = expirationDate.toLocaleDateString("vi-VN", {
+    timeZone: "Asia/Ho_Chi_Minh",
+  });
   return (
     <>
       <Card title={<span className="text-[20px]">{job.title}</span>}>
@@ -68,9 +77,7 @@ export default function JobInfomation({ job }: Props) {
               <ClockCircleOutlined />
               <span className="ml-2">
                 Hạn nộp hồ sơ:{" "}
-                {new Date(job.expiration).toLocaleDateString("vi-VN", {
-                  timeZone: "Asia/Ho_Chi_Minh",
-                })}
+                {formattedDate}
               </span>
             </div>
           ) : (

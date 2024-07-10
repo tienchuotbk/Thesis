@@ -100,6 +100,16 @@ def getJobId(id):
         # if not user_filters:
         #     return jsonify({"error": "No filters found for the user"}), 404
         # print(user_filters)
+        recent_jobs = list(jobs_collection.find({"_id": {"$in": recent_job_ids}}))
+        
+        # Tiền xử lý các thông tin của các công việc đã xem gần đây
+        recent_jobs_data = [preprocess_job(job) for job in recent_jobs]
+        
+        # Kết hợp thông tin từ recentsJobs vào user_filters
+        # print(str(len(user_filters)))
+        # print(str(len(recent_jobs_data)))
+        user_filters = user_filters + recent_jobs_data
+        # print(str(len(user_filters)))
         
 
         combined_text = ' '.join([f"{f.get('career', '')} {f.get('text', '')} {f.get('province', '')}" for f in user_filters])
@@ -145,7 +155,7 @@ def getJobId(id):
         # Đánh giá Precision và Recall
         evaluation_result = evaluate_recommendations([recommended_job_ids], [user_viewed_jobs])
         
-        print(evaluation_result)
+        # print(evaluation_result)
         
         # print(recommended_jobs)
         return jsonify(recommended_jobs)

@@ -67,7 +67,7 @@ export default async (req, res) => {
                   newObjt
                 ],
                 $sort: { time: -1 },
-                $slice: 10,
+                $slice: 25,
               }
             },
           },
