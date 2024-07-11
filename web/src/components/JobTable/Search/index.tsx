@@ -20,6 +20,10 @@ const Search: React.FC<ChildComponentProps> = ({ getJobData, loading }) => {
     dispatch(setFilter({ text: valueDebounce }));
   }, [valueDebounce]);
 
+  useEffect(()=> {
+    setSearch(filter.text);
+  }, [filter.text]);
+
   const handleChangeLocation = (value: string) => {
     dispatch(
       setFilter({
@@ -76,6 +80,7 @@ const Search: React.FC<ChildComponentProps> = ({ getJobData, loading }) => {
             onChange={handleChangeLocation}
             options={provinces}
             filterOption={filterOption}
+            value={filter.province}
             defaultValue={"all"}
             showSearch
           />

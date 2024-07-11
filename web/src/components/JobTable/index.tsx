@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Filter from "./Filter";
 import JobCard from "./JobCard";
 import Search from "./Search";
+import { selectOrder, setOrder } from "@/redux/slice/sort.slice";
 
 const typedKeys = <T extends object>(obj: T): (keyof T)[] => {
   return Object.keys(obj) as (keyof T)[];
@@ -33,11 +34,10 @@ export default function JobTable() {
 
   const dispatch = useDispatch();
 
-  const [order, setOrder] = useState("lastest");
-
   const pagination = useSelector(selectPagination);
   const filter = useSelector(selectFilter);
   const uid = useSelector(selectUser);
+  const order = useSelector(selectOrder);
 
   const { isPending, data: dataQuery } = useQuery({
     queryKey: ["fetchListJob", pagination.currentPage, pagination.pageSize, filter, order],
@@ -90,7 +90,7 @@ export default function JobTable() {
   }, []);
 
   const handleChangeOrder = useCallback((val: string) => {
-    setOrder(val);
+    dispatch(setOrder(val));
   }, []);
 
   const handleSearch = useCallback(() => {
@@ -155,12 +155,13 @@ export default function JobTable() {
               <Select
                 defaultValue="lastest"
                 options={[
+                  { value: "fit", label: "Mặc định" },
                   { value: "lastest", label: "Mới nhất" },
-                  { value: "fit", label: "Phù hợp nhất" },
-                  { value: "title", label: "Tên" },
+                  { value: "title", label: "Tên việc làm" },
                 ]}
                 onChange={handleChangeOrder}
-                value={order}
+                value={order.order}
+                style={{ minWidth: "8rem"}}
               />
             </Flex>
           </Flex>

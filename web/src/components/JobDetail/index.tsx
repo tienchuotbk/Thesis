@@ -1,7 +1,7 @@
 import JobApi from "@/network/job";
 import { useQuery } from "@tanstack/react-query";
-import { Card, Col, Layout, Row, Skeleton } from "antd";
-import { useParams } from "react-router-dom";
+import { Button, Card, Col, Layout, Row, Skeleton } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
 import CompanyInformation from "./CompanyInformation";
 import JobInfomation from "./JobInformation";
 import JobRecommend from "../JobRecommend";
@@ -9,10 +9,12 @@ import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/slice/user.slice";
 import { provinceMap } from "@/const/province";
 import { rolesMap, typeMap } from "@/const";
+import { BackwardFilled, BackwardOutlined } from "@ant-design/icons";
 
 export default function JobDetail() {
   const { id = "" } = useParams();
   const uid = useSelector(selectUser);
+  const naviage = useNavigate();
 
   const { isPending, data } = useQuery({
     queryKey: ["job-detail", id],
@@ -29,6 +31,9 @@ export default function JobDetail() {
 
   return (
     <Layout.Content className="container mx-auto pt-8">
+      <Button type="default" icon={<BackwardFilled />} iconPosition={"start"} className="mb-4" onClick={()=> naviage("/")}>
+        Quay lại
+      </Button>
       {isPending && <Skeleton />}
       {data && (
         <>

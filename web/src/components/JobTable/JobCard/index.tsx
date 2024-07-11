@@ -56,7 +56,8 @@ export default function JobCard({ jobInfo }: IProps) {
   }
 
   return (
-    <Card className="min-h-48 shadow-md" bordered={true}>
+    <Card className="min-h-48 shadow-md" bordered={true} style={{ width: "100%"}}>
+      <div style={{ height: "60%" }}>
       <Flex justify="space-start" gap={"middle"}>
         <Image width={"4.5em"} src={getLogoSrc(jobInfo.logo)} preview={false} />
         <Flex justify="space-start" gap="small" vertical>
@@ -69,11 +70,13 @@ export default function JobCard({ jobInfo }: IProps) {
           <div className="text-xs">{jobInfo.company}</div>
         </Flex>
       </Flex>
-      <Flex gap="small" align="center" justify="flex-end">
+      <Flex gap="small" align="center" justify="flex-end" style={{paddingTop: "1rem"}}>
         <p className="text-blue-500">Lương:</p>
         <p>{getSalaryText(jobInfo.salary)}</p>
       </Flex>
+      </div>
       <Divider />
+      <div style={{ height: "35%" }}>
       <Flex wrap align="center">
         {jobInfo.category?.map((tag: string) => (
           <Tag key={tag} className="mt-[8px]">
@@ -81,6 +84,7 @@ export default function JobCard({ jobInfo }: IProps) {
           </Tag>
         ))}
       </Flex>
+      </div>
     </Card>
   );
 }

@@ -3,6 +3,7 @@ import filterJobReducer from "./slice/filter.slice";
 import paginationJobReducer from "./slice/pagination.slice";
 import analysisFilterReducer from "./slice/analysisFilter.slice";
 import userReducer from "./slice/user.slice";
+import ordereReducer from "./slice/sort.slice";
 
 
 export const store = configureStore({
@@ -10,7 +11,8 @@ export const store = configureStore({
         filterJob: filterJobReducer,
         paginationJob: paginationJobReducer,
         analysisFilter: analysisFilterReducer,
-        user: userReducer
+        user: userReducer,
+        order: ordereReducer
     }
 })
 
