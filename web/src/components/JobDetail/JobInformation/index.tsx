@@ -9,8 +9,15 @@ import experience from "@/assets/svg/experience.svg";
 import levelSvg from "@/assets/svg/level.svg";
 import sexSvg from "@/assets/svg/sex.svg";
 import ageSvg from "@/assets/svg/age.svg";
+import updateSvg from "@/assets/svg/update.svg";
 import { ClockCircleOutlined, WarningOutlined } from "@ant-design/icons";
-import { getAgeString, getExpString, getSalaryText, getSex } from "@/helpers/job.helper";
+import {
+  formatUpdateTime,
+  getAgeString,
+  getExpString,
+  getSalaryText,
+  getSex,
+} from "@/helpers/job.helper";
 import { levelOptions } from "@/const/options";
 import { provinceMap } from "@/const/province";
 
@@ -29,23 +36,39 @@ export default function JobInfomation({ job }: Props) {
       <Card title={<span className="text-[20px]">{job.title}</span>}>
         <div className="flex">
           <div className="flex flex-1">
-            <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
+            <Image
+              src={salarySvg}
+              className="job-detail__info--section-icon"
+              preview={false}
+            />
             <div className="pl-4">
               <div>Mức lương</div>
+              <div className="font-bold">{getSalaryText(job.salary)}</div>
+            </div>
+          </div>
+          <div className="flex flex-1">
+            <Image
+              src={locationSvg}
+              className="job-detail__info--section-icon"
+              preview={false}
+            />
+            <div className="pl-4">
+              <div>Địa điểm</div>
               <div className="font-bold">
-                {getSalaryText(job.salary)}
+                {job.location?.length
+                  ? job.location
+                      .map((val) => provinceMap.get(val.province))
+                      .join(",")
+                  : "Bảo mật"}
               </div>
             </div>
           </div>
           <div className="flex flex-1">
-            <Image src={locationSvg} className="job-detail__info--section-icon" preview={false} />
-            <div className="pl-4">
-              <div>Địa điểm</div>
-              <div className="font-bold">{job.location?.length ? job.location.map((val)=> provinceMap.get(val.province)).join(','): "Bảo mật"}</div>
-            </div>
-          </div>
-          <div className="flex flex-1">
-            <Image src={experience} className="job-detail__info--section-icon" preview={false} />
+            <Image
+              src={experience}
+              className="job-detail__info--section-icon"
+              preview={false}
+            />
             <div className="pl-4">
               <div>Kinh nghiệm</div>
               <div className="font-bold">{getExpString(job.experience)}</div>
@@ -54,43 +77,74 @@ export default function JobInfomation({ job }: Props) {
         </div>
         <div className="mt-6 flex">
           <div className="flex flex-1">
-            <Image src={levelSvg} className="job-detail__info--section-icon" preview={false} />
+            <Image
+              src={levelSvg}
+              className="job-detail__info--section-icon"
+              preview={false}
+            />
             <div className="pl-4">
               <div>Yêu cầu trình độ</div>
-              <div className="font-bold">{levelOptions.find((val)=> val.value === parseInt(job.certificate ? job.certificate : '0'))?.label}</div>
+              <div className="font-bold">
+                {
+                  levelOptions.find(
+                    (val) =>
+                      val.value ===
+                      parseInt(job.certificate ? job.certificate : "0")
+                  )?.label
+                }
+              </div>
             </div>
           </div>
           <div className="flex flex-1">
-            <Image src={sexSvg} className="job-detail__info--section-icon" preview={false} />
+            <Image
+              src={sexSvg}
+              className="job-detail__info--section-icon"
+              preview={false}
+            />
             <div className="pl-4">
               <div>Yêu cầu giới tính</div>
               <div className="font-bold">{getSex(job.sex)}</div>
             </div>
           </div>
           <div className="flex flex-1">
-            <Image src={ageSvg} className="job-detail__info--section-icon" preview={false} />
+            <Image
+              src={ageSvg}
+              className="job-detail__info--section-icon"
+              preview={false}
+            />
             <div className="pl-4">
               <div>Yêu cầu độ tuổi</div>
               <div className="font-bold">{getAgeString(job.age)}</div>
             </div>
           </div>
         </div>
-          
+
+        <div className="mt-6 flex">
+          <div className="flex flex-1">
+          <Image
+              src={updateSvg}
+              className="job-detail__info--section-icon"
+              preview={false}
+            />
+            <div className="pl-4">
+              <div>Thời gian đăng tin</div>
+              <div className="font-bold">{formatUpdateTime(job.update_time)}</div>
+            </div>
+          </div>
+        </div>
         <div className="flex">
           {new Date(job.expiration) > new Date() ? (
             <div className="mt-6 bg-[#f2f4f5] text-[#263a4d] flex py-[2px] px-2 rounded">
               <ClockCircleOutlined />
-              <span className="ml-2">
-                Hạn nộp hồ sơ:{" "}
-                {formattedDate}
-              </span>
+              <span className="ml-2">Hạn nộp hồ sơ: {formattedDate}</span>
             </div>
           ) : (
             <div className="job-detail__expired mt-6">
               <WarningOutlined />
-              Hết hạn ứng tuyển:  {new Date(job.expiration).toLocaleDateString("vi-VN", {
-                  timeZone: "Asia/Ho_Chi_Minh",
-                })}
+              Hết hạn ứng tuyển:{" "}
+              {new Date(job.expiration).toLocaleDateString("vi-VN", {
+                timeZone: "Asia/Ho_Chi_Minh",
+              })}
             </div>
           )}
         </div>

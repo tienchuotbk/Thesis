@@ -32,6 +32,6 @@ type JobType = {
   sex: "0" | "1";
   title: string;
   type: number[];
-  update_time: string;
+  update_time: Date;
   url: string;
 };

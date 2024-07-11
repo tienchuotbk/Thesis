@@ -66,6 +66,27 @@ export const getAgeString = (ageObj: any) => {
   }
 }
 
+export function formatUpdateTime(update_time: Date) {
+  // Convert update_time to a Date object
+  const updateDate = new Date(update_time) as any;
+
+  // Get the current date
+  const currentDate = new Date() as any;
+
+  // Calculate the difference in time (in milliseconds)
+  const timeDifference = currentDate - updateDate;
+
+  // Calculate the difference in days
+  const dayDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+  // Return "Hôm nay" if the difference is less than one day, otherwise return "Đăng n ngày trước"
+  if (dayDifference === 0) {
+    return "Hôm nay";
+  } else {
+    return `Đăng ${dayDifference} ngày trước`;
+  }
+}
+
 export function getSex(sex: string){
   if(!sex){
     return "Không yêu cầu"

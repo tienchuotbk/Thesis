@@ -40,7 +40,7 @@ export default function JobTable() {
   const order = useSelector(selectOrder);
 
   const { isPending, data: dataQuery } = useQuery({
-    queryKey: ["fetchListJob", pagination.currentPage, pagination.pageSize, filter, order],
+    queryKey: ["fetchListJob", pagination.currentPage, pagination.pageSize, filter, order.order],
     queryFn: async () => {
       console.log(46);
       let filtered: any = {};
@@ -60,7 +60,7 @@ export default function JobTable() {
 
       const configParams = {
         page: pagination.currentPage,
-        order: order,
+        order: order.order,
         limit: pagination.pageSize,
         uid: uid,
         ...filtered,
