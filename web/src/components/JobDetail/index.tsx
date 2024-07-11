@@ -8,7 +8,6 @@ import JobRecommend from "../JobRecommend";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/slice/user.slice";
 import { provinceMap } from "@/const/province";
-import { getSex } from "@/helpers/job.helper";
 import { rolesMap, typeMap } from "@/const";
 
 export default function JobDetail() {
@@ -51,27 +50,31 @@ export default function JobDetail() {
                 <div className="mt-6"></div>
                 <div className="text-[20px] font-[600]">Vị trí tuyển dụng</div>
                 <div className="box-category-tags mt-2">
-                  { rolesMap.get(data.role) }
-                </div>
-                <div className="mt-6"></div>
-                <div className="text-[20px] font-[600]">Yêu cầu giới tính</div>
-                <div className="box-category-tags mt-2">
-                  { getSex(data.sex) }
+                  {rolesMap.get(data.role)}
                 </div>
                 <div className="mt-6"></div>
                 <div className="text-[20px] font-[600]">Loại hình làm việc</div>
                 <div className="box-category-tags mt-2">
-                  { data.type?.map((val: number)=> typeMap.get(val)).join(",") }
+                  {data.type?.map((val: number) => typeMap.get(val)).join(",")}
                 </div>
                 <div className="mt-6"></div>
                 <div className="text-[20px] font-[600]">Khu Vực</div>
                 <div className="box-category-tags mt-2">
-                  {data?.location?.map((location: LocationType, index: number) => (
-                    // <div key={index} className="box-category-tag">
-                      <p><b>{ provinceMap.get(location.province)}</b> : {location.address}</p>
-                    // </div>
-                  ))}
+                  {data?.location?.map(
+                    (location: LocationType, index: number) => (
+                      // <div key={index} className="box-category-tag">
+                      <p>
+                        <b>{provinceMap.get(location.province)}</b> :{" "}
+                        {location.address}
+                      </p>
+                      // </div>
+                    )
+                  )}
                 </div>
+                <div className="mt-6"></div>
+                <a href={data.url} target="_blank">
+                  <button>Xem chi tiết tin tại đây</button>
+                </a>
               </Card>
             </Col>
           </Row>

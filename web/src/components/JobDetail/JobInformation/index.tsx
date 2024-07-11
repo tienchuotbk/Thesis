@@ -4,6 +4,11 @@ type Props = {
   job: JobType;
 };
 import salarySvg from "@/assets/svg/salary.svg";
+import locationSvg from "@/assets/svg/location.svg";
+import experience from "@/assets/svg/experience.svg";
+import levelSvg from "@/assets/svg/level.svg";
+import sexSvg from "@/assets/svg/sex.svg";
+import ageSvg from "@/assets/svg/age.svg";
 import { ClockCircleOutlined, WarningOutlined } from "@ant-design/icons";
 import { getAgeString, getExpString, getSalaryText, getSex } from "@/helpers/job.helper";
 import { levelOptions } from "@/const/options";
@@ -33,14 +38,14 @@ export default function JobInfomation({ job }: Props) {
             </div>
           </div>
           <div className="flex flex-1">
-            <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
+            <Image src={locationSvg} className="job-detail__info--section-icon" preview={false} />
             <div className="pl-4">
               <div>Địa điểm</div>
               <div className="font-bold">{job.location?.length ? job.location.map((val)=> provinceMap.get(val.province)).join(','): "Bảo mật"}</div>
             </div>
           </div>
           <div className="flex flex-1">
-            <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
+            <Image src={experience} className="job-detail__info--section-icon" preview={false} />
             <div className="pl-4">
               <div>Kinh nghiệm</div>
               <div className="font-bold">{getExpString(job.experience)}</div>
@@ -49,21 +54,21 @@ export default function JobInfomation({ job }: Props) {
         </div>
         <div className="mt-6 flex">
           <div className="flex flex-1">
-            <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
+            <Image src={levelSvg} className="job-detail__info--section-icon" preview={false} />
             <div className="pl-4">
               <div>Yêu cầu trình độ</div>
               <div className="font-bold">{levelOptions.find((val)=> val.value === parseInt(job.certificate ? job.certificate : '0'))?.label}</div>
             </div>
           </div>
           <div className="flex flex-1">
-            <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
+            <Image src={sexSvg} className="job-detail__info--section-icon" preview={false} />
             <div className="pl-4">
               <div>Yêu cầu giới tính</div>
               <div className="font-bold">{getSex(job.sex)}</div>
             </div>
           </div>
           <div className="flex flex-1">
-            <Image src={salarySvg} className="job-detail__info--section-icon" preview={false} />
+            <Image src={ageSvg} className="job-detail__info--section-icon" preview={false} />
             <div className="pl-4">
               <div>Yêu cầu độ tuổi</div>
               <div className="font-bold">{getAgeString(job.age)}</div>
