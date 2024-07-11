@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
+import { ObjectId } from "mongoose";
 import { filterAggregate } from "../../helper/filter.js";
 import Job from "../job.js";
+import Users from "../user.js";
 // import searchFullText from "./elastic.js";
 
 const jobRepo = {
@@ -48,6 +50,22 @@ const jobRepo = {
         },
       },
     ]);
+  },
+
+  findRecents: async (id, jobId) => {
+    const objId = new mongoose.Types.ObjectId(jobId);
+    const recentIds = await Users.aggregate([
+      { $match: { uId: id } }, 
+      { $unwind: "$recentJobs" },
+      { $match: { "recentJobs.jobId": { $ne: objId } }},
+      { $sort: { "recentJobs.time": -1 } },
+      { $limit: 10 },
+      { $project: { "recentJobs.jobId": 1, _id: 0 } } 
+    ]);
+
+    let arrIds = recentIds.map((val)=> val.recentJobs.jobId);
+    const jobs = await Job.find({ _id: { $in: arrIds } }, { title: 1, logo: 1, url: 1, company : 1 }, { limit: 5 });
+    return jobs;
   },
 
   getById: (id, project = {}, options = {}) => {

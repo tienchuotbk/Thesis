@@ -36,7 +36,7 @@ export default function JobRecommend({ id }: Props) {
 
   return (
     <Card className="mt-4">
-      <Typography.Text className="text-[20px] font-[600] border-l-[6px] border-[#00b14f] pl-3">
+      <Typography.Text className="text-[20px] font-[600] border-l-[6px] border-[#2428a5] pl-3">
         Bạn có thể quan tâm
       </Typography.Text>
 
@@ -95,7 +95,7 @@ export default function JobRecommend({ id }: Props) {
                         </div>
 
                         <div className="box-right">
-                          <label className="text-[#00b14f] font-[600]">
+                          <label className="text-[#2428a5] font-[600]">
                             {job.company}
                           </label>
                         </div>

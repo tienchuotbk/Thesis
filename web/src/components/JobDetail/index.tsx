@@ -1,6 +1,16 @@
 import JobApi from "@/network/job";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Card, Col, Layout, Row, Skeleton } from "antd";
+import {
+  Button,
+  Card,
+  Col,
+  Flex,
+  Layout,
+  Row,
+  Skeleton,
+  Typography,
+  Image
+} from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import CompanyInformation from "./CompanyInformation";
 import JobInfomation from "./JobInformation";
@@ -14,7 +24,21 @@ import { BackwardFilled, BackwardOutlined } from "@ant-design/icons";
 export default function JobDetail() {
   const { id = "" } = useParams();
   const uid = useSelector(selectUser);
-  const naviage = useNavigate();
+  const navigate = useNavigate();
+
+  const { data: recentData } = useQuery({
+    queryKey: ["job-recent", id],
+    queryFn: async () => {
+      const jobData = await JobApi.getRecent(id, uid);
+      if (jobData && jobData.data) {
+        return jobData.data;
+      }
+      {
+        return [];
+      }
+    },
+    enabled: !!uid
+  })
 
   const { isPending, data } = useQuery({
     queryKey: ["job-detail", id],
@@ -24,14 +48,20 @@ export default function JobDetail() {
         return jobData.data;
       }
       {
-        return null;
+        return {};
       }
     },
   });
 
   return (
     <Layout.Content className="container mx-auto pt-8">
-      <Button type="default" icon={<BackwardFilled />} iconPosition={"start"} className="mb-4" onClick={()=> naviage("/")}>
+      <Button
+        type="default"
+        icon={<BackwardFilled />}
+        iconPosition={"start"}
+        className="mb-4"
+        onClick={() => navigate("/")}
+      >
         Quay lại
       </Button>
       {isPending && <Skeleton />}
@@ -81,13 +111,39 @@ export default function JobDetail() {
                   <button>Xem chi tiết tin tại đây</button>
                 </a>
               </Card>
+              <Card className="mt-4" style={{ width: "100%"}}>
+                <Typography.Text className="text-[20px] font-[600] border-l-[6px] border-[#2428a5] pl-3">
+                  Việc làm vừa xem
+                </Typography.Text>
+                <Col className="mt-2 pd-0" >
+                {recentData?.map((job:any)=> (
+                  <Row>
+                    <Card className="mb-2">
+                      <Flex justify="space-start" gap={"middle"}>
+                        <Image
+                          src={job.logo}
+                          preview={false}
+                          className="!h-[35px] !w-[35px] object-contain"
+                        />
+                        <Flex justify="space-start" gap="small" vertical>
+                          <p
+                            className="font-bold text-slate-700 cursor-pointer hover:text-[#69b1ff]"
+                            onClick={() => navigate("/job/" + job._id)}
+                          >
+                            {job.title}
+                          </p>
+                          <div className="text-xs">{job.company}</div>
+                        </Flex>
+                      </Flex>
+                    </Card>
+                  </Row>
+                ))}
+                </Col>
+              </Card>
             </Col>
           </Row>
         </>
       )}
-
-      <div className="mt-4"></div>
-      {data && <JobRecommend id={id} />}
     </Layout.Content>
   );
 }

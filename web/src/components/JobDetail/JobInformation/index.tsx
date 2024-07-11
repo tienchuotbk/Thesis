@@ -20,6 +20,7 @@ import {
 } from "@/helpers/job.helper";
 import { levelOptions } from "@/const/options";
 import { provinceMap } from "@/const/province";
+import JobRecommend from "@/components/JobRecommend";
 
 export default function JobInfomation({ job }: Props) {
   const expirationDate = new Date(job.expiration);
@@ -150,7 +151,7 @@ export default function JobInfomation({ job }: Props) {
         </div>
       </Card>
       <Card className="mt-4">
-        <Typography.Text className="text-[20px] font-[600] border-l-[6px] border-[#00b14f] pl-3">
+        <Typography.Text className="text-[20px] font-[600] border-l-[6px] border-[#2428a5] pl-3">
           Chi tiết tin tuyển dụng
         </Typography.Text>
 
@@ -181,6 +182,8 @@ export default function JobInfomation({ job }: Props) {
           </ul>
         )}
       </Card>
+      <div className="mt-4"></div>
+      {job && <JobRecommend id={job._id} />}
     </>
   );
 }

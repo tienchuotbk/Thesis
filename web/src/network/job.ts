@@ -11,6 +11,9 @@ const JobApi = {
   getListRecommendById: (id: string, uid: string): Promise<{ payload: any }> => {
     return axiosClient.get(`/jobs/${id}/recommend?uid=${uid}`);
   },
+  getRecent: (id: string, uid: string) => {
+    return axiosClient.get(`/jobs/${uid}/recents?jobId=${id}`);
+  }
 };
 
 export default JobApi;
